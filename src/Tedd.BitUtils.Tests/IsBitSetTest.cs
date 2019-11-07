@@ -30,7 +30,7 @@ namespace Tedd.BitUtils.Tests
         {
             for (var n = 0; n < sizeof(UInt16) * 8; n++)
             {
-                UInt16 i = (UInt16)((Int32)1 << n);
+                UInt16 i = unchecked((UInt16)((Int32)1 << n));
                 Assert.True(i.IsBitSet(n), n.ToString());
             }
         }
