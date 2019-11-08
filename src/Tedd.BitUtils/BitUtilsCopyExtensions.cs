@@ -52,7 +52,7 @@ namespace Tedd
         public static Int64 RolCopy(ref this Int64 value) => (Int64)(((UInt64)value << 1) | ((UInt64)value >> 63));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static UInt64 RolCopy(ref this UInt64 value) => (UInt64)(((UInt64)value << 1) | ((UInt64)value >> 64 - 1));
+        public static UInt64 RolCopy(ref this UInt64 value) => (UInt64)(((UInt64)value << 1) | ((UInt64)value >> 63));
 
         #endregion
 
@@ -124,10 +124,10 @@ namespace Tedd
         public static UInt16 SetBit0Copy(ref this UInt16 value, int pos) => (UInt16)((UInt16)value & ~((UInt16)1 << pos));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 SetBit0Copy(ref this Int32 value, int pos) => (Int32)(value & ~(1 << pos));
+        public static Int32 SetBit0Copy(ref this Int32 value, int pos) => (Int32)((UInt32)value & ~((UInt32)1 << pos));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static UInt32 SetBit0Copy(ref this UInt32 value, int pos) => (UInt32)(value & ~(1 << pos));
+        public static UInt32 SetBit0Copy(ref this UInt32 value, int pos) => (UInt32)((UInt32)value & ~((UInt32)1 << pos));
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int64 SetBit0Copy(ref this Int64 value, int pos) => (Int64)((Int64)value & ~((Int64)1 << pos));

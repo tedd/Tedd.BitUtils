@@ -117,38 +117,42 @@ namespace Tedd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsBitSet(ref this Int64 value, int pos) => (Int64)((UInt64)value & ((UInt64)1 << pos)) != 0;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool IsBitSet(ref this UInt64 value, int pos) => (value & ((UInt64)1 << pos)) != 0;
+        public static bool IsBitSet(ref this UInt64 value, int pos) => (UInt64)((value & ((UInt64)1 << pos))) != 0;
         #endregion
 
 
+        // Broken for now
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static void Pack(ref this Int32 packed, int offset, int length, uint value)
+        //{
+        //    // Clear excess data in value and move it into position
+        //    value &= (~0U >> sizeof(Int32) - length)<< offset;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Pack(ref this uint packed, int offset, int length, uint value)
-        {
-            // Ensure value only contains length bits
-            value &= uint.MaxValue >> 32 - length;
+        //    //if (offset + length > sizeof(Int32))
+        //    //    throw new Exception($"Bit out of bounds"); // + ": Offset " + offset + " + length " + length + " > 32
 
-            if (offset + length > 32)
-                throw new Exception($"Bit out of bounds"); // + ": Offset " + offset + " + length " + length + " > 32
-            var clearMask = (uint)~((uint.MaxValue >> (32 - length)) << offset);
+        //    // Clear bit mask
+        //    var clearMask = (Int32)~((~0U >> (sizeof(Int32) - length)) << offset);
 
-            packed &= clearMask;
-            packed |= (uint)(value << offset);
-        }
+        //    // Clear space for value
+        //    packed &= clearMask;
+        //    // Apply value
+        //    packed |= (Int32)value;
+        //}
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static uint Unpack(ref this uint packed, int offset, int length)
-        {
-            var v = packed >> offset;
-            v = v & (((uint)1 << length) - 1);
-            return v;
-        }
+        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+        //public static uint Unpack(ref this uint packed, int offset, int length)
+        //{
+        //    var v = packed >> offset;
+        //    v = v & (((uint)1 << length) - 1);
+        //    return v;
+        //}
 
 
-        public static bool IsSet(this byte[] array, int pos)
-        {
-            var mask = 1 << (7 - (pos % 8));
-            return (array[pos / 8] & mask) != 0;
-        }
+        //public static bool IsSet(this byte[] array, int pos)
+        //{
+        //    var mask = 1 << (7 - (pos % 8));
+        //    return (array[pos / 8] & mask) != 0;
+        //}
     }
 }
