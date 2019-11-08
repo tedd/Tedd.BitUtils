@@ -11,6 +11,7 @@ Note that CPU most likely only supports bit manipulation on Int32 and Int64, so 
 Ror and Rol is only implemented for 32-bit and 64-bit integers.
 
 ## Quick examples
+```cs
 var a = 0;
 a.SetBit(0, true);
 // a == 1
@@ -24,3 +25,4 @@ var b = a.SetBit(0);
 a = 1;
 a.Rol();
 // a == 3
+```
