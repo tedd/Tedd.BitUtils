@@ -60,7 +60,7 @@ namespace Tedd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetBit(ref this Int32 value, int pos, bool state) => value = (state ? (Int32)((UInt32)value | ((UInt32)1 << pos)) : (Int32)unchecked((UInt32)value & ~((UInt32)1 << pos)));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetBit(ref this UInt32 value, int pos, bool state) => value = (state ? (UInt32)((UInt32)value | ((UInt32)1 << pos)) : (UInt32)(UInt32)(value & ~((UInt32)1 << pos)));
+        public static void SetBit(ref this UInt32 value, int pos, bool state) => value = (state ? (UInt32)((UInt32)value | ((UInt32)1 << pos)) : (UInt32)(UInt32)((UInt32)value & ~((UInt32)1 << pos)));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetBit(ref this Int64 value, int pos, bool state) => value = (state ? (Int64)((UInt64)value | ((UInt64)1 << pos)) : (Int64)unchecked((UInt64)value & ~((UInt64)1 << pos)));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -75,9 +75,9 @@ namespace Tedd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetBit0(ref this UInt16 value, int pos) => value = (UInt16)((UInt16)value & ~((UInt16)1 << pos));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetBit0(ref this Int32 value, int pos) => value = (Int32)(value & ~(1 << pos));
+        public static void SetBit0(ref this Int32 value, int pos) => value = (Int32)((UInt32)value & ~((UInt32)1 << pos));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetBit0(ref this UInt32 value, int pos) => value = (UInt32)(value & ~(1 << pos));
+        public static void SetBit0(ref this UInt32 value, int pos) => value = (UInt32)((UInt32)value & ~((UInt32)1 << pos));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetBit0(ref this Int64 value, int pos) => value = (Int64)((Int64)value & ~((Int64)1 << pos));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -93,9 +93,9 @@ namespace Tedd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetBit1(ref this UInt16 value, int pos) => value = (UInt16)((UInt16)value | ((UInt16)1 << pos));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetBit1(ref this Int32 value, int pos) => value = (Int32)(value | (1 << pos));
+        public static void SetBit1(ref this Int32 value, int pos) => value = (Int32)((UInt32)value | ((UInt32)1 << pos));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetBit1(ref this UInt32 value, int pos) => value = (UInt32)(value | ((UInt32)1 << pos));
+        public static void SetBit1(ref this UInt32 value, int pos) => value = (UInt32)((UInt32)value | ((UInt32)1 << pos));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void SetBit1(ref this Int64 value, int pos) => value = (Int64)((Int64)value | ((Int64)1 << pos));
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

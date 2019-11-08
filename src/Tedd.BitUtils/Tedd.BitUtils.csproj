@@ -1,7 +1,24 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFrameworks>net461;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netstandard2.1;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Tedd Hansen</Authors>
+    <Company>Tedd Hansen</Company>
+    <Description>Bit manipulation of Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64: Ror, Rol, SetBit, IsBitSet</Description>
+    <PackageTags>bit setbit getbit isbitset pack unpack ror rol</PackageTags>
+    <Copyright>Tedd Hansen</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tedd/Tedd.BitUtils</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
