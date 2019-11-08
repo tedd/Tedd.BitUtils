@@ -9,3 +9,18 @@ Faster versions of SetBit0(n) and SetBit1(n) skips the branch required for SetBi
 Note that CPU most likely only supports bit manipulation on Int32 and Int64, so Byte and Int16 will be treated as Int32 internally. Result will be correct, but there is no speed benefit and possibly a small penalty for using smaller types than Int32.
 
 Ror and Rol is only implemented for 32-bit and 64-bit integers.
+
+## Quick examples
+var a = 0;
+a.SetBit(0, true);
+// a == 1
+a.SetBit(1, true);
+// a == 3
+a.SetBit0(0);
+// a == 2
+// a.IsBitSet(0) == false
+var b = a.SetBit(0);
+// b == 3
+a = 1;
+a.Rol();
+// a == 3
