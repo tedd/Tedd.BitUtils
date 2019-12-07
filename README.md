@@ -23,6 +23,7 @@ Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 * i.Rol(n);
 * i.Ror();
 * i.Ror(n);
+* i.ReverseBits();
 
 ### Copy
 * bool = i.IsBitSet(n);
@@ -33,8 +34,7 @@ Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 * i.RolCopy(n);
 * i.RorCopy();
 * i.RorCopy(n);
-
-
+* i.ReverseBits();
 
 ## Quick examples
 ```cs

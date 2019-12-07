@@ -163,6 +163,48 @@ namespace Tedd
 
         #endregion
 
+
+        #region ReverseBits
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Byte ReverseBitsCopy(ref this Byte value) => BitUtilsExtensions.BitReverseLookup[value];
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int16 ReverseBitsCopy(ref this Int16 value) => (Int16)((UInt16)BitUtilsExtensions.BitReverseLookup[(UInt16)value >> 8]
+                                                                              | (UInt16)((UInt16)BitUtilsExtensions.BitReverseLookup[(UInt16)value & 0xFF] << (UInt16)8));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt16 ReverseBitsCopy(ref this UInt16 value) => (UInt16)((UInt16)BitUtilsExtensions.BitReverseLookup[(UInt16)value >> 8]
+                                                                                | (UInt16)((UInt16)BitUtilsExtensions.BitReverseLookup[(UInt16)value & 0xFF] << (UInt16)8));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 ReverseBitsCopy(ref this Int32 value) => (Int32)((UInt32)BitUtilsExtensions.BitReverseLookup[(UInt32)value >> 24]
+                                                                              | (UInt32)BitUtilsExtensions.BitReverseLookup[((UInt32)value >> 16) & 0xFF] << 8
+                                                                              | (UInt32)BitUtilsExtensions.BitReverseLookup[((UInt32)value >> 8) & 0xFF] << 16
+                                                                              | (UInt32)BitUtilsExtensions.BitReverseLookup[((UInt32)value & 0xFF)] << 24);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt32 ReverseBitsCopy(ref this UInt32 value) => (UInt32)((UInt32)BitUtilsExtensions.BitReverseLookup[(UInt32)value >> 24]
+                                                                                | (UInt32)BitUtilsExtensions.BitReverseLookup[((UInt32)value >> 16) & 0xFF] << 8
+                                                                                | (UInt32)BitUtilsExtensions.BitReverseLookup[((UInt32)value >> 8) & 0xFF] << 16
+                                                                                | (UInt32)BitUtilsExtensions.BitReverseLookup[(UInt32)value & 0xFF] << 24);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int64 ReverseBitsCopy(ref this Int64 value) => (Int64)((UInt64)BitUtilsExtensions.BitReverseLookup[(UInt64)value >> 56]
+                                                                              | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 48) & 0xFF] << 8
+                                                                              | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 40) & 0xFF] << 16
+                                                                              | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 32) & 0xFF] << 24
+                                                                              | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 24) & 0xFF] << 32
+                                                                              | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 16) & 0xFF] << 40
+                                                                              | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 8) & 0xFF] << 48
+                                                                              | (UInt64)BitUtilsExtensions.BitReverseLookup[(UInt64)value & 0xFF] << 56);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt64 ReverseBitsCopy(ref this UInt64 value) => (UInt64)((UInt64)BitUtilsExtensions.BitReverseLookup[(UInt64)value >> 56]
+                                                                                | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 48) & 0xFF] << 8
+                                                                                | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 40) & 0xFF] << 16
+                                                                                | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 32) & 0xFF] << 24
+                                                                                | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 24) & 0xFF] << 32
+                                                                                | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 16) & 0xFF] << 40
+                                                                                | (UInt64)BitUtilsExtensions.BitReverseLookup[((UInt64)value >> 8) & 0xFF] << 48
+                                                                                | (UInt64)BitUtilsExtensions.BitReverseLookup[(UInt64)value & 0xFF] << 56);
+
+        #endregion
+
         #endregion
 
     }
