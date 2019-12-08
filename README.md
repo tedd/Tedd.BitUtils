@@ -16,9 +16,11 @@ Faster versions of Ror() and Rol() are hardcoded to shift 1. Faster versions of 
 Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 
 ### Get info
-* bool = i.IsBitSet(n);
-* int = i.PopCount();
-* int = i.LeadingZeroCount();
+* bool a = i.IsBitSet(n);
+* int a = i.PopCount();
+* int a = i.LeadingZeroCount();
+* string a = i.ToBinaryString();
+* string a = i.ToBinaryStringPadded();
 
 ### In-place
 * i.SetBit(n, bool);
