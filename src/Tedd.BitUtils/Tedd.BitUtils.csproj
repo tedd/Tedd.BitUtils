@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netstandard2.1;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <!--<TargetFrameworks>net461;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netstandard2.1;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>-->
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Tedd Hansen</Authors>
     <Company>Tedd Hansen</Company>
@@ -15,11 +16,25 @@
     <Version>1.0.2</Version>
   </PropertyGroup>
 
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
+    <DefineConstants>NETCOREAPP</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp3'))">
+    <DefineConstants>NETCOREAPP3</DefineConstants>
+  </PropertyGroup>
+  <!--<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
+    <DefineConstants>NETSTANDARD</DefineConstants>
+  </PropertyGroup>-->
+  <!--<PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <DefineConstants>DOTNET</DefineConstants>
+  </PropertyGroup>-->
+
   <ItemGroup>
     <None Include="..\..\LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
+
 
 </Project>
