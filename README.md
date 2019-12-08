@@ -15,6 +15,11 @@ Faster versions of Ror() and Rol() are hardcoded to shift 1. Faster versions of 
 
 Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 
+### Get info
+* bool = i.IsBitSet(n);
+* int = i.PopCount();
+* int = i.LeadingZeroCount();
+
 ### In-place
 * i.SetBit(n, bool);
 * i.SetBit0(n);
@@ -25,8 +30,8 @@ Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 * i.Ror(n);
 * i.ReverseBits();
 
+
 ### Copy
-* bool = i.IsBitSet(n);
 * i.SetBitCopy(n, bool);
 * i.SetBit0Copy(n);
 * i.SetBit1Copy(n);
@@ -52,3 +57,6 @@ a = 1;
 a.Rol();
 // a == 3
 ```
+
+## Note
+.Net Core 3.0 and above uses hardware intrinsics for operations where available (PopCount, LeadingZeroCount). This is due to new features supported. If lack of hardware support or .Net Standard/.Net 4.x then a slower software fallback is used.

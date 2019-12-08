@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!--<TargetFrameworks>net461;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netstandard2.1;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>-->
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFrameworks>net461;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netstandard2.1;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+    <!--<TargetFramework>netcoreapp3.0</TargetFramework>-->
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Tedd Hansen</Authors>
     <Company>Tedd Hansen</Company>
@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tedd/Tedd.BitUtils</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">

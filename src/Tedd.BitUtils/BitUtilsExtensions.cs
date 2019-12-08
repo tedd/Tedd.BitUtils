@@ -239,7 +239,7 @@ namespace Tedd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 PopCount(ref this Byte value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 PopCount(ref this Int16 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
+        public static Int32 PopCount(ref this Int16 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value & 0xFFFF) : PopCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 PopCount(ref this UInt16 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -254,7 +254,7 @@ namespace Tedd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 PopCount(ref this Byte value) => PopCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 PopCount(ref this Int16 value) => PopCntSoftwareFallback((UInt32)value);
+        public static Int32 PopCount(ref this Int16 value) => PopCntSoftwareFallback((UInt32)value & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 PopCount(ref this UInt16 value) => PopCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -272,13 +272,22 @@ namespace Tedd
 
         #region LZCNT
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static int LzCntSoftwareFallback(Byte value)
+        {
+            // Unguarded fallback contract is 0->31
+            if (value == 0)
+                return 8;
+
+            return 7 - Log2SoftwareFallback((UInt32)value & 0xFF);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static int LzCntSoftwareFallback(UInt16 value)
         {
             // Unguarded fallback contract is 0->31
             if (value == 0)
-                return 32;
+                return 16;
 
-            return 31 - Log2SoftwareFallback(value);
+            return 15 - Log2SoftwareFallback((UInt32)value & 0xFFFF) ;
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static int LzCntSoftwareFallback(UInt32 value)
@@ -297,17 +306,23 @@ namespace Tedd
             if (value == 0)
                 return 64;
 
-            return 63 - (Log2SoftwareFallback((UInt32)((UInt64)value>>32)) + Log2SoftwareFallback((UInt32)((UInt64)value)));
+            var n = Log2SoftwareFallback((UInt32) (value >> 32));
+            if (n > 0)
+                n += 32;
+            else
+                n = Log2SoftwareFallback((UInt32) value);
+
+            return 63 - n;
         }
 
 #if NETCOREAPP3
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 LeadingZeroCount(ref this Byte value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount(((UInt32)value) & 0xFF) -24: LzCntSoftwareFallback(((UInt32)value) & 0xFF) -24;
+        public static Int32 LeadingZeroCount(ref this Byte value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value) - 24 : LzCntSoftwareFallback(value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 LeadingZeroCount(ref this Int16 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount(((UInt32)value) & 0xFFFF) -16: LzCntSoftwareFallback(((UInt32)value) & 0xFFFF) -16;
+        public static Int32 LeadingZeroCount(ref this Int16 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value & 0xFFFF) - 16 : LzCntSoftwareFallback((UInt16)value) ;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 LeadingZeroCount(ref this UInt16 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value) -16: LzCntSoftwareFallback((UInt32)value)-16;
+        public static Int32 LeadingZeroCount(ref this UInt16 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value) - 16 : LzCntSoftwareFallback((UInt16)value) ;
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 LeadingZeroCount(ref this Int32 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value) : LzCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -318,11 +333,11 @@ namespace Tedd
         public static Int32 LeadingZeroCount(ref this UInt64 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.X64.LeadingZeroCount((UInt64)value) : LzCntSoftwareFallback((UInt64)value);
 #else
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 LeadingZeroCount(ref this Byte value) => LzCntSoftwareFallback((UInt32)value);
+        public static Int32 LeadingZeroCount(ref this Byte value) => LzCntSoftwareFallback(value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 LeadingZeroCount(ref this Int16 value) => LzCntSoftwareFallback((UInt32)value);
+        public static Int32 LeadingZeroCount(ref this Int16 value) => LzCntSoftwareFallback((UInt16)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 LeadingZeroCount(ref this UInt16 value) => LzCntSoftwareFallback((UInt32)value);
+        public static Int32 LeadingZeroCount(ref this UInt16 value) => LzCntSoftwareFallback((UInt16)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 LeadingZeroCount(ref this Int32 value) => LzCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -360,12 +375,16 @@ namespace Tedd
             value |= value >> 08;
             value |= value >> 16;
 
+#if NETCOREAPP3
             // uint.MaxValue >> 27 is always in range [0 - 31] so we use Unsafe.AddByteOffset to avoid bounds check
             return Unsafe.AddByteOffset(
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_1100_0100_1010_1100_1101_1101u
                 ref MemoryMarshal.GetReference(Log2DeBruijn),
                 // uint|long -> IntPtr cast on 32-bit platforms does expensive overflow checks not needed here
                 (IntPtr)(int)((value * 0x07C4ACDDu) >> 27));
+#else
+            return Log2DeBruijn[(value * 0x07C4ACDDu) >> 27];
+#endif
         }
         #endregion
 
