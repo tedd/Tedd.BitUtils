@@ -6,8 +6,8 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Tedd Hansen</Authors>
     <Company>Tedd Hansen</Company>
-    <Description>Bit manipulation of Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64: Ror, Rol, SetBit, IsBitSet, ReverseBits</Description>
-    <PackageTags>bit setbit getbit isbitset pack unpack ror rol reverse reversebits</PackageTags>
+    <Description>Bit manipulation of Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64: Ror, Rol, Rotate, SetBit, IsBitSet, ReverseBits, PopCount, PopCnt, LzCnt, LeadingZeroCount, Pack, Unpack</Description>
+    <PackageTags>bit setbit getbit isbitset pack unpack ror rol rotate reverse reversebits popcount popcnt leadingzerocount lzcnt pack unpack</PackageTags>
     <Copyright>Tedd Hansen</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
