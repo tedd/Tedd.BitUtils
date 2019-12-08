@@ -388,8 +388,46 @@ namespace Tedd
         }
         #endregion
 
+        #region ToBitStringPadded
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitStringPadded(ref this Byte value) => Convert.ToString(value, 2).PadLeft(sizeof(Byte)*8, '0');
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitStringPadded(ref this Int16 value) => Convert.ToString((UInt32)value & 0xFFFF, 2).PadLeft(sizeof(Int16) * 8, '0');
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitStringPadded(ref this UInt16 value) => Convert.ToString((UInt32) value, 2).PadLeft(sizeof(UInt16) * 8, '0');
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitStringPadded(ref this Int32 value) => Convert.ToString((Int32)value, 2).PadLeft(sizeof(Int32) * 8, '0');
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitStringPadded(ref this UInt32 value) => Convert.ToString((Int32)value, 2).PadLeft(sizeof(UInt32) * 8, '0');
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitStringPadded(ref this Int64 value) => Convert.ToString((Int64)value, 2).PadLeft(sizeof(Int64) * 8, '0');
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitStringPadded(ref this UInt64 value) => Convert.ToString((Int64)value, 2).PadLeft(sizeof(UInt64) * 8, '0');
+        #endregion|
+        #region ToBitString
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitString(ref this Byte value) => Convert.ToString(value, 2);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitString(ref this Int16 value) => Convert.ToString((UInt32)value & 0xFFFF, 2);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitString(ref this UInt16 value) => Convert.ToString((UInt32)value, 2);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitString(ref this Int32 value) => Convert.ToString((Int32)value, 2);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitString(ref this UInt32 value) => Convert.ToString((Int32)value, 2);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitString(ref this Int64 value) => Convert.ToString((Int64)value, 2);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitString(ref this UInt64 value) => Convert.ToString((Int64)value, 2);
+        #endregion|
 
+        //#region FromBitString
+
+        //public static Byte BinaryStringToByte(string @string) => Convert.ToByte(@string, 2);
+        //public static Int32 BinaryStringToInt32(string @string) => Convert.ToInt32(@string, 2);
+        
+        //#endregion
         // Broken for now
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         //public static void Pack(ref this Int32 packed, int offset, int length, uint value)
