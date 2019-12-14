@@ -1,14 +1,12 @@
 # Tedd.BitUtils
 Available as NuGet Package: https://www.nuget.org/packages/Tedd.BitUtils/
 
-Bit manipulation extension methods for byte, short (Int16), ushort (UInt16), int (Int32), uint (UInt32), long (Int64) and ulong (UInt64).
+Bit manipulation extension methods for:<br />byte, short (Int16), ushort (UInt16), int (Int32), uint (UInt32), long (Int64) and ulong (UInt64).
 
-Types can be manipulated in-place or by returning a modified copy. All methods are tagged for inline compile.
+Types can be manipulated in-place or by returning a modified copy.
 
 ## Extension methods
 Methods are implemented as extension methods. This should give you a list in editor when you type dot after a supported type.
-
-The integer (i) can be byte, short (Int16), ushort (UInt16), int (Int32), uint (UInt32), long (Int64) and ulong (UInt64).
 Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 
 ### Get info
@@ -57,6 +55,8 @@ a.Rol();
 ## Performance
 Ror() and Rol() are faster versions of Ror(1) and Ror(1). If you only need to roll one, use these.<br/>
 The same goes for SetBit1(n) and SetBit0(n) which are faster versions of SetBit(n, bool) where branching is left out. If you don't need to pass true/false as parameter use the faster versions.
+
+All methods are tagged for inline compile.
 
 ### Hardware intrinsics
 .Net Core 3.0 and above uses hardware intrinsics for operations where available. This is due to new features supported. For frameworks and platforms (CPU's) where this is not supported a slower software implementation is used.
