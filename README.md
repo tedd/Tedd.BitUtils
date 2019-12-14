@@ -70,8 +70,8 @@ a.Rol();
 | SetBit               |    Y     |       Y       |       Y       |       Y       |
 | SetBit0              |    Y     |       Y       |       Y       |       Y       |
 | SetBit1              |    Y     |       Y       |       Y       |       Y       |
-| Rol                  | RyuJit   |       Y       |       Y       |       Y       |
-| Ror                  | RyuJit   |       Y       |       Y       |       Y       |
+| Rol                  | RyuJit   |    RyuJit     |       Y       |       Y       |
+| Ror                  | RyuJit   |    RyuJit     |       Y       |       Y       |
 | ReverseBits          |    N     |       N       |       N       |       Y       |
 | PopCount             |    N     |       N       |       N       |       Y       |
 | LeadingZeroCount     |    N     |       N       |       N       |       Y       |
