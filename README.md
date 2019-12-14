@@ -27,14 +27,14 @@ Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 * i.ReverseBits();
 
 ### Copy
-* i.SetBitCopy(n, bool);
-* i.SetBit0Copy(n);
-* i.SetBit1Copy(n);
-* i.RolCopy();
-* i.RolCopy(n);
-* i.RorCopy();
-* i.RorCopy(n);
-* i.ReverseBits();
+* i2 = i.SetBitCopy(n, bool);
+* i2 = i.SetBit0Copy(n);
+* i2 = i.SetBit1Copy(n);
+* i2 = i.RolCopy();
+* i2 = i.RolCopy(n);
+* i2 = i.RorCopy();
+* i2 = i.RorCopy(n);
+* i2 = i.ReverseBits();
 
 ## Simple example of usage
 ```cs
@@ -46,7 +46,7 @@ a.SetBit(1, true);
 a.SetBit0(0);
 // a == 2
 // a.IsBitSet(0) == false
-var b = a.SetBit(0);
+var b = a.SetBitCopy(0);
 // b == 3
 a = 1;
 a.Rol();
