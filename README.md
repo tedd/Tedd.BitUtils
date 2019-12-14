@@ -59,7 +59,7 @@ The same goes for SetBit1(n) and SetBit0(n) which are faster versions of SetBit(
 All methods are tagged for inline compile.
 
 ### Hardware intrinsics
-.Net Core 3.0 and above uses hardware intrinsics for operations where available. This is due to new features supported. For frameworks and platforms (CPU's) where this is not supported a slower software implementation is used.
+For .Net Core 3.0 and above library uses hardware intrinsics for operations where available. This is possible because of new features supported in .Net Core 3.0 and aboce. For frameworks (.Net 4.x and .Net Standard) and processors (i.e. non-x86/x64 CPU) where this is not supported a slower software implementation is used.
 
 | Command              | .Net 4.x | .Net Standard | .Net Core 2.x | .Net Core 3.x |
 | -------------------- |  :---:   |     :---:     |     :---:     |     :---:     |
