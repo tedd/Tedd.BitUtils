@@ -61,4 +61,19 @@ a.Rol();
 ```
 
 ## Note
-.Net Core 3.0 and above uses hardware intrinsics for operations where available (PopCount, LeadingZeroCount). This is due to new features supported. If lack of hardware support or .Net Standard/.Net 4.x then a slower software fallback is used.
+
+## Hardware intrinsics
+.Net Core 3.0 and above uses hardware intrinsics for operations where available. This is due to new features supported. For frameworks and platforms (CPU's) where this is not supported a slower software implementation is used.
+
+| Command              | .Net 4.x | .Net Standard | .Net Core 2.x | .Net Core 3.x |
+| -------------------- |  :---:   |     :---:     |     :---:     |     :---:     |
+| SetBit               |    Y     |       Y       |       Y       |       Y       |
+| SetBit0              |    Y     |       Y       |       Y       |       Y       |
+| SetBit1              |    Y     |       Y       |       Y       |       Y       |
+| Rol                  | RyuJit   |       Y       |       Y       |       Y       |
+| Ror                  | RyuJit   |       Y       |       Y       |       Y       |
+| ReverseBits          |    N     |       N       |       N       |       Y       |
+| PopCount             |    N     |       N       |       N       |       Y       |
+| LeadingZeroCount     |    N     |       N       |       N       |       Y       |
+| ToBinaryString       |   N/A    |      N/A      |      N/A      |      N/A      |
+| ToBinaryStringPadded |   N/A    |      N/A      |      N/A      |      N/A      |
