@@ -6,14 +6,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Tedd Hansen</Authors>
     <Company>Tedd Hansen</Company>
-    <Description>Bit manipulation of Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64: Ror, Rol, Rotate, SetBit, IsBitSet, ReverseBits, PopCount, PopCnt, LzCnt, LeadingZeroCount, Pack, Unpack, ToBitString</Description>
-    <PackageTags>bit setbit getbit isbitset pack unpack ror rol rotate reverse reversebits popcount popcnt leadingzerocount lzcnt pack unpack tostring tobitstring</PackageTags>
+    <Description>Bit manipulation of Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64: Ror, Rol, Rotate, SetBit, IsBitSet, ReverseBits, PopCount, PopCnt, LzCnt, LeadingZeroCount, Pack, Unpack, ToBitString, ReverseEndianness</Description>
+    <PackageTags>bit setbit getbit isbitset pack unpack ror rol rotate reverse reversebits popcount popcnt leadingzerocount lzcnt pack unpack tostring tobitstring reverseendianness endian</PackageTags>
     <Copyright>Tedd Hansen</Copyright>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
     <RepositoryUrl>https://github.com/tedd/Tedd.BitUtils</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">

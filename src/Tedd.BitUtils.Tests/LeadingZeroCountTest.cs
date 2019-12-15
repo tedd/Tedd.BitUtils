@@ -13,7 +13,7 @@ namespace Tedd.BitUtils.Tests.InPlace
         {
             for (var i = 0; i < Iterations; i++)
             {
-                var r = (Byte)_rnd.Next();
+                var r = _rnd.NextByte();
                 var c = r.LeadingZeroCount();
                 var str = Convert.ToString(r, 2);
                 var len = str == "0" ? 0 : str.Length;
@@ -27,7 +27,7 @@ namespace Tedd.BitUtils.Tests.InPlace
         {
             for (var i = 0; i < Iterations; i++)
             {
-                var r = (Int16)_rnd.Next();
+                var r = _rnd.NextInt16();
                 var c = r.LeadingZeroCount();
                 var str = Convert.ToString(r, 2);
                 var len = str == "0" ? 0 : str.Length;
@@ -42,7 +42,7 @@ namespace Tedd.BitUtils.Tests.InPlace
         {
             for (var i = 0; i < Iterations; i++)
             {
-                var r = (UInt16)_rnd.Next();
+                var r = _rnd.NextUInt16();
                 var c = r.LeadingZeroCount();
                 var str = Convert.ToString(r, 2);
                 var len = str == "0" ? 0 : str.Length;
@@ -55,7 +55,7 @@ namespace Tedd.BitUtils.Tests.InPlace
         {
             for (var i = 0; i < Iterations; i++)
             {
-                var r = (Int32)_rnd.Next();
+                var r = _rnd.NextInt32();
                 var c = r.LeadingZeroCount();
                 var str = Convert.ToString(r, 2);
                 var len = str == "0" ? 0 : str.Length;
@@ -69,7 +69,7 @@ namespace Tedd.BitUtils.Tests.InPlace
         {
             for (var i = 0; i < Iterations; i++)
             {
-                var r = (UInt32)_rnd.Next();
+                var r = _rnd.NextUInt32();
                 var c = r.LeadingZeroCount();
                 var str = Convert.ToString(r, 2);
                 var len = str == "0" ? 0 : str.Length;
@@ -83,7 +83,7 @@ namespace Tedd.BitUtils.Tests.InPlace
         {
             for (var i = 0; i < Iterations; i++)
             {
-                var r = (Int64)_rnd.Next() | ((Int64)_rnd.Next()) << 32;
+                var r = _rnd.NextInt64();
                 var c = r.LeadingZeroCount();
                 var str = Convert.ToString(r, 2);
                 var len = str == "0" ? 0 : str.Length;
@@ -97,7 +97,7 @@ namespace Tedd.BitUtils.Tests.InPlace
         {
             for (var i = 0; i < Iterations; i++)
             {
-                var r = (UInt64)_rnd.Next() | ((UInt64)_rnd.Next()) << 32;
+                var r = _rnd.NextUInt64();
                 var c = r.LeadingZeroCount();
                 var str = Convert.ToString((Int64)r, 2);
                 var len = str == "0" ? 0 : str.Length;

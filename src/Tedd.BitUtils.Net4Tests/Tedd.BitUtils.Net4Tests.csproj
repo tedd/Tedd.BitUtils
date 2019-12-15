@@ -42,6 +42,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tedd.RandomExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tedd.RandomExtensions.1.0.0\lib\net461\Tedd.RandomExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\packages\xunit.abstractions.2.0.3\lib\net35\xunit.abstractions.dll</HintPath>
       <Private>True</Private>
@@ -60,6 +63,78 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\ReverseBitTest.cs">
+      <Link>Copy\ReverseBitTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\ReverseEndinanessTest.cs">
+      <Link>Copy\ReverseEndinanessTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\Rol1CopyTest.cs">
+      <Link>Copy\Rol1CopyTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\RolNTest.cs">
+      <Link>Copy\RolNTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\Ror1Test.cs">
+      <Link>Copy\Ror1Test.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\RorNTest.cs">
+      <Link>Copy\RorNTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\SetBit0Test.cs">
+      <Link>Copy\SetBit0Test.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\SetBit1Test.cs">
+      <Link>Copy\SetBit1Test.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\SetBitFalseTest.cs">
+      <Link>Copy\SetBitFalseTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\Copy\SetBitTrueTest.cs">
+      <Link>Copy\SetBitTrueTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\PackTest.cs">
+      <Link>InPlace\PackTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\ReverseBitTest.cs">
+      <Link>InPlace\ReverseBitTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\ReverseEndinanessTest.cs">
+      <Link>InPlace\ReverseEndinanessTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\Rol1Test.cs">
+      <Link>InPlace\Rol1Test.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\RolNTest.cs">
+      <Link>InPlace\RolNTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\Ror1Test.cs">
+      <Link>InPlace\Ror1Test.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\RorNTest.cs">
+      <Link>InPlace\RorNTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\SetBit0Test.cs">
+      <Link>InPlace\SetBit0Test.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\SetBit1Test.cs">
+      <Link>InPlace\SetBit1Test.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\SetBitFalseTest.cs">
+      <Link>InPlace\SetBitFalseTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\InPlace\SetBitTrueTest.cs">
+      <Link>InPlace\SetBitTrueTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\IsBitSetTest.cs">
+      <Link>IsBitSetTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\LeadingZeroCountTest.cs">
+      <Link>LeadingZeroCountTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Tedd.BitUtils.Tests\PopCountTest.cs">
+      <Link>PopCountTest.cs</Link>
+    </Compile>
     <Compile Include="Copy\*.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
