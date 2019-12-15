@@ -235,7 +235,7 @@ namespace Tedd
         }
 
 #if NETCOREAPP3
-
+        
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 PopCount(ref this Byte value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -63,21 +63,18 @@ All methods are tagged for inline compile.
 ### Hardware intrinsics
 For .Net Core 3.0 and above library uses hardware intrinsics for operations where available. This is possible because of new features supported in .Net Core 3.0 and aboce. For frameworks (.Net 4.x and .Net Standard) and processors (i.e. non-x86/x64 CPU) where this is not supported a slower software implementation is used.
 
-| Command              | .Net 4.x | .Net Standard | .Net Core 2.x | .Net Core 3.x |
-| -------------------- |  :---:   |     :---:     |     :---:     |     :---:     |
-| SetBit               |    Y     |       Y       |       Y       |       Y       |
-| SetBit0              |    Y     |       Y       |       Y       |       Y       |
-| SetBit1              |    Y     |       Y       |       Y       |       Y       |
-| Rol                  | RyuJit   |    RyuJit     |       Y       |       Y       |
-| Ror                  | RyuJit   |    RyuJit     |       Y       |       Y       |
-| ReverseBits          |    N     |       N       |       N       |       Y       |
-| PopCount             |    N     |       N       |       N       |       Y       |
-| LeadingZeroCount     |    N     |       N       |       N       |       Y       |
-| ToBinaryString       |   N/A    |      N/A      |      N/A      |      N/A      |
-| ToBinaryStringPadded |   N/A    |      N/A      |      N/A      |      N/A      |
-| ReverseEndianness    |    N     |       N       |       N       |       N       |
+| Command              | .Net 4.x | .Net Standard | .Net Core 2.x | .Net Core 3.0 | .Net Core 3.1 |
+| -------------------- |  :---:   |     :---:     |     :---:     |     :---:     |     :---:     |
+| SetBit               |    Y     |       Y       |       Y       |       Y       |       Y       |
+| SetBit0              |    Y     |       Y       |       Y       |       Y       |       Y       |
+| SetBit1              |    Y     |       Y       |       Y       |       Y       |       Y       |
+| Rol                  | RyuJit   |    RyuJit     |       Y       |       Y       |       Y       |
+| Ror                  | RyuJit   |    RyuJit     |       Y       |       Y       |       Y       |
+| ReverseBits          |    N     |       N       |       N       |       Y       |       Y       |
+| PopCount             |    N     |       N       |       N       |       Y       |       Y       |
+| LeadingZeroCount     |    N     |       N       |       N       |       Y       |       Y       |
+| ReverseEndianness    |    N     |       N       |       N       |       N       |       Y       |
+| ToBinaryString       |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |
+| ToBinaryStringPadded |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |
 
 Note that for Byte, Int16 and UInt16 the CPU uses 32-bit word size anyway so there is no speed gained in smaller datatypes. Decompile to MSIL shows extra assembly instructions handling conversions.
-
-# Note
-ReverseEndianness uses simple binary operations, but instructions such as BSWAP is not available in .Net yet. However the BinaryPrimitives implementation of the same methods are tagged as \[Intrinsic\], which means they may provide better implementation than what this library can offer.
