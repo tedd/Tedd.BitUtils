@@ -13,11 +13,6 @@ namespace Tedd.BitUtils.Tests.InPlace
             _output = output;
         }
 
-        private Int32 GetRandomInt32() => _rnd.Next(Int32.MinValue, Int32.MaxValue);
-        private UInt32 GetRandomUInt32() => (UInt32)GetRandomInt32();
-        private Int64 GetRandomInt64() => GetRandomInt32() | (GetRandomInt32() << sizeof(Int32));
-        private UInt64 GetRandomUInt64() => (UInt64)(((UInt64)GetRandomInt32()) | (((UInt64)GetRandomInt32()) << sizeof(Int32)));
-
 
         //[Fact]
         //public void TestInt32()
