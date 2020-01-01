@@ -2,8 +2,9 @@
 Available as NuGet Package: https://www.nuget.org/packages/Tedd.BitUtils/
 
 Bit manipulation extension methods for:<br />byte, short (Int16), ushort (UInt16), int (Int32), uint (UInt32), long (Int64) and ulong (UInt64).
+Types can be manipulated in-place or by returning a modified copy. In-place modification uses reference for maximum performance.
 
-Types can be manipulated in-place or by returning a modified copy.
+Library offers standard bit manipulation methods that are fast. Wherever possible accellerated things such as specialized CPU instructions (intrinsics) or compiler magic is used to accellerate execution. If .Net version or CPU you are using doesn't support hardware accelleration for a particular function then software implementation is used.
 
 ## Extension methods
 Methods are implemented as extension methods. This should give you a list in editor when you type dot after a supported type.
@@ -56,12 +57,14 @@ a.Rol();
 ```
 ## Performance
 Ror() and Rol() are faster versions of Ror(1) and Ror(1). If you only need to roll one, use these.<br/>
-The same goes for SetBit1(n) and SetBit0(n) which are faster versions of SetBit(n, bool) where branching is left out. If you don't need to pass true/false as parameter use the faster versions.
+The same goes for SetBit1(n) and SetBit0(n) which are faster versions of SetBit(n, bool) where branching is not required. If you don't need to pass true/false as parameter use the faster versions.
 
 All methods are tagged for inline compile.
 
+Note that for SByte, Byte, Int16 and UInt16 the CPU uses 32-bit word size anyway, so there is no speed gained in smaller datatypes. If you decompile to MSIL it will in fact show more instructions due to casting between types, but if you further look at the JIT generated ASM (final code executed) the code is identical for all datatypes.
+
 ### Hardware intrinsics
-For .Net Core 3.0 and above library uses hardware intrinsics for operations where available. This is possible because of new features supported in .Net Core 3.0 and aboce. For frameworks (.Net 4.x and .Net Standard) and processors (i.e. non-x86/x64 CPU) where this is not supported a slower software implementation is used.
+For .Net Core 3.0 and above library uses hardware intrinsics for operations where available. This is possible because of new features supported in .Net Core 3.0 and above. For frameworks (.Net 4.x and .Net Standard) and processors (i.e. non-x86/x64 CPU) where this is not supported a software implementation is used. The software implementation is naturally slower than the hardware accellerated implementation.
 
 | Command              | .Net 4.x | .Net Standard | .Net Core 2.x | .Net Core 3.0 | .Net Core 3.1 |
 | -------------------- |  :---:   |     :---:     |     :---:     |     :---:     |     :---:     |
@@ -73,8 +76,9 @@ For .Net Core 3.0 and above library uses hardware intrinsics for operations wher
 | ReverseBits          |    N     |       N       |       N       |       Y       |       Y       |
 | PopCount             |    N     |       N       |       N       |       Y       |       Y       |
 | LeadingZeroCount     |    N     |       N       |       N       |       Y       |       Y       |
-| ReverseEndianness    |    N     |       N       |       N       |       N       |       Y       |
+| ReverseEndianness    |    N     |       N       |       N       |       N       |       YC      |
 | ToBinaryString       |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |
 | ToBinaryStringPadded |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |
 
-Note that for Byte, Int16 and UInt16 the CPU uses 32-bit word size anyway so there is no speed gained in smaller datatypes. Decompile to MSIL shows extra assembly instructions handling conversions.
+*C = One copy operation.
+
