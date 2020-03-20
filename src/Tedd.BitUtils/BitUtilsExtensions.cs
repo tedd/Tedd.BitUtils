@@ -122,7 +122,7 @@ namespace Tedd
         #endregion
         // Tedd.MoreRandom should support Byte, Int16, Int64 and stuff + static copy of random-class
 
-#if NETCOREAPP3
+#if !NETCOREAPP2 && !NETSTANDARD && !DOTNET
         // https://github.com/dotnet/roslyn/pull/24621
         internal static ReadOnlySpan<byte> BitReverseLookup => new byte[256]
 #else
