@@ -287,7 +287,7 @@ namespace Tedd
             if (value == 0)
                 return 16;
 
-            return 15 - Log2SoftwareFallback((UInt32)value & 0xFFFF) ;
+            return 15 - Log2SoftwareFallback((UInt32)value & 0xFFFF);
         }
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static int LzCntSoftwareFallback(UInt32 value)
@@ -306,11 +306,11 @@ namespace Tedd
             if (value == 0)
                 return 64;
 
-            var n = Log2SoftwareFallback((UInt32) (value >> 32));
+            var n = Log2SoftwareFallback((UInt32)(value >> 32));
             if (n > 0)
                 n += 32;
             else
-                n = Log2SoftwareFallback((UInt32) value);
+                n = Log2SoftwareFallback((UInt32)value);
 
             return 63 - n;
         }
@@ -390,12 +390,12 @@ namespace Tedd
 
         #region ToBitStringPadded
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToBitStringPadded(ref this Byte value) => Convert.ToString(value, 2).PadLeft(sizeof(Byte)*8, '0');
+        public static string ToBitStringPadded(ref this Byte value) => Convert.ToString(value, 2).PadLeft(sizeof(Byte) * 8, '0');
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitStringPadded(ref this Int16 value) => Convert.ToString((UInt32)value & 0xFFFF, 2).PadLeft(sizeof(Int16) * 8, '0');
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToBitStringPadded(ref this UInt16 value) => Convert.ToString((UInt32) value, 2).PadLeft(sizeof(UInt16) * 8, '0');
+        public static string ToBitStringPadded(ref this UInt16 value) => Convert.ToString((UInt32)value, 2).PadLeft(sizeof(UInt16) * 8, '0');
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitStringPadded(ref this Int32 value) => Convert.ToString((Int32)value, 2).PadLeft(sizeof(Int32) * 8, '0');
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -426,14 +426,14 @@ namespace Tedd
 
         //public static Byte BinaryStringToByte(string @string) => Convert.ToByte(@string, 2);
         //public static Int32 BinaryStringToInt32(string @string) => Convert.ToInt32(@string, 2);
-        
+
         //#endregion
-        // Broken for now
+        //#region Pack
         //[MethodImpl(MethodImplOptions.AggressiveInlining)]
         //public static void Pack(ref this Int32 packed, int offset, int length, uint value)
         //{
         //    // Clear excess data in value and move it into position
-        //    value &= (~0U >> sizeof(Int32) - length)<< offset;
+        //    value &= (~0U >> sizeof(Int32) - length) << offset;
 
         //    //if (offset + length > sizeof(Int32))
         //    //    throw new Exception($"Bit out of bounds"); // + ": Offset " + offset + " + length " + length + " > 32
@@ -446,20 +446,27 @@ namespace Tedd
         //    // Apply value
         //    packed |= (Int32)value;
         //}
+        //#endregion
 
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static uint Unpack(ref this uint packed, int offset, int length)
-        //{
-        //    var v = packed >> offset;
-        //    v = v & (((uint)1 << length) - 1);
-        //    return v;
-        //}
-
-
-        //public static bool IsSet(this byte[] array, int pos)
-        //{
-        //    var mask = 1 << (7 - (pos % 8));
-        //    return (array[pos / 8] & mask) != 0;
-        //}
+        #region ExtractBits
+        /// <summary>
+        /// Extract a subset of bits, works similarly to SubString().
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <returns>Extracted bits shifted down.</returns>
+        /// <example>var value = 0b00000000_10011001;
+        /// value.ExtractBits(5, 2) == 0b11</example>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static SByte ExtractBits(ref this SByte value, int offset, int length) => (SByte)(((UInt16)value & (UInt16)(((Int16)1 << offset ) - 1)) >> (offset - length));
+        public static Byte ExtractBits(ref this Byte value, int offset, int length) => (Byte)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        public static UInt16 ExtractBits(ref this UInt16 value, int offset, int length) => (UInt16)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        public static Int16 ExtractBits(ref this Int16 value, int offset, int length) => (Int16)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        public static UInt32 ExtractBits(ref this UInt32 value, int offset, int length) => (UInt32)(((UInt32)value & (UInt32)(((Int32)1 << offset) - 1)) >> (offset - length));
+        public static Int32 ExtractBits(ref this Int32 value, int offset, int length) => (Int32)(((UInt32)value & (UInt32)(((Int32)1 << offset) - 1)) >> (offset - length));
+        public static UInt64 ExtractBits(ref this UInt64 value, int offset, int length) => (UInt64)(((UInt64)value & (UInt64)(((Int64)1 << offset) - 1)) >> (offset - length));
+        public static Int64 ExtractBits(ref this Int64 value, int offset, int length) => (Int64)(((UInt64)value & (UInt64)(((Int64)1 << offset) - 1)) >> (offset - length));
+        #endregion
     }
 }
