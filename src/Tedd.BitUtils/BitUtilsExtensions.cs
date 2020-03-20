@@ -122,7 +122,7 @@ namespace Tedd
         #endregion
         // Tedd.MoreRandom should support Byte, Int16, Int64 and stuff + static copy of random-class
 
-#if !NETCOREAPP2 && !NETSTANDARD && !DOTNET
+#if !BEFORENETCOREAPP3
         // https://github.com/dotnet/roslyn/pull/24621
         internal static ReadOnlySpan<byte> BitReverseLookup => new byte[256]
 #else
@@ -234,7 +234,7 @@ namespace Tedd
             return (int)value;
         }
 
-#if NETCOREAPP3
+#if !BEFORENETCOREAPP3
         
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 PopCount(ref this Byte value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
@@ -315,7 +315,7 @@ namespace Tedd
             return 63 - n;
         }
 
-#if NETCOREAPP3
+#if !BEFORENETCOREAPP3
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 LeadingZeroCount(ref this Byte value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value) - 24 : LzCntSoftwareFallback(value);
@@ -351,7 +351,7 @@ namespace Tedd
         #endregion
         #region Log2
 
-#if NETCOREAPP3
+#if !BEFORENETCOREAPP3
         // https://github.com/dotnet/roslyn/pull/24621
         private static ReadOnlySpan<byte> Log2DeBruijn => new byte[32]
 #else
@@ -375,7 +375,7 @@ namespace Tedd
             value |= value >> 08;
             value |= value >> 16;
 
-#if NETCOREAPP3
+#if !BEFORENETCOREAPP3
             // uint.MaxValue >> 27 is always in range [0 - 31] so we use Unsafe.AddByteOffset to avoid bounds check
             return Unsafe.AddByteOffset(
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_1100_0100_1010_1100_1101_1101u
