@@ -18,6 +18,8 @@ Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 * string a = i.ToBinaryStringPadded();
 
 ### In-place
+Operates directly on variable, avoiding copy operation.
+
 * i.SetBit(n, bool);
 * i.SetBit0(n);
 * i.SetBit1(n);
@@ -27,8 +29,11 @@ Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 * i.Ror(n);
 * i.ReverseBits();
 * i.ReverseEndianness();
+* i.Pack(5, 2, i2);
 
 ### Copy
+Result is copied to return value, keeping original variable unchaned.
+
 * i2 = i.SetBitCopy(n, bool);
 * i2 = i.SetBit0Copy(n);
 * i2 = i.SetBit1Copy(n);
@@ -38,6 +43,8 @@ Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 * i2 = i.RorCopy(n);
 * i2 = i.ReverseBitsCopy();
 * i2 = i.ReverseEndiannessCopy();
+* i2 = i.PackCopy(5, 2, i3);
+* i2 = i.Unpack(5, 2);
 
 ## Simple example of usage
 ```cs
@@ -55,6 +62,20 @@ a = 1;
 a.Rol();
 // a == 3
 ```
+
+## Pack / Unpack
+Pack and unpack allows you to copy portions of an integer into portions of another integer.
+```cs
+var i1 = 0b0000_1111_1100_0011;
+var i2 = 0b0000_0000_0000_0010;
+// We copy the last 3 bits of i2 into fift position from right in i1.
+i1.Pack(5, 2, i2);
+// Arrows shows where the two lowest bits of i2 will be inserted into i1: 0b0000_1111_110 -> 0_0 <- 011
+// i1 is now: 0b0000_1111_1101_0011
+var i3 = i1.Unpack(5, 2);
+// i3 is now: 0b0000_0000_0000_0010
+```
+
 ## Performance
 Ror() and Rol() are faster versions of Ror(1) and Ror(1). If you only need to roll one, use these.<br/>
 The same goes for SetBit1(n) and SetBit0(n) which are faster versions of SetBit(n, bool) where branching is not required. If you don't need to pass true/false as parameter use the faster versions.
