@@ -10,9 +10,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tedd.BitUtils
+namespace Tedd
 {
-    public static class EndinanessExtensions
+    public static class BitUtilsEndinanessExtensions
     {
 #region In-Place
         /// <summary>
