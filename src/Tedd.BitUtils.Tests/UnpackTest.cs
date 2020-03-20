@@ -41,7 +41,7 @@ namespace Tedd.BitUtils.Tests
         public void TestSByte()
         {
             SByte r = 0b0101_1001;
-            Assert.Equal(0b11, r.ExtractBits(5, 2));
+            Assert.Equal(0b11, r.Unpack(5, 2));
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -50,7 +50,7 @@ namespace Tedd.BitUtils.Tests
                 {
                     for (var len = 1; len < offset; len++)
                     {
-                        var n = (UInt32)r.ExtractBits(offset, len);
+                        var n = (UInt32)r.Unpack(offset, len);
                         var nsp = n.ToBitStringPadded();
                         var ns = nsp.Substring(nsp.Length - len, len);
 

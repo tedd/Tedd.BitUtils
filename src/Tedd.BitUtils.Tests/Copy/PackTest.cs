@@ -2,7 +2,7 @@ using System;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tedd.BitUtils.Tests.InPlace
+namespace Tedd.BitUtils.Tests.Copy
 {
     public class PackTest
     {
@@ -21,8 +21,10 @@ namespace Tedd.BitUtils.Tests.InPlace
             Byte v1 = 0b1001_1001;
             Byte i1 = 0b0000_0010;
             Byte a1 = 0b1001_0001;
-            v1.Pack(5, 2, i1);
-            Assert.Equal(a1.ToBitStringPadded(), v1.ToBitStringPadded());
+            var v1b = v1;
+            var v1a = v1.PackCopy(5, 2, i1);
+            Assert.Equal(v1b, v1);
+            Assert.Equal(a1.ToBitStringPadded(), v1a.ToBitStringPadded());
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -33,7 +35,7 @@ namespace Tedd.BitUtils.Tests.InPlace
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v.Pack(offset, len, sv);
+                        v=v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
@@ -55,8 +57,10 @@ namespace Tedd.BitUtils.Tests.InPlace
             SByte v1 = 0b0001_1001;
             SByte i1 = 0b0000_0010;
             SByte a1 = 0b0001_0001;
-            v1.Pack(5, 2, i1);
-            Assert.Equal(a1.ToBitStringPadded(), v1.ToBitStringPadded());
+            var v1b = v1;
+            var v1a = v1.PackCopy(5, 2, i1);
+            Assert.Equal(v1b, v1);
+            Assert.Equal(a1.ToBitStringPadded(), v1a.ToBitStringPadded());
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -67,14 +71,14 @@ namespace Tedd.BitUtils.Tests.InPlace
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v.Pack(offset, len, sv);
+                        v=v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
                         var ovs = ov.ToBitStringPadded();
                         ovs = ovs.Substring(0, ovs.Length - offset)
-                              + ss
-                              + ovs.Substring(ovs.Length - offset + len);
+                             + ss
+                             + ovs.Substring(ovs.Length - offset + len);
                         Assert.Equal(v.ToBitStringPadded(), ovs);
                         //_outputHelper.WriteLine(ovs);
 
@@ -83,14 +87,17 @@ namespace Tedd.BitUtils.Tests.InPlace
 
             }
         }
+
         [Fact]
         public void TestUInt16()
         {
             UInt16 v1 = 0b1001_1001;
             UInt16 i1 = 0b0000_0010;
             UInt16 a1 = 0b1001_0001;
-            v1.Pack(5, 2, i1);
-            Assert.Equal(a1.ToBitStringPadded(), v1.ToBitStringPadded());
+            var v1b = v1;
+            var v1a = v1.PackCopy(5, 2, i1);
+            Assert.Equal(v1b, v1);
+            Assert.Equal(a1.ToBitStringPadded(), v1a.ToBitStringPadded());
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -101,7 +108,7 @@ namespace Tedd.BitUtils.Tests.InPlace
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v.Pack(offset, len, sv);
+                        v = v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
@@ -123,8 +130,10 @@ namespace Tedd.BitUtils.Tests.InPlace
             Int16 v1 = 0b1001_1001;
             Int16 i1 = 0b0000_0010;
             Int16 a1 = 0b1001_0001;
-            v1.Pack(5, 2, i1);
-            Assert.Equal(a1.ToBitStringPadded(), v1.ToBitStringPadded());
+            var v1b = v1;
+            var v1a = v1.PackCopy(5, 2, i1);
+            Assert.Equal(v1b, v1);
+            Assert.Equal(a1.ToBitStringPadded(), v1a.ToBitStringPadded());
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -135,7 +144,7 @@ namespace Tedd.BitUtils.Tests.InPlace
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v.Pack(offset, len, sv);
+                        v = v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
@@ -151,14 +160,17 @@ namespace Tedd.BitUtils.Tests.InPlace
 
             }
         }
+
         [Fact]
         public void TestUInt32()
         {
             UInt32 v1 = 0b1001_1001;
             UInt32 i1 = 0b0000_0010;
             UInt32 a1 = 0b1001_0001;
-            v1.Pack(5, 2, i1);
-            Assert.Equal(a1.ToBitStringPadded(), v1.ToBitStringPadded());
+            var v1b = v1;
+            var v1a = v1.PackCopy(5, 2, i1);
+            Assert.Equal(v1b, v1);
+            Assert.Equal(a1.ToBitStringPadded(), v1a.ToBitStringPadded());
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -169,7 +181,7 @@ namespace Tedd.BitUtils.Tests.InPlace
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v.Pack(offset, len, sv);
+                        v = v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
@@ -191,8 +203,10 @@ namespace Tedd.BitUtils.Tests.InPlace
             Int32 v1 = 0b1001_1001;
             Int32 i1 = 0b0000_0010;
             Int32 a1 = 0b1001_0001;
-            v1.Pack(5, 2, i1);
-            Assert.Equal(a1.ToBitStringPadded(), v1.ToBitStringPadded());
+            var v1b = v1;
+            var v1a = v1.PackCopy(5, 2, i1);
+            Assert.Equal(v1b, v1);
+            Assert.Equal(a1.ToBitStringPadded(), v1a.ToBitStringPadded());
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -203,7 +217,7 @@ namespace Tedd.BitUtils.Tests.InPlace
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v.Pack(offset, len, sv);
+                        v = v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
@@ -218,15 +232,18 @@ namespace Tedd.BitUtils.Tests.InPlace
                 }
 
             }
-        }
+        } 
+        
         [Fact]
         public void TestUInt64()
         {
             UInt64 v1 = 0b1001_1001;
             UInt64 i1 = 0b0000_0010;
             UInt64 a1 = 0b1001_0001;
-            v1.Pack(5, 2, i1);
-            Assert.Equal(a1.ToBitStringPadded(), v1.ToBitStringPadded());
+            var v1b = v1;
+            var v1a = v1.PackCopy(5, 2, i1);
+            Assert.Equal(v1b, v1);
+            Assert.Equal(a1.ToBitStringPadded(), v1a.ToBitStringPadded());
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -237,7 +254,7 @@ namespace Tedd.BitUtils.Tests.InPlace
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v.Pack(offset, len, sv);
+                        v = v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
@@ -259,8 +276,10 @@ namespace Tedd.BitUtils.Tests.InPlace
             Int64 v1 = 0b1001_1001;
             Int64 i1 = 0b0000_0010;
             Int64 a1 = 0b1001_0001;
-            v1.Pack(5, 2, i1);
-            Assert.Equal(a1.ToBitStringPadded(), v1.ToBitStringPadded());
+            var v1b = v1;
+            var v1a = v1.PackCopy(5, 2, i1);
+            Assert.Equal(v1b, v1);
+            Assert.Equal(a1.ToBitStringPadded(), v1a.ToBitStringPadded());
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -271,7 +290,7 @@ namespace Tedd.BitUtils.Tests.InPlace
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v.Pack(offset, len, sv);
+                        v = v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
@@ -287,9 +306,6 @@ namespace Tedd.BitUtils.Tests.InPlace
 
             }
         }
-
-
-
 
     }
 }

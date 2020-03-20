@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -392,6 +393,8 @@ namespace Tedd
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitStringPadded(ref this Byte value) => Convert.ToString(value, 2).PadLeft(sizeof(Byte) * 8, '0');
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static string ToBitStringPadded(ref this SByte value) => Convert.ToString(value, 2).PadLeft(sizeof(SByte) * 8, '0');
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitStringPadded(ref this Int16 value) => Convert.ToString((UInt32)value & 0xFFFF, 2).PadLeft(sizeof(Int16) * 8, '0');
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -428,29 +431,148 @@ namespace Tedd
         //public static Int32 BinaryStringToInt32(string @string) => Convert.ToInt32(@string, 2);
 
         //#endregion
-        //#region Pack
-        //[MethodImpl(MethodImplOptions.AggressiveInlining)]
-        //public static void Pack(ref this Int32 packed, int offset, int length, uint value)
-        //{
-        //    // Clear excess data in value and move it into position
-        //    value &= (~0U >> sizeof(Int32) - length) << offset;
+        #region Pack
+        #region In-place
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Pack(ref this SByte packed, int offset, int length, SByte value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            packed = (SByte)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
 
-        //    //if (offset + length > sizeof(Int32))
-        //    //    throw new Exception($"Bit out of bounds"); // + ": Offset " + offset + " + length " + length + " > 32
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Pack(ref this Byte packed, int offset, int length, Byte value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            packed = (byte)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
 
-        //    // Clear bit mask
-        //    var clearMask = (Int32)~((~0U >> (sizeof(Int32) - length)) << offset);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Pack(ref this UInt16 packed, int offset, int length, UInt16 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            packed = (UInt16)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Pack(ref this Int16 packed, int offset, int length, Int16 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            packed = (Int16)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Pack(ref this UInt32 packed, int offset, int length, UInt32 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            packed = (UInt32)(((Int32)packed & ~mask) | (((Int32)value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Pack(ref this Int32 packed, int offset, int length, Int32 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            packed = (Int32)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Pack(ref this UInt64 packed, int offset, int length, UInt64 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int64)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            packed = (UInt64)(((Int64)packed & ~mask) | (((Int64)value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Pack(ref this Int64 packed, int offset, int length, Int64 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int64)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            packed = (Int64)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
+        #endregion
+        #region Copy
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static SByte PackCopy(this SByte packed, int offset, int length, SByte value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            return (SByte)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
 
-        //    // Clear space for value
-        //    packed &= clearMask;
-        //    // Apply value
-        //    packed |= (Int32)value;
-        //}
-        //#endregion
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Byte PackCopy(this Byte packed, int offset, int length, Byte value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            return (byte)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt16 PackCopy(this UInt16 packed, int offset, int length, UInt16 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            return (UInt16)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int16 PackCopy(this Int16 packed, int offset, int length, Int16 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            return (Int16)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt32 PackCopy(this UInt32 packed, int offset, int length, UInt32 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            return (UInt32)(((Int32)packed & ~mask) | (((Int32)value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 PackCopy(this Int32 packed, int offset, int length, Int32 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int32)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            return (Int32)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static UInt64 PackCopy(this UInt64 packed, int offset, int length, UInt64 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int64)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            return (UInt64)(((Int64)packed & ~mask) | (((Int64)value << (offset - length)) & mask));
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int64 PackCopy(this Int64 packed, int offset, int length, Int64 value)
+        {
+            // mask value by length and shift up to correct position
+            var mask = (((Int64)1 << (length)) - 1) << (offset - length);
+            // (clear by reverse mask) OR with (shift value up, apply mask)
+            return (Int64)((packed & ~mask) | ((value << (offset - length)) & mask));
+        }
+        #endregion
+        #endregion
 
         #region Unpack
         /// <summary>
-        /// Extract a subset of bits, works similarly to SubString().
+        /// Extract a subset of bits, works similarly to SubString(), except offset is from end not start.
         /// </summary>
         /// <param name="value"></param>
         /// <param name="offset">Offset from LSB (right).</param>
@@ -459,13 +581,20 @@ namespace Tedd
         /// <example>var value = 0b00000000_10011001;
         /// value.ExtractBits(5, 2) == 0b11</example>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static SByte Unpack(ref this SByte value, int offset, int length) => (SByte)(((UInt16)value & (UInt16)(((Int16)1 << offset ) - 1)) >> (offset - length));
+        public static SByte Unpack(ref this SByte value, int offset, int length) => (SByte)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Byte Unpack(ref this Byte value, int offset, int length) => (Byte)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt16 Unpack(ref this UInt16 value, int offset, int length) => (UInt16)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int16 Unpack(ref this Int16 value, int offset, int length) => (Int16)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt32 Unpack(ref this UInt32 value, int offset, int length) => (UInt32)(((UInt32)value & (UInt32)(((Int32)1 << offset) - 1)) >> (offset - length));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 Unpack(ref this Int32 value, int offset, int length) => (Int32)(((UInt32)value & (UInt32)(((Int32)1 << offset) - 1)) >> (offset - length));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt64 Unpack(ref this UInt64 value, int offset, int length) => (UInt64)(((UInt64)value & (UInt64)(((Int64)1 << offset) - 1)) >> (offset - length));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int64 Unpack(ref this Int64 value, int offset, int length) => (Int64)(((UInt64)value & (UInt64)(((Int64)1 << offset) - 1)) >> (offset - length));
         #endregion
     }
