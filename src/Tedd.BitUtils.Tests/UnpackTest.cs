@@ -12,7 +12,7 @@ namespace Tedd.BitUtils.Tests
         public void TestByte()
         {
             Byte r = 0b1001_1001;
-            Assert.Equal(0b11, r.ExtractBits(5, 2));
+            Assert.Equal(0b11, r.Unpack(5, 2));
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -21,7 +21,7 @@ namespace Tedd.BitUtils.Tests
                 {
                     for (var len = 1; len < offset; len++)
                     {
-                        var n = (UInt32)r.ExtractBits(offset, len);
+                        var n = (UInt32)r.Unpack(offset, len);
                         var nsp = n.ToBitStringPadded();
                         var ns = nsp.Substring(nsp.Length - len, len);
 
@@ -70,7 +70,7 @@ namespace Tedd.BitUtils.Tests
         public void TestUInt16()
         {
             UInt16 r = 0b1001_1001;
-            Assert.Equal(0b11, r.ExtractBits(5, 2));
+            Assert.Equal(0b11, r.Unpack(5, 2));
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -79,7 +79,7 @@ namespace Tedd.BitUtils.Tests
                 {
                     for (var len = 1; len < offset; len++)
                     {
-                        var n = (UInt32)r.ExtractBits(offset, len);
+                        var n = (UInt32)r.Unpack(offset, len);
                         var nsp = n.ToBitStringPadded();
                         var ns = nsp.Substring(nsp.Length - len, len);
 
@@ -99,7 +99,7 @@ namespace Tedd.BitUtils.Tests
         public void TestInt16()
         {
             Int16 r = 0b1001_1001;
-            Assert.Equal(0b11, r.ExtractBits(5, 2));
+            Assert.Equal(0b11, r.Unpack(5, 2));
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -108,7 +108,7 @@ namespace Tedd.BitUtils.Tests
                 {
                     for (var len = 1; len < offset; len++)
                     {
-                        var n = (UInt32)r.ExtractBits(offset, len);
+                        var n = (UInt32)r.Unpack(offset, len);
                         var nsp = n.ToBitStringPadded();
                         var ns = nsp.Substring(nsp.Length - len, len);
 
@@ -128,7 +128,7 @@ namespace Tedd.BitUtils.Tests
         public void TestUInt32()
         {
             UInt32 r = 0b1001_1001;
-            Assert.Equal((UInt32)0b11, r.ExtractBits(5, 2));
+            Assert.Equal((UInt32)0b11, r.Unpack(5, 2));
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -137,7 +137,7 @@ namespace Tedd.BitUtils.Tests
                 {
                     for (var len = 1; len < offset; len++)
                     {
-                        var n = (UInt32)r.ExtractBits(offset, len);
+                        var n = (UInt32)r.Unpack(offset, len);
                         var nsp = n.ToBitStringPadded();
                         var ns = nsp.Substring(nsp.Length - len, len);
 
@@ -157,7 +157,7 @@ namespace Tedd.BitUtils.Tests
         public void TestInt32()
         {
             Int32 r = 0b1001_1001;
-            Assert.Equal(0b11, r.ExtractBits(5, 2));
+            Assert.Equal(0b11, r.Unpack(5, 2));
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -166,7 +166,7 @@ namespace Tedd.BitUtils.Tests
                 {
                     for (var len = 1; len < offset; len++)
                     {
-                        var n = (UInt32)r.ExtractBits(offset, len);
+                        var n = (UInt32)r.Unpack(offset, len);
                         var nsp = n.ToBitStringPadded();
                         var ns = nsp.Substring(nsp.Length - len, len);
 
@@ -186,7 +186,7 @@ namespace Tedd.BitUtils.Tests
         public void TestUInt64()
         {
             UInt64 r = 0b1001_1001;
-            Assert.Equal((UInt64)0b11, r.ExtractBits(5, 2));
+            Assert.Equal((UInt64)0b11, r.Unpack(5, 2));
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -195,7 +195,7 @@ namespace Tedd.BitUtils.Tests
                 {
                     for (var len = 1; len < offset; len++)
                     {
-                        var n = (UInt64)r.ExtractBits(offset, len);
+                        var n = (UInt64)r.Unpack(offset, len);
                         var nsp = n.ToBitStringPadded();
                         var ns = nsp.Substring(nsp.Length - len, len);
 
@@ -215,7 +215,7 @@ namespace Tedd.BitUtils.Tests
         public void TestInt64()
         {
             Int64 r = 0b1001_1001;
-            Assert.Equal(0b11, r.ExtractBits(5, 2));
+            Assert.Equal(0b11, r.Unpack(5, 2));
 
             for (var i = 0; i < Iterations; i++)
             {
@@ -224,7 +224,7 @@ namespace Tedd.BitUtils.Tests
                 {
                     for (var len = 1; len < offset; len++)
                     {
-                        var n = (UInt64)r.ExtractBits(offset, len);
+                        var n = (UInt64)r.Unpack(offset, len);
                         var nsp = n.ToBitStringPadded();
                         var ns = nsp.Substring(nsp.Length - len, len);
 
