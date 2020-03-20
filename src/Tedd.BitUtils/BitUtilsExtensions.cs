@@ -433,6 +433,13 @@ namespace Tedd
         //#endregion
         #region Pack
         #region In-place
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Pack(ref this SByte packed, int offset, int length, SByte value)
         {
@@ -442,6 +449,13 @@ namespace Tedd
             packed = (SByte)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
 
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Pack(ref this Byte packed, int offset, int length, Byte value)
         {
@@ -451,6 +465,13 @@ namespace Tedd
             packed = (byte)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
 
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Pack(ref this UInt16 packed, int offset, int length, UInt16 value)
         {
@@ -459,6 +480,14 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             packed = (UInt16)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Pack(ref this Int16 packed, int offset, int length, Int16 value)
         {
@@ -467,6 +496,14 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             packed = (Int16)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Pack(ref this UInt32 packed, int offset, int length, UInt32 value)
         {
@@ -475,6 +512,14 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             packed = (UInt32)(((Int32)packed & ~mask) | (((Int32)value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Pack(ref this Int32 packed, int offset, int length, Int32 value)
         {
@@ -483,6 +528,14 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             packed = (Int32)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Pack(ref this UInt64 packed, int offset, int length, UInt64 value)
         {
@@ -491,6 +544,14 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             packed = (UInt64)(((Int64)packed & ~mask) | (((Int64)value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static void Pack(ref this Int64 packed, int offset, int length, Int64 value)
         {
@@ -501,6 +562,14 @@ namespace Tedd
         }
         #endregion
         #region Copy
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
+        /// <returns>Modified copy.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static SByte PackCopy(this SByte packed, int offset, int length, SByte value)
         {
@@ -510,6 +579,14 @@ namespace Tedd
             return (SByte)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
 
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
+        /// <returns>Modified copy.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Byte PackCopy(this Byte packed, int offset, int length, Byte value)
         {
@@ -519,6 +596,14 @@ namespace Tedd
             return (byte)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
 
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
+        /// <returns>Modified copy.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt16 PackCopy(this UInt16 packed, int offset, int length, UInt16 value)
         {
@@ -527,6 +612,15 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             return (UInt16)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
+        /// <returns>Modified copy.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int16 PackCopy(this Int16 packed, int offset, int length, Int16 value)
         {
@@ -535,6 +629,15 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             return (Int16)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
+        /// <returns>Modified copy.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt32 PackCopy(this UInt32 packed, int offset, int length, UInt32 value)
         {
@@ -543,6 +646,15 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             return (UInt32)(((Int32)packed & ~mask) | (((Int32)value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
+        /// <returns>Modified copy.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 PackCopy(this Int32 packed, int offset, int length, Int32 value)
         {
@@ -551,6 +663,15 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             return (Int32)((packed & ~mask) | ((value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
+        /// <returns>Modified copy.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt64 PackCopy(this UInt64 packed, int offset, int length, UInt64 value)
         {
@@ -559,6 +680,15 @@ namespace Tedd
             // (clear by reverse mask) OR with (shift value up, apply mask)
             return (UInt64)(((Int64)packed & ~mask) | (((Int64)value << (offset - length)) & mask));
         }
+
+        /// <summary>
+        /// Packs bits into integer.
+        /// </summary>
+        /// <param name="packed"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <param name="value">Value to insert, only <para>length</para> least significant bits will be used.</param>
+        /// <returns>Modified copy.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int64 PackCopy(this Int64 packed, int offset, int length, Int64 value)
         {
@@ -572,7 +702,7 @@ namespace Tedd
 
         #region Unpack
         /// <summary>
-        /// Extract a subset of bits, works similarly to SubString(), except offset is from end not start.
+        /// Extract a subset of bits. Works similarly to SubString(), except on bits and offset is from right side.
         /// </summary>
         /// <param name="value"></param>
         /// <param name="offset">Offset from LSB (right).</param>
@@ -582,18 +712,81 @@ namespace Tedd
         /// value.ExtractBits(5, 2) == 0b11</example>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static SByte Unpack(ref this SByte value, int offset, int length) => (SByte)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        /// <summary>
+        /// Extract a subset of bits. Works similarly to SubString(), except on bits and offset is from right side.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <returns>Extracted bits shifted down.</returns>
+        /// <example>var value = 0b00000000_10011001;
+        /// value.ExtractBits(5, 2) == 0b11</example>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Byte Unpack(ref this Byte value, int offset, int length) => (Byte)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        /// <summary>
+        /// Extract a subset of bits. Works similarly to SubString(), except on bits and offset is from right side.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <returns>Extracted bits shifted down.</returns>
+        /// <example>var value = 0b00000000_10011001;
+        /// value.ExtractBits(5, 2) == 0b11</example>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt16 Unpack(ref this UInt16 value, int offset, int length) => (UInt16)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        /// <summary>
+        /// Extract a subset of bits. Works similarly to SubString(), except on bits and offset is from right side.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <returns>Extracted bits shifted down.</returns>
+        /// <example>var value = 0b00000000_10011001;
+        /// value.ExtractBits(5, 2) == 0b11</example>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int16 Unpack(ref this Int16 value, int offset, int length) => (Int16)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
+        /// <summary>
+        /// Extract a subset of bits. Works similarly to SubString(), except on bits and offset is from right side.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <returns>Extracted bits shifted down.</returns>
+        /// <example>var value = 0b00000000_10011001;
+        /// value.ExtractBits(5, 2) == 0b11</example>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt32 Unpack(ref this UInt32 value, int offset, int length) => (UInt32)(((UInt32)value & (UInt32)(((Int32)1 << offset) - 1)) >> (offset - length));
+        /// <summary>
+        /// Extract a subset of bits. Works similarly to SubString(), except on bits and offset is from right side.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <returns>Extracted bits shifted down.</returns>
+        /// <example>var value = 0b00000000_10011001;
+        /// value.ExtractBits(5, 2) == 0b11</example>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 Unpack(ref this Int32 value, int offset, int length) => (Int32)(((UInt32)value & (UInt32)(((Int32)1 << offset) - 1)) >> (offset - length));
+        /// <summary>
+        /// Extract a subset of bits. Works similarly to SubString(), except on bits and offset is from right side.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <returns>Extracted bits shifted down.</returns>
+        /// <example>var value = 0b00000000_10011001;
+        /// value.ExtractBits(5, 2) == 0b11</example>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static UInt64 Unpack(ref this UInt64 value, int offset, int length) => (UInt64)(((UInt64)value & (UInt64)(((Int64)1 << offset) - 1)) >> (offset - length));
+        /// <summary>
+        /// Extract a subset of bits. Works similarly to SubString(), except on bits and offset is from right side.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="offset">Offset from LSB (right).</param>
+        /// <param name="length">Length of bits.</param>
+        /// <returns>Extracted bits shifted down.</returns>
+        /// <example>var value = 0b00000000_10011001;
+        /// value.ExtractBits(5, 2) == 0b11</example>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int64 Unpack(ref this Int64 value, int offset, int length) => (Int64)(((UInt64)value & (UInt64)(((Int64)1 << offset) - 1)) >> (offset - length));
         #endregion
