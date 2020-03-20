@@ -16,21 +16,24 @@
     <Version>1.0.5</Version>
   </PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp'))">
-    <DefineConstants>NETCOREAPP</DefineConstants>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp1'))">
+    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp3'))">
-    <DefineConstants>NETCOREAPP3</DefineConstants>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp2'))">
+    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp3.1'))">
-    <DefineConstants>NETCOREAPP31</DefineConstants>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net3'))">
+    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
   </PropertyGroup>
-  <!--<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard'))">
-    <DefineConstants>NETSTANDARD</DefineConstants>
-  </PropertyGroup>-->
-  <!--<PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
-    <DefineConstants>DOTNET</DefineConstants>
-  </PropertyGroup>-->
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
+    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard1'))">
+    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard2'))">
+    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
+  </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\..\LICENSE">
