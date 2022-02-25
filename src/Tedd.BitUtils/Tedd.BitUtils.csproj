@@ -1,46 +1,58 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net461;net462;net48;netcoreapp2.0;netcoreapp2.1;netcoreapp3.0;netstandard2.1;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1;</TargetFrameworks>
-    <!--<TargetFramework>netcoreapp3.1</TargetFramework>-->
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Tedd Hansen</Authors>
-    <Company>Tedd Hansen</Company>
-    <Description>Bit manipulation of Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64: Ror, Rol, Rotate, SetBit, IsBitSet, ReverseBits, PopCount, PopCnt, LzCnt, LeadingZeroCount, Pack, Unpack, ToBitString, ReverseEndianness, Pack, Unpack</Description>
-    <PackageTags>bit setbit getbit isbitset pack unpack ror rol rotate reverse reversebits popcount popcnt leadingzerocount lzcnt pack unpack tostring tobitstring reverseendianness endian pack unpack</PackageTags>
-    <Copyright>Tedd Hansen</Copyright>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/tedd/Tedd.BitUtils</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <Version>1.0.6</Version>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net4.6.2;netstandard2.1;netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+		<!--<TargetFramework>net6.0</TargetFramework>-->
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Description>Bit manipulation of Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64: Ror, Rol, Rotate, SetBit, IsBitSet, ReverseBits, PopCount, PopCnt, LzCnt, LeadingZeroCount, Pack, Unpack, ToBitString, ReverseEndianness, Pack, Unpack</Description>
+		<PackageTags>bit;setbit;getbit;isbitset;pack;unpack;ror;rol;rotate;reverse;reversebits;popcount;popcnt;leadingzerocount;lzcnt;pack;unpack;tostring;tobitstring;reverseendianness;endian;pack;unpack</PackageTags>
+		<Copyright>Tedd Hansen</Copyright>
+		<PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/tedd/Tedd.BitUtils.git</RepositoryUrl>
+		<Version>1.0.7</Version>
+		<Authors>tedd</Authors>
+		<Company>Tedd Hansen</Company>
+		<RepositoryType>git</RepositoryType>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<Copyright>Tedd Hansen</Copyright>
+		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+		<EnableNETAnalyzers>True</EnableNETAnalyzers>
+		<AnalysisLevel>latest-all</AnalysisLevel>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp1'))">
-    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp2'))">
-    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('net3'))">
-    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
-    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard1'))">
-    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard2'))">
-    <DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-  </PropertyGroup>
+	<ItemGroup>
+		<None Include="..\..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp1'))">
+		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp2'))">
+		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework.StartsWith('net3'))">
+		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
+		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard1'))">
+		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard2'))">
+		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
+	</PropertyGroup>
 
 
 </Project>
