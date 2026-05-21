@@ -17,7 +17,7 @@ namespace Tedd.BitUtils.Tests
             for (var i = 0; i < Iterations; i++)
             {
                 r = _rnd.NextByte();
-                for (var offset = 1; offset < sizeof(Byte)*8; offset++)
+                for (var offset = 1; offset < sizeof(Byte) * 8; offset++)
                 {
                     for (var len = 1; len < offset; len++)
                     {
@@ -27,7 +27,7 @@ namespace Tedd.BitUtils.Tests
 
                         var ur = (UInt64)r;
                         var srsp = ur.ToBitStringPadded();
-                        var srs = srsp.Substring(srsp.Length - offset , len);
+                        var srs = srsp.Substring(srsp.Length - offset, len);
                         Assert.NotEqual(0, srs.Length);
                         Assert.Equal(srs, ns);
 
