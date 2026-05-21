@@ -14,8 +14,8 @@ Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
 * bool a = i.IsBitSet(n);
 * int a = i.PopCount();
 * int a = i.LeadingZeroCount();
-* string a = i.ToBinaryString();
-* string a = i.ToBinaryStringPadded();
+* string a = i.ToBitString();
+* string a = i.ToBitStringPadded();
 
 ### In-place
 Operates directly on variable, avoiding copy operation.
@@ -46,6 +46,13 @@ Result is copied to return value, keeping original variable unchaned.
 * i2 = i.PackCopy(5, 2, i3);
 * i2 = i.Unpack(5, 2);
 
+## Architectural Execution Flow
+
+The library adheres to a strictly **primitive bitwise operational paradigm**. It is designed for maximal performance utilizing in-place modifications (via reference parameters) and non-mutating copy operations.
+
+*   **Established Mechanics:** Operations execute deterministically on raw scalar types (`byte`, `short`, `int`, etc.). They automatically leverage low-level hardware intrinsics (e.g., `System.Runtime.Intrinsics.X86`) on modern frameworks (.NET Core 3.0+ through .NET 9.0/10.0+), falling back to optimized software routines when executing on unsupported architectures.
+*   **Architectural Scope:** The framework operates exclusively at the fundamental data layer. It **explicitly does not implement** hierarchical data binding or routed event infrastructures, mitigating any ambiguity regarding state propagation or complex DOM-like event bubbling architectures.
+
 ## Simple example of usage
 ```cs
 var a = 0;
@@ -56,7 +63,7 @@ a.SetBit(1, true);
 a.SetBit0(0);
 // a == 2
 // a.IsBitSet(0) == false
-var b = a.SetBitCopy(0);
+var b = a.SetBitCopy(0, true);
 // b == 3
 a = 1;
 a.Rol();
@@ -87,19 +94,18 @@ Note that for SByte, Byte, Int16 and UInt16 the CPU uses 32-bit word size anyway
 ### Hardware intrinsics
 For .Net Core 3.0 and above library uses hardware intrinsics for operations where available. This is possible because of new features supported in .Net Core 3.0 and above. For frameworks (.Net 4.x and .Net Standard) and processors (i.e. non-x86/x64 CPU) where this is not supported a software implementation is used. The software implementation is naturally slower than the hardware accellerated implementation.
 
-| Command              | .Net 4.x | .Net Standard | .Net Core 2.x | .Net Core 3.0 | .Net Core 3.1 |
-| -------------------- |  :---:   |     :---:     |     :---:     |     :---:     |     :---:     |
-| SetBit               |    Y     |       Y       |       Y       |       Y       |       Y       |
-| SetBit0              |    Y     |       Y       |       Y       |       Y       |       Y       |
-| SetBit1              |    Y     |       Y       |       Y       |       Y       |       Y       |
-| Rol                  | RyuJit   |    RyuJit     |       Y       |       Y       |       Y       |
-| Ror                  | RyuJit   |    RyuJit     |       Y       |       Y       |       Y       |
-| ReverseBits          |    N     |       N       |       N       |       Y       |       Y       |
-| PopCount             |    N     |       N       |       N       |       Y       |       Y       |
-| LeadingZeroCount     |    N     |       N       |       N       |       Y       |       Y       |
-| ReverseEndianness    |    N     |       N       |       N       |       N       |       YC      |
-| ToBinaryString       |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |
-| ToBinaryStringPadded |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |
+| Command              | .Net 4.x | .Net Standard | .Net Core 2.x | .Net Core 3.0 | .Net Core 3.1 | .Net 5.0+ (up to 10.0+) |
+| -------------------- |  :---:   |     :---:     |     :---:     |     :---:     |     :---:     |     :---:     |
+| SetBit               |    Y     |       Y       |       Y       |       Y       |       Y       |       Y       |
+| SetBit0              |    Y     |       Y       |       Y       |       Y       |       Y       |       Y       |
+| SetBit1              |    Y     |       Y       |       Y       |       Y       |       Y       |       Y       |
+| Rol                  |  RyuJit  |     RyuJit    |       Y       |       Y       |       Y       |       Y       |
+| Ror                  |  RyuJit  |     RyuJit    |       Y       |       Y       |       Y       |       Y       |
+| ReverseBits          |    N     |       N       |       N       |       Y       |       Y       |       Y       |
+| PopCount             |    N     |       N       |       N       |       Y       |       Y       |       Y       |
+| LeadingZeroCount     |    N     |       N       |       N       |       Y       |       Y       |       Y       |
+| ReverseEndianness    |    N     |       N       |       N       |       N       |       YC      |       YC      |
+| ToBitString          |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |      N/A      |
+| ToBitStringPadded    |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |      N/A      |
 
 *C = One copy operation.
-
