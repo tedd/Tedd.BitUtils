@@ -13,7 +13,7 @@ namespace Tedd.BitUtils.Tests.InPlace
                 byte a = (byte)~(1 << n);
                 byte i = unchecked((byte)~0);
                 i.SetBit0(n);
-                Assert.Equal(a,i);
+                Assert.Equal(a, i);
             }
         }
         [Fact]
