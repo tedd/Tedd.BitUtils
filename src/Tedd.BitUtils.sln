@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tedd.BitUtils", "Tedd.BitUt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tedd.BitUtils.Tests", "Tedd.BitUtils.Tests\Tedd.BitUtils.Tests.csproj", "{CCB69A02-9F01-4A03-B754-7072ABFAA654}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tedd.BitUtils.Archive", "Tedd.BitUtils.Archive\Tedd.BitUtils.Archive.csproj", "{F38F119E-A7FF-4058-878A-7C7508D7CCA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tedd.BitUtils.Archive", "Tedd.BitUtils.Archive\Tedd.BitUtils.Archive.csproj", "{F38F119E-A7FF-4058-878A-7C7508D7CCA0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tedd.BitUtils.Benchmarks", "Tedd.BitUtils.Benchmarks\Tedd.BitUtils.Benchmarks.csproj", "{B208EFAC-F596-4876-9534-2D4AF505235E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tedd.BitUtils.Benchmarks", "Tedd.BitUtils.Benchmarks\Tedd.BitUtils.Benchmarks.csproj", "{B208EFAC-F596-4876-9534-2D4AF505235E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
