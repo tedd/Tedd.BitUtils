@@ -16,11 +16,11 @@ namespace Tedd.BitUtils.Tests.InPlace
         [Fact]
         public void TestInt32()
         {
-            for (var i = 0; i < (sizeof(Int32) * 8) ; i++)
+            for (var i = 0; i < (sizeof(Int32) * 8); i++)
             {
                 Int32 v = 1;
                 v.Rol(i);
-                var a = (Int32)((UInt32)1 << (i ));
+                var a = (Int32)((UInt32)1 << (i));
                 _output?.WriteLine(Convert.ToString(a, 2).PadLeft(32, '0') + " == " + Convert.ToString(v, 2).PadLeft(32, '0'));
                 Assert.Equal(a, v);
             }

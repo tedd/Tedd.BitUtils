@@ -16,7 +16,7 @@ namespace Tedd.BitUtils.Tests.Copy
                 var expected = new string(Convert.ToString(r, 2).PadLeft(sizeof(byte) * 8, '0').Reverse().ToArray());
                 var o = r;
                 var n = r.ReverseBitsCopy();
-                Assert.Equal(o,r);
+                Assert.Equal(o, r);
                 var actual = new string(Convert.ToString(n, 2).PadLeft(sizeof(byte) * 8, '0').ToArray());
                 Assert.Equal(expected, actual);
             }
@@ -84,7 +84,7 @@ namespace Tedd.BitUtils.Tests.Copy
         {
             for (var i = 0; i < 100; i++)
             {
-                var r = (Int64)rnd.Next() | (Int64)rnd.Next()<<32;
+                var r = (Int64)rnd.Next() | (Int64)rnd.Next() << 32;
                 var expected = new string(Convert.ToString(r, 2).PadLeft(sizeof(Int64) * 8, '0').Reverse().ToArray());
                 var o = r;
                 var n = r.ReverseBitsCopy();

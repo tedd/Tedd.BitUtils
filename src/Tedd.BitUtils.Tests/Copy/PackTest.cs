@@ -35,7 +35,7 @@ namespace Tedd.BitUtils.Tests.Copy
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v=v.PackCopy(offset, len, sv);
+                        v = v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
@@ -71,7 +71,7 @@ namespace Tedd.BitUtils.Tests.Copy
                     for (var len = 1; len < offset; len++)
                     {
                         var ov = v;
-                        v=v.PackCopy(offset, len, sv);
+                        v = v.PackCopy(offset, len, sv);
 
                         var ss = sv.ToBitStringPadded();
                         ss = ss.Substring(ss.Length - len, len);
@@ -232,8 +232,8 @@ namespace Tedd.BitUtils.Tests.Copy
                 }
 
             }
-        } 
-        
+        }
+
         [Fact]
         public void TestUInt64()
         {
