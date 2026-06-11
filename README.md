@@ -67,7 +67,7 @@ var b = a.SetBitCopy(0, true);
 // b == 3
 a = 1;
 a.Rol();
-// a == 3
+// a == 2
 ```
 
 ## Pack / Unpack

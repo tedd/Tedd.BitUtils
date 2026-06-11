@@ -787,7 +787,7 @@ public static class BitUtilsExtensions
     /// <param name="length">Length of bits.</param>
     /// <returns>Extracted bits shifted down.</returns>
     /// <example>var value = 0b00000000_10011001;
-    /// value.ExtractBits(5, 2) == 0b11</example>
+    /// value.Unpack(5, 2) == 0b11</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static SByte Unpack(ref this SByte value, int offset, int length) => (SByte)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
     /// <summary>
@@ -798,7 +798,7 @@ public static class BitUtilsExtensions
     /// <param name="length">Length of bits.</param>
     /// <returns>Extracted bits shifted down.</returns>
     /// <example>var value = 0b00000000_10011001;
-    /// value.ExtractBits(5, 2) == 0b11</example>
+    /// value.Unpack(5, 2) == 0b11</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Byte Unpack(ref this Byte value, int offset, int length) => (Byte)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
     /// <summary>
@@ -809,7 +809,7 @@ public static class BitUtilsExtensions
     /// <param name="length">Length of bits.</param>
     /// <returns>Extracted bits shifted down.</returns>
     /// <example>var value = 0b00000000_10011001;
-    /// value.ExtractBits(5, 2) == 0b11</example>
+    /// value.Unpack(5, 2) == 0b11</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static UInt16 Unpack(ref this UInt16 value, int offset, int length) => (UInt16)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
     /// <summary>
@@ -820,7 +820,7 @@ public static class BitUtilsExtensions
     /// <param name="length">Length of bits.</param>
     /// <returns>Extracted bits shifted down.</returns>
     /// <example>var value = 0b00000000_10011001;
-    /// value.ExtractBits(5, 2) == 0b11</example>
+    /// value.Unpack(5, 2) == 0b11</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int16 Unpack(ref this Int16 value, int offset, int length) => (Int16)(((UInt16)value & (UInt16)(((Int16)1 << offset) - 1)) >> (offset - length));
     /// <summary>
@@ -831,7 +831,7 @@ public static class BitUtilsExtensions
     /// <param name="length">Length of bits.</param>
     /// <returns>Extracted bits shifted down.</returns>
     /// <example>var value = 0b00000000_10011001;
-    /// value.ExtractBits(5, 2) == 0b11</example>
+    /// value.Unpack(5, 2) == 0b11</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static UInt32 Unpack(ref this UInt32 value, int offset, int length) => (UInt32)(((UInt32)value & (UInt32)(((Int32)1 << offset) - 1)) >> (offset - length));
     /// <summary>
@@ -842,7 +842,7 @@ public static class BitUtilsExtensions
     /// <param name="length">Length of bits.</param>
     /// <returns>Extracted bits shifted down.</returns>
     /// <example>var value = 0b00000000_10011001;
-    /// value.ExtractBits(5, 2) == 0b11</example>
+    /// value.Unpack(5, 2) == 0b11</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int32 Unpack(ref this Int32 value, int offset, int length) => (Int32)(((UInt32)value & (UInt32)(((Int32)1 << offset) - 1)) >> (offset - length));
     /// <summary>
@@ -853,7 +853,7 @@ public static class BitUtilsExtensions
     /// <param name="length">Length of bits.</param>
     /// <returns>Extracted bits shifted down.</returns>
     /// <example>var value = 0b00000000_10011001;
-    /// value.ExtractBits(5, 2) == 0b11</example>
+    /// value.Unpack(5, 2) == 0b11</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static UInt64 Unpack(ref this UInt64 value, int offset, int length) => (UInt64)(((UInt64)value & (UInt64)(((Int64)1 << offset) - 1)) >> (offset - length));
     /// <summary>
@@ -864,7 +864,7 @@ public static class BitUtilsExtensions
     /// <param name="length">Length of bits.</param>
     /// <returns>Extracted bits shifted down.</returns>
     /// <example>var value = 0b00000000_10011001;
-    /// value.ExtractBits(5, 2) == 0b11</example>
+    /// value.Unpack(5, 2) == 0b11</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Int64 Unpack(ref this Int64 value, int offset, int length) => (Int64)(((UInt64)value & (UInt64)(((Int64)1 << offset) - 1)) >> (offset - length));
     #endregion
