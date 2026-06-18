@@ -18,9 +18,9 @@ namespace Tedd.BitUtils.Tests
         [Fact]
         public void TestInt16()
         {
-            for (var n = 0; n < sizeof(Int32) * 8; n++)
+            for (var n = 0; n < sizeof(Int16) * 8; n++)
             {
-                Int32 i = (Int32)1 << n;
+                Int16 i = unchecked((Int16)((Int32)1 << n));
                 Assert.True(i.IsBitSet(n), n.ToString());
             }
         }
