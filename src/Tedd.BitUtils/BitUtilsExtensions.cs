@@ -241,7 +241,7 @@ public static class BitUtilsExtensions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 PopCount(ref this Byte value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Int32 PopCount(ref this Int16 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value & 0xFFFF) : PopCntSoftwareFallback((UInt32)value);
+        public static Int32 PopCount(ref this Int16 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value & 0xFFFF) : PopCntSoftwareFallback((UInt32)value & 0xFFFF);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Int32 PopCount(ref this UInt16 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
