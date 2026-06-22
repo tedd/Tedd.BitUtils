@@ -52,6 +52,7 @@ The library adheres to a strictly **primitive bitwise operational paradigm**. It
 
 *   **Established Mechanics:** Operations execute deterministically on raw scalar types (`byte`, `short`, `int`, etc.). They automatically leverage low-level hardware intrinsics (e.g., `System.Runtime.Intrinsics.X86`) on modern frameworks (.NET Core 3.0+ through .NET 9.0/10.0+), falling back to optimized software routines when executing on unsupported architectures.
 *   **Architectural Scope:** The framework operates exclusively at the fundamental data layer. It **explicitly does not implement** hierarchical data binding or routed event infrastructures, mitigating any ambiguity regarding state propagation or complex DOM-like event bubbling architectures.
+*   **Planned Enhancements (Hypotheses):** Future architectural integrations (such as higher-order frameworks) remain purely speculative hypotheses and are not a constituent part of the current operational reality.
 
 ## Simple example of usage
 ```cs
@@ -75,7 +76,7 @@ Pack and unpack allows you to copy portions of an integer into portions of anoth
 ```cs
 var i1 = 0b0000_1111_1100_0011;
 var i2 = 0b0000_0000_0000_0010;
-// We copy the last 3 bits of i2 into fift position from right in i1.
+// We copy the 2 lowest bits of i2 into the 4th and 5th position from right in i1.
 i1.Pack(5, 2, i2);
 // Arrows shows where the two lowest bits of i2 will be inserted into i1: 0b0000_1111_110 -> 0_0 <- 011
 // i1 is now: 0b0000_1111_1101_0011
