@@ -1,7 +1,7 @@
 # Tedd.BitUtils
 Available as NuGet Package: https://www.nuget.org/packages/Tedd.BitUtils/
 
-Bit manipulation extension methods for:<br />sbyte, byte, short (Int16), ushort (UInt16), int (Int32), uint (UInt32), long (Int64) and ulong (UInt64).
+Bit manipulation extension methods for:<br />byte, short (Int16), ushort (UInt16), int (Int32), uint (UInt32), long (Int64) and ulong (UInt64). (Limited support for sbyte).
 Types can be manipulated in-place or by returning a modified copy. In-place modification uses reference for maximum performance.
 
 Library offers standard bit manipulation methods that are fast. Wherever possible accellerated things such as specialized CPU instructions (intrinsics) or compiler magic is used to accellerate execution. If .Net version or CPU you are using doesn't support hardware accelleration for a particular function then software implementation is used.
@@ -106,7 +106,7 @@ For .Net Core 3.0 and above library uses hardware intrinsics for operations wher
 | PopCount             |    N     |       N       |       N       |       Y       |       Y       |       Y       |
 | LeadingZeroCount     |    N     |       N       |       N       |       Y       |       Y       |       Y       |
 | ReverseEndianness    |    N     |       N       |       N       |       N       |       YC      |       YC      |
-| ToBitString          |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |      N/A      |
-| ToBitStringPadded    |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |      N/A      |
+| ToBitString          |    Y     |       Y       |       Y       |       Y       |       Y       |       Y       |
+| ToBitStringPadded    |    Y     |       Y       |       Y       |       Y       |       Y       |       Y       |
 
 *C = One copy operation.
