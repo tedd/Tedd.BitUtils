@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Tedd.BitUtils.Archive
 {
-    public static class BitUtilsArchiveExtensions
+    public static partial class BitUtilsArchiveExtensions
     {
         #region ToBitStringPadded
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
