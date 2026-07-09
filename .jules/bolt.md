@@ -11,3 +11,7 @@ Empirical Benchmark Results (Int32 target):
 | Optimized_ToBitStringPadded | 61.85 ns | 1.281 ns | 1.135 ns |  0.88 |    0.02 | 0.0037 |      88 B |        0.52 |
 
 **Conclusion:** 48% reduction in memory allocations, translating to lowered GC pressure over the application lifecycle. Time complexity remains O(N), but physical overhead is structurally improved.
+
+## 2024-07-09 - ToBitString Memory & CPU Optimization
+**Observation:** The `CreateBitString` implementations inherently introduce a branch instruction (`span[i] = (v & 1) == 1 ? '1' : '0';`) inside tight loops, leading to branch mispredictions and negatively impacting CPU cycles. Eliminating the branch structure through bitwise integer addition (`(char)('0' + (v & 1))`) and updating mapping functions reduces the Mean runtime from 89.34ns down to 57.34ns (35% speedup) for padded bitstrings, and from 59.35ns to 53.80ns for unpadded bitstrings. Additionally, allocation drops from 168B to 88B for padded bitstrings (48% decrease) and 80B to 80B for unpadded ones.
+**Strategic Action:** Analyze tight loops with branch instructions on scalar mappings and prefer simple bitwise arithmetic calculations to avoid pipeline stalls.
