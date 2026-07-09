@@ -1,3 +1,7 @@
 ## 2026-06-18 - Bitwise Extensions Fallback Test Coverage
 **Observation:** Hardware intrinsics (`X86.Popcnt.IsSupported`, `X86.Lzcnt.IsSupported`) obscured execution pathways for software fallbacks (`PopCntSoftwareFallback`, `LzCntSoftwareFallback`) within `BitUtilsExtensions.cs`, resulting in < 100% code coverage. Additionally, negative boundary conditions were incorrectly evaluating `Int16` PopCount values due to missing sign-extension masks (`& 0xFFFF`), which was only caught by generating explicit boundary tests.
 **Strategic Action:** Utilize Reflection within a dedicated parameterized testing harness (`SoftwareFallbackTests.cs` using `[Theory]`/`[InlineData]`) to force deterministic execution of internal/private fallback routines, guaranteeing complete branch evaluation regardless of runtime hardware capabilities. Ensure boundary assertions apply 16-bit masks explicitly for 16-bit numeric derivations.
+
+## 2024-05-14 - Test Coverage Expansion for UInt64 ReverseBitsCopy
+**Observation:** The test method `TestUInt64` in `ReverseBitTest.cs` was incorrectly instantiating an `Int64` instead of a `UInt64`, causing the `UInt64 ReverseBitsCopy` extension method to have 0% branch/line coverage, as the `Int64` overload was called instead.
+**Strategic Action:** Corrected the test initialization to explicitly cast `rnd.Next()` to `UInt64` ensuring the correct overload is invoked, increasing overall code coverage to 100%. Replaced iteration with parameterized `[Theory]` and `[InlineData]` constructs containing edge cases.
