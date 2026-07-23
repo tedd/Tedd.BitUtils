@@ -430,7 +430,7 @@ public static class BitUtilsExtensions
     {
         if (value == 0) return 1;
         int count = 64 - value.LeadingZeroCount();
-        return count > 0 ? count : 1;
+        return count;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -438,7 +438,7 @@ public static class BitUtilsExtensions
     {
         if (value == 0) return 1;
         int count = 32 - value.LeadingZeroCount();
-        return count > 0 ? count : 1;
+        return count;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -446,7 +446,7 @@ public static class BitUtilsExtensions
     {
         if (value == 0) return 1;
         int count = 8 - value.LeadingZeroCount();
-        return count > 0 ? count : 1;
+        return count;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -454,7 +454,7 @@ public static class BitUtilsExtensions
     {
         if (value == 0) return 1;
         int count = 16 - value.LeadingZeroCount();
-        return count > 0 ? count : 1;
+        return count;
     }
     #endregion
 

@@ -98,12 +98,12 @@ namespace Tedd.BitUtils.Tests.Copy
         {
             for (var i = 0; i < 100; i++)
             {
-                var r = (Int64)rnd.Next() | (Int64)rnd.Next() << 32;
-                var expected = new string(Convert.ToString(r, 2).PadLeft(sizeof(UInt64) * 8, '0').Reverse().ToArray());
+                var r = (UInt64)((Int64)rnd.Next() | (Int64)rnd.Next() << 32);
+                var expected = new string(Convert.ToString((long)r, 2).PadLeft(sizeof(UInt64) * 8, '0').Reverse().ToArray());
                 var o = r;
                 var n = r.ReverseBitsCopy();
                 Assert.Equal(o, r);
-                var actual = new string(Convert.ToString(n, 2).PadLeft(sizeof(UInt64) * 8, '0').ToArray());
+                var actual = new string(Convert.ToString((long)n, 2).PadLeft(sizeof(UInt64) * 8, '0').ToArray());
                 Assert.Equal(expected, actual);
             }
         }
