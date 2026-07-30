@@ -399,6 +399,11 @@ public static class BitUtilsExtensions
     //#endregion
     #region ToBitStringHelpers
 #if NETSTANDARD2_1_OR_GREATER || NETCOREAPP3_0_OR_GREATER || NET5_0_OR_GREATER
+    /// <summary>
+    /// Creates a bit string representation of the given value.
+    /// Time Complexity: O(n) where n is the length of bits.
+    /// Space Complexity: O(n) for the output string allocation.
+    /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static string CreateBitString(UInt64 value, int length)
     {
@@ -406,19 +411,24 @@ public static class BitUtilsExtensions
         {
             for (int i = span.Length - 1; i >= 0; i--)
             {
-                span[i] = (v & 1) == 1 ? '1' : '0';
+                span[i] = (char)('0' + (v & 1));
                 v >>= 1;
             }
         });
     }
 #else
+    /// <summary>
+    /// Creates a bit string representation of the given value.
+    /// Time Complexity: O(n) where n is the length of bits.
+    /// Space Complexity: O(n) for the character array allocation and resulting string.
+    /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static string CreateBitString(UInt64 value, int length)
     {
         char[] chars = new char[length];
         for (int i = length - 1; i >= 0; i--)
         {
-            chars[i] = (value & 1) == 1 ? '1' : '0';
+            chars[i] = (char)('0' + (value & 1));
             value >>= 1;
         }
         return new string(chars);

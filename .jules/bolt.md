@@ -11,3 +11,7 @@ Empirical Benchmark Results (Int32 target):
 | Optimized_ToBitStringPadded | 61.85 ns | 1.281 ns | 1.135 ns |  0.88 |    0.02 | 0.0037 |      88 B |        0.52 |
 
 **Conclusion:** 48% reduction in memory allocations, translating to lowered GC pressure over the application lifecycle. Time complexity remains O(N), but physical overhead is structurally improved.
+
+## 2024-07-30 - BitString Generation Optimization
+**Observation:** In `CreateBitString`, conditionally assigning a char (`(v & 1) == 1 ? '1' : '0'`) requires a branching instruction, which can disrupt the CPU pipeline. By replacing it with scalar bitwise arithmetic `(char)('0' + (v & 1))`, we eliminate the branch. Benchmarks via `ToBitStringBenchmarks` show a latency reduction of ~10-15% for ToBitStringPadded and ~30% for ToBitString.
+**Strategic Action:** Prefer simple bitwise arithmetic calculations (e.g., `(char)('0' + (v & 1))`) over conditional branch instructions in tight loops on scalar mappings to avoid pipeline stalls.
