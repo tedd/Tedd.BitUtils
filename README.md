@@ -56,6 +56,8 @@ The library adheres to a strictly **primitive bitwise operational paradigm**. It
 
 ## Simple example of usage
 ```cs
+using Tedd;
+
 var a = 0;
 a.SetBit(0, true);
 // a == 1
@@ -74,6 +76,8 @@ a.Rol();
 ## Pack / Unpack
 Pack and unpack allows you to copy portions of an integer into portions of another integer.
 ```cs
+using Tedd;
+
 var i1 = 0b0000_1111_1100_0011;
 var i2 = 0b0000_0000_0000_0010;
 // We copy the 2 lowest bits of i2 into the 4th and 5th position from right in i1.
