@@ -11,3 +11,6 @@ Empirical Benchmark Results (Int32 target):
 | Optimized_ToBitStringPadded | 61.85 ns | 1.281 ns | 1.135 ns |  0.88 |    0.02 | 0.0037 |      88 B |        0.52 |
 
 **Conclusion:** 48% reduction in memory allocations, translating to lowered GC pressure over the application lifecycle. Time complexity remains O(N), but physical overhead is structurally improved.
+## 2025-02-20 - ToBitString Optimization
+**Observation:** The `CreateBitString` implementations in `BitUtilsExtensions.cs` utilized a conditional ternary operation `(v & 1) == 1 ? '1' : '0'` inside a loop, causing pipeline stalls and suboptimal execution speed.
+**Strategic Action:** Substituted the conditional branch with direct bitwise arithmetic mapping `(char)('0' + (v & 1))`, reducing CPU cycles per operation and improving overall execution latency without increasing memory allocations.
