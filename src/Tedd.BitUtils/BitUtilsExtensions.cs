@@ -406,7 +406,7 @@ public static class BitUtilsExtensions
         {
             for (int i = span.Length - 1; i >= 0; i--)
             {
-                span[i] = (v & 1) == 1 ? '1' : '0';
+                span[i] = (char)('0' + (v & 1));
                 v >>= 1;
             }
         });
@@ -418,7 +418,7 @@ public static class BitUtilsExtensions
         char[] chars = new char[length];
         for (int i = length - 1; i >= 0; i--)
         {
-            chars[i] = (value & 1) == 1 ? '1' : '0';
+            chars[i] = (char)('0' + (value & 1));
             value >>= 1;
         }
         return new string(chars);
