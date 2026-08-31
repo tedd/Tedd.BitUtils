@@ -14,4 +14,4 @@ Empirical Benchmark Results (Int32 target):
 
 ## 2024-05-27 - `CreateBitString` Character Mapping Optimization
 **Observation:** The `CreateBitString` utility methods in `BitUtilsExtensions.cs` used a conditional ternary operator `(v & 1) == 1 ? '1' : '0'` to map integer bits to character representations. This introduced branching logic into the tight loop generating string characters, leading to pipeline stalls and suboptimal performance.
-**Strategic Action:** Substituted the conditional branch with a direct bitwise arithmetic calculation `(char)('0' + (v & 1))`. This leverages scalar mappings without branch instructions, improving CPU pipeline efficiency. Benchmarks demonstrated an execution time reduction from ~96 ns to ~59 ns for `ToBitStringPadded` (a ~38% improvement) and ~58 ns to ~55 ns for `ToBitString`.
+**Strategic Action:** Substituted the conditional branch with a direct bitwise arithmetic calculation `(char)('0' + (v & 1))`. This leverages scalar mappings without branch instructions, improving CPU pipeline efficiency. Benchmarks demonstrated roughly 25% faster `ToBitStringPadded` and roughly 29% faster `ToBitString` in current measurements.

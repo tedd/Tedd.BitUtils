@@ -68,9 +68,10 @@ namespace Tedd.BitUtils.Archive
         private static int LeadingZeroCountSoftwareFallback(UInt64 value)
         {
             if (value == 0) return 64;
-            var n = Log2SoftwareFallback((UInt32)(value >> 32));
-            if (n > 0) n += 32;
-            else n = Log2SoftwareFallback((UInt32)value);
+            var upper = (UInt32)(value >> 32);
+            var n = upper > 0
+                ? Log2SoftwareFallback(upper) + 32
+                : Log2SoftwareFallback((UInt32)value);
             return 63 - n;
         }
 
