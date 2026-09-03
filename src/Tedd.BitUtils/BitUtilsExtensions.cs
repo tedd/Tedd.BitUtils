@@ -429,32 +429,28 @@ public static class BitUtilsExtensions
     private static int GetLength(UInt64 value)
     {
         if (value == 0) return 1;
-        int count = 64 - value.LeadingZeroCount();
-        return count > 0 ? count : 1;
+        return 64 - value.LeadingZeroCount();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static int GetLength(UInt32 value)
     {
         if (value == 0) return 1;
-        int count = 32 - value.LeadingZeroCount();
-        return count > 0 ? count : 1;
+        return 32 - value.LeadingZeroCount();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static int GetLength(Byte value)
     {
         if (value == 0) return 1;
-        int count = 8 - value.LeadingZeroCount();
-        return count > 0 ? count : 1;
+        return 8 - value.LeadingZeroCount();
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static int GetLength(UInt16 value)
     {
         if (value == 0) return 1;
-        int count = 16 - value.LeadingZeroCount();
-        return count > 0 ? count : 1;
+        return 16 - value.LeadingZeroCount();
     }
     #endregion
 
