@@ -1,211 +1,134 @@
-﻿using System;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace Tedd;
 
+/// <summary>
+/// Non-mutating counterparts of the in-place operations in <see cref="BitUtilsExtensions"/>.
+/// Every method leaves the original value untouched and returns the modified copy.
+/// </summary>
+/// <remarks>See <see cref="BitUtilsExtensions"/> for the conventions shared by all methods.</remarks>
 [CLSCompliant(false)]
-public static class BitUtilsCopyExtensions
+public static partial class BitUtilsCopyExtensions
 {
-    #region Copy
-
-    #region Rol count
-
-    // Note. RyuJIT will compile this to a single rotate CPU instruction (as of about .NET 4.6.1 and dotnet core 2.0).
+    #region SetBitCopy(pos, state)
+    /// <summary>Returns a copy of <paramref name="value"/> with bit <paramref name="pos"/> set to 1 when <paramref name="state"/> is <see langword="true"/>, otherwise cleared to 0. Branch free.</summary>
+    /// <param name="value">Original value (not modified).</param>
+    /// <param name="pos">Zero based bit position counted from the least significant bit.</param>
+    /// <param name="state">New state of the bit.</param>
+    /// <returns>Modified copy.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int32 RolCopy(ref this Int32 value, int count) => (Int32)(((UInt32)value << count) | ((UInt32)value >> (32 - count)));
-
+    public static sbyte SetBitCopy(ref this sbyte value, int pos, bool state) => (sbyte)((value & ~(1 << pos)) | ((state ? 1 : 0) << pos));
+    /// <inheritdoc cref="SetBitCopy(ref sbyte, int, bool)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt32 RolCopy(ref this UInt32 value, int count) => (UInt32)(((UInt64)value << count) | ((UInt64)value >> (32 - count)));
-
+    public static byte SetBitCopy(ref this byte value, int pos, bool state) => (byte)((value & ~(1 << pos)) | ((state ? 1 : 0) << pos));
+    /// <inheritdoc cref="SetBitCopy(ref sbyte, int, bool)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int64 RolCopy(ref this Int64 value, int count) => (Int64)(((UInt64)value << count) | ((UInt64)value >> (64 - count)));
-
+    public static short SetBitCopy(ref this short value, int pos, bool state) => (short)((value & ~(1 << pos)) | ((state ? 1 : 0) << pos));
+    /// <inheritdoc cref="SetBitCopy(ref sbyte, int, bool)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt64 RolCopy(ref this UInt64 value, int count) => (UInt64)(((UInt64)value << count) | ((UInt64)value >> (64 - count)));
-
+    public static ushort SetBitCopy(ref this ushort value, int pos, bool state) => (ushort)((value & ~(1 << pos)) | ((state ? 1 : 0) << pos));
+    /// <inheritdoc cref="SetBitCopy(ref sbyte, int, bool)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int SetBitCopy(ref this int value, int pos, bool state) => (value & ~(1 << pos)) | ((state ? 1 : 0) << pos);
+    /// <inheritdoc cref="SetBitCopy(ref sbyte, int, bool)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static uint SetBitCopy(ref this uint value, int pos, bool state) => (value & ~(1u << pos)) | ((state ? 1u : 0u) << pos);
+    /// <inheritdoc cref="SetBitCopy(ref sbyte, int, bool)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static long SetBitCopy(ref this long value, int pos, bool state) => (value & ~(1L << pos)) | ((state ? 1L : 0L) << pos);
+    /// <inheritdoc cref="SetBitCopy(ref sbyte, int, bool)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static ulong SetBitCopy(ref this ulong value, int pos, bool state) => (value & ~(1UL << pos)) | ((state ? 1UL : 0UL) << pos);
     #endregion
 
-    #region Ror count
-
+    #region SetBit0Copy(pos)
+    /// <summary>Returns a copy of <paramref name="value"/> with bit <paramref name="pos"/> cleared to 0.</summary>
+    /// <param name="value">Original value (not modified).</param>
+    /// <param name="pos">Zero based bit position counted from the least significant bit.</param>
+    /// <returns>Modified copy.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int32 RorCopy(ref this Int32 value, int count) => (Int32)(((UInt32)value << (32 - count)) | ((UInt32)value >> count));
-
+    public static sbyte SetBit0Copy(ref this sbyte value, int pos) => (sbyte)(value & ~(1 << pos));
+    /// <inheritdoc cref="SetBit0Copy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt32 RorCopy(ref this UInt32 value, int count) => (UInt32)(((UInt32)value << (32 - count)) | ((UInt32)value >> count));
-
+    public static byte SetBit0Copy(ref this byte value, int pos) => (byte)(value & ~(1 << pos));
+    /// <inheritdoc cref="SetBit0Copy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int64 RorCopy(ref this Int64 value, int count) => (Int64)(((UInt64)value << (64 - count)) | ((UInt64)value >> count));
-
+    public static short SetBit0Copy(ref this short value, int pos) => (short)(value & ~(1 << pos));
+    /// <inheritdoc cref="SetBit0Copy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt64 RorCopy(ref this UInt64 value, int count) => (UInt64)(((UInt64)value << (64 - count)) | ((UInt64)value >> count));
-
+    public static ushort SetBit0Copy(ref this ushort value, int pos) => (ushort)(value & ~(1 << pos));
+    /// <inheritdoc cref="SetBit0Copy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int SetBit0Copy(ref this int value, int pos) => value & ~(1 << pos);
+    /// <inheritdoc cref="SetBit0Copy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static uint SetBit0Copy(ref this uint value, int pos) => value & ~(1u << pos);
+    /// <inheritdoc cref="SetBit0Copy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static long SetBit0Copy(ref this long value, int pos) => value & ~(1L << pos);
+    /// <inheritdoc cref="SetBit0Copy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static ulong SetBit0Copy(ref this ulong value, int pos) => value & ~(1UL << pos);
     #endregion
 
-    #region Rol 1
-
+    #region SetBit1Copy(pos)
+    /// <summary>Returns a copy of <paramref name="value"/> with bit <paramref name="pos"/> set to 1.</summary>
+    /// <param name="value">Original value (not modified).</param>
+    /// <param name="pos">Zero based bit position counted from the least significant bit.</param>
+    /// <returns>Modified copy.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int32 RolCopy(ref this Int32 value) => (Int32)(((UInt32)value << 1) | ((UInt32)value >> 31));
-
+    public static sbyte SetBit1Copy(ref this sbyte value, int pos) => (sbyte)(value | (1 << pos));
+    /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt32 RolCopy(ref this UInt32 value) => (UInt32)(((UInt32)value << 1) | ((UInt32)value >> 31));
-
+    public static byte SetBit1Copy(ref this byte value, int pos) => (byte)(value | (1 << pos));
+    /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int64 RolCopy(ref this Int64 value) => (Int64)(((UInt64)value << 1) | ((UInt64)value >> 63));
-
+    public static short SetBit1Copy(ref this short value, int pos) => (short)(value | (1 << pos));
+    /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt64 RolCopy(ref this UInt64 value) => (UInt64)(((UInt64)value << 1) | ((UInt64)value >> 63));
-
+    public static ushort SetBit1Copy(ref this ushort value, int pos) => (ushort)(value | (1 << pos));
+    /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int SetBit1Copy(ref this int value, int pos) => value | (1 << pos);
+    /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static uint SetBit1Copy(ref this uint value, int pos) => value | (1u << pos);
+    /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static long SetBit1Copy(ref this long value, int pos) => value | (1L << pos);
+    /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static ulong SetBit1Copy(ref this ulong value, int pos) => value | (1UL << pos);
     #endregion
 
-    #region Ror 1
-
+    #region ToggleBitCopy(pos)
+    /// <summary>Returns a copy of <paramref name="value"/> with bit <paramref name="pos"/> inverted.</summary>
+    /// <param name="value">Original value (not modified).</param>
+    /// <param name="pos">Zero based bit position counted from the least significant bit.</param>
+    /// <returns>Modified copy.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int32 RorCopy(ref this Int32 value) => (Int32)(((UInt32)value << 31) | ((UInt32)value >> 1));
-
+    public static sbyte ToggleBitCopy(ref this sbyte value, int pos) => (sbyte)(value ^ (1 << pos));
+    /// <inheritdoc cref="ToggleBitCopy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt32 RorCopy(ref this UInt32 value) => (UInt32)(((UInt32)value << 31) | ((UInt32)value >> 1));
-
+    public static byte ToggleBitCopy(ref this byte value, int pos) => (byte)(value ^ (1 << pos));
+    /// <inheritdoc cref="ToggleBitCopy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int64 RorCopy(ref this Int64 value) => (Int64)(((UInt64)value << 63) | ((UInt64)value >> 1));
-
+    public static short ToggleBitCopy(ref this short value, int pos) => (short)(value ^ (1 << pos));
+    /// <inheritdoc cref="ToggleBitCopy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt64 RorCopy(ref this UInt64 value) => (UInt64)(((UInt64)value << 63) | ((UInt64)value >> 1));
-
+    public static ushort ToggleBitCopy(ref this ushort value, int pos) => (ushort)(value ^ (1 << pos));
+    /// <inheritdoc cref="ToggleBitCopy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static int ToggleBitCopy(ref this int value, int pos) => value ^ (1 << pos);
+    /// <inheritdoc cref="ToggleBitCopy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static uint ToggleBitCopy(ref this uint value, int pos) => value ^ (1u << pos);
+    /// <inheritdoc cref="ToggleBitCopy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static long ToggleBitCopy(ref this long value, int pos) => value ^ (1L << pos);
+    /// <inheritdoc cref="ToggleBitCopy(ref sbyte, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static ulong ToggleBitCopy(ref this ulong value, int pos) => value ^ (1UL << pos);
     #endregion
-
-    #region SetBit bool
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Byte SetBitCopy(ref this Byte value, int pos, bool state) => (state ? (Byte)(value | (1 << pos)) : (Byte)(value & ~(1 << pos)));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int16 SetBitCopy(ref this Int16 value, int pos, bool state) => state ? (Int16)((UInt16)value | ((UInt16)1 << pos)) : (Int16)((UInt16)value & ~((UInt16)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt16 SetBitCopy(ref this UInt16 value, int pos, bool state) =>
-        (state
-            ? (UInt16)((UInt16)value | ((UInt16)1 << pos))
-            : (UInt16)((UInt16)value & ~((UInt16)1 << pos)));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int32 SetBitCopy(ref this Int32 value, int pos, bool state) =>
-        (state
-            ? (Int32)((UInt32)value | ((UInt32)1 << pos))
-            : (Int32)((UInt32)value & ~((UInt32)1 << pos)));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt32 SetBitCopy(ref this UInt32 value, int pos, bool state) =>
-        (state
-            ? (UInt32)((UInt32)value | ((UInt32)1 << pos))
-            : (UInt32)(UInt32)(value & ~((UInt32)1 << pos)));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int64 SetBitCopy(ref this Int64 value, int pos, bool state) =>
-        (state
-            ? (Int64)((UInt64)value | ((UInt64)1 << pos))
-            : (Int64)((UInt64)value & ~((UInt64)1 << pos)));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt64 SetBitCopy(ref this UInt64 value, int pos, bool state) =>
-        (state
-            ? (UInt64)((UInt64)value | ((UInt64)1 << pos))
-            : (UInt64)((UInt64)value & ~((UInt64)1 << pos)));
-
-    #endregion
-
-    #region SetBit0
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Byte SetBit0Copy(ref this Byte value, int pos) => (Byte)(value & ~(1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int16 SetBit0Copy(ref this Int16 value, int pos) => (Int16)((UInt16)value & ~((UInt16)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt16 SetBit0Copy(ref this UInt16 value, int pos) => (UInt16)((UInt16)value & ~((UInt16)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int32 SetBit0Copy(ref this Int32 value, int pos) => (Int32)((UInt32)value & ~((UInt32)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt32 SetBit0Copy(ref this UInt32 value, int pos) => (UInt32)((UInt32)value & ~((UInt32)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int64 SetBit0Copy(ref this Int64 value, int pos) => (Int64)((Int64)value & ~((Int64)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt64 SetBit0Copy(ref this UInt64 value, int pos) => (UInt64)((UInt64)value & ~((UInt64)1 << pos));
-
-    #endregion
-
-
-    #region SetBit1
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Byte SetBit1Copy(ref this Byte value, int pos) => (Byte)(value | (1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int16 SetBit1Copy(ref this Int16 value, int pos) => (Int16)((UInt16)value | ((UInt16)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt16 SetBit1Copy(ref this UInt16 value, int pos) => (UInt16)((UInt16)value | ((UInt16)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int32 SetBit1Copy(ref this Int32 value, int pos) => (Int32)((UInt32)value | ((UInt32)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt32 SetBit1Copy(ref this UInt32 value, int pos) => (UInt32)((UInt32)value | ((UInt32)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int64 SetBit1Copy(ref this Int64 value, int pos) => (Int64)((UInt64)value | ((UInt64)1 << pos));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt64 SetBit1Copy(ref this UInt64 value, int pos) => (UInt64)((UInt64)value | ((UInt64)1 << pos));
-
-    #endregion
-
-
-    #region ReverseBits
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Byte ReverseBitsCopy(ref this Byte value) => BitUtilsExtensions.BitReverseLookup[value];
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int16 ReverseBitsCopy(ref this Int16 value) => (Int16)((UInt16)BitUtilsExtensions.BitReverseLookup[(UInt16)value >> 8]
-                                                                          | (UInt16)((UInt16)BitUtilsExtensions.BitReverseLookup[(UInt16)value & 0xFF] << (UInt16)8));
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt16 ReverseBitsCopy(ref this UInt16 value) => (UInt16)((UInt16)BitUtilsExtensions.BitReverseLookup[(UInt16)value >> 8]
-                                                                            | (UInt16)((UInt16)BitUtilsExtensions.BitReverseLookup[(UInt16)value & 0xFF] << (UInt16)8));
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int32 ReverseBitsCopy(ref this Int32 value) => (Int32)((UInt32)BitUtilsExtensions.BitReverseLookup[(Int32)((UInt32)value >> 24)]
-                                                                          | (UInt32)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt32)value >> 16) & 0xFF)] << 8
-                                                                          | (UInt32)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt32)value >> 8) & 0xFF)] << 16
-                                                                          | (UInt32)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt32)value & 0xFF))] << 24);
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt32 ReverseBitsCopy(ref this UInt32 value) => (UInt32)((UInt32)BitUtilsExtensions.BitReverseLookup[(Int32)((UInt32)value >> 24)]
-                                                                            | (UInt32)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt32)value >> 16) & 0xFF)] << 8
-                                                                            | (UInt32)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt32)value >> 8) & 0xFF)] << 16
-                                                                            | (UInt32)BitUtilsExtensions.BitReverseLookup[(Int32)((UInt32)value & 0xFF)] << 24);
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Int64 ReverseBitsCopy(ref this Int64 value) => (Int64)((UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)((UInt64)value >> 56)]
-                                                                          | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 48) & 0xFF)] << 8
-                                                                          | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 40) & 0xFF)] << 16
-                                                                          | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 32) & 0xFF)] << 24
-                                                                          | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 24) & 0xFF)] << 32
-                                                                          | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 16) & 0xFF)] << 40
-                                                                          | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 8) & 0xFF)] << 48
-                                                                          | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)((UInt64)value & 0xFF)] << 56);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static UInt64 ReverseBitsCopy(ref this UInt64 value) => (UInt64)((UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)((UInt64)value >> 56)]
-                                                                            | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 48) & 0xFF)] << 8
-                                                                            | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 40) & 0xFF)] << 16
-                                                                            | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 32) & 0xFF)] << 24
-                                                                            | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 24) & 0xFF)] << 32
-                                                                            | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 16) & 0xFF)] << 40
-                                                                            | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)(((UInt64)value >> 8) & 0xFF)] << 48
-                                                                            | (UInt64)BitUtilsExtensions.BitReverseLookup[(Int32)((UInt64)value & 0xFF)] << 56);
-
-    #endregion
-
-    #endregion
-
 }
