@@ -3,6 +3,12 @@ using System.Runtime.CompilerServices;
 
 namespace Tedd.BitUtils.Archive
 {
+    /// <summary>
+    /// Frozen snapshot of the pre-2.0 (1.0.7) Tedd.BitUtils implementation, kept only so
+    /// Tedd.BitUtils.Benchmarks can compare the old and new code side by side. Not published, not maintained -
+    /// including a real bug in ReverseEndianness, preserved deliberately (see the comment on that region) so the
+    /// benchmark measures what 1.0.7 actually did in production, not a corrected version of it.
+    /// </summary>
     public static class BitUtilsArchiveExtensions
     {
         #region ToBitStringPadded
@@ -12,15 +18,14 @@ namespace Tedd.BitUtils.Archive
         public static string ToBitStringPadded(ref this SByte value) => Convert.ToString(value, 2).PadLeft(sizeof(SByte) * 8, '0');
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitStringPadded(ref this Int16 value) => Convert.ToString((UInt32)value & 0xFFFF, 2).PadLeft(sizeof(Int16) * 8, '0');
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitStringPadded(ref this UInt16 value) => Convert.ToString((UInt32)value, 2).PadLeft(sizeof(UInt16) * 8, '0');
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToBitStringPadded(ref this Int32 value) => Convert.ToString((Int32)value, 2).PadLeft(sizeof(Int32) * 8, '0');
+        public static string ToBitStringPadded(ref this Int32 value) => Convert.ToString(value, 2).PadLeft(sizeof(Int32) * 8, '0');
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitStringPadded(ref this UInt32 value) => Convert.ToString((Int32)value, 2).PadLeft(sizeof(UInt32) * 8, '0');
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToBitStringPadded(ref this Int64 value) => Convert.ToString((Int64)value, 2).PadLeft(sizeof(Int64) * 8, '0');
+        public static string ToBitStringPadded(ref this Int64 value) => Convert.ToString(value, 2).PadLeft(sizeof(Int64) * 8, '0');
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitStringPadded(ref this UInt64 value) => Convert.ToString((Int64)value, 2).PadLeft(sizeof(UInt64) * 8, '0');
         #endregion
@@ -33,13 +38,289 @@ namespace Tedd.BitUtils.Archive
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitString(ref this UInt16 value) => Convert.ToString((UInt32)value, 2);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToBitString(ref this Int32 value) => Convert.ToString((Int32)value, 2);
+        public static string ToBitString(ref this Int32 value) => Convert.ToString(value, 2);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitString(ref this UInt32 value) => Convert.ToString((Int32)value, 2);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static string ToBitString(ref this Int64 value) => Convert.ToString((Int64)value, 2);
+        public static string ToBitString(ref this Int64 value) => Convert.ToString(value, 2);
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string ToBitString(ref this UInt64 value) => Convert.ToString((Int64)value, 2);
+        #endregion
+
+        #region Rol / Ror (count) - originally implemented only for 32/64-bit
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Rol(ref this Int32 value, int count) => value = (Int32)(((UInt32)value << count) | ((UInt32)value >> (32 - count)));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Rol(ref this UInt32 value, int count) => value = (UInt32)(((UInt32)value << count) | ((UInt32)value >> (32 - count)));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Rol(ref this Int64 value, int count) => value = (Int64)(((UInt64)value << count) | ((UInt64)value >> (64 - count)));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Rol(ref this UInt64 value, int count) => value = (UInt64)(((UInt64)value << count) | ((UInt64)value >> (64 - count)));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Ror(ref this Int32 value, int count) => value = (Int32)(((UInt32)value << (32 - count)) | ((UInt32)value >> count));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Ror(ref this UInt32 value, int count) => value = (UInt32)(((UInt32)value << (32 - count)) | ((UInt32)value >> count));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Ror(ref this Int64 value, int count) => value = (Int64)(((UInt64)value << (64 - count)) | ((UInt64)value >> count));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Ror(ref this UInt64 value, int count) => value = (UInt64)(((UInt64)value << (64 - count)) | ((UInt64)value >> count));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Rol(ref this Int32 value) => value = (Int32)(((UInt32)value << 1) | ((UInt32)value >> (32 - 1)));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Rol(ref this UInt32 value) => value = (UInt32)(((UInt32)value << 1) | ((UInt32)value >> (32 - 1)));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Rol(ref this Int64 value) => value = (Int64)(((UInt64)value << 1) | ((UInt64)value >> (64 - 1)));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Rol(ref this UInt64 value) => value = (UInt64)(((UInt64)value << 1) | ((UInt64)value >> (64 - 1)));
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Ror(ref this Int32 value) => value = (Int32)(((UInt32)value << (32 - 1)) | ((UInt32)value >> 1));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Ror(ref this UInt32 value) => value = (UInt32)(((UInt32)value << (32 - 1)) | ((UInt32)value >> 1));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Ror(ref this Int64 value) => value = (Int64)(((UInt64)value << (64 - 1)) | ((UInt64)value >> 1));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void Ror(ref this UInt64 value) => value = (UInt64)(((UInt64)value << (64 - 1)) | ((UInt64)value >> 1));
+        #endregion
+
+        #region PopCount - originally an explicit intrinsic check per call, one type at a time
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static int PopCntSoftwareFallback(uint value)
+        {
+            const uint c1 = 0x_55555555u;
+            const uint c2 = 0x_33333333u;
+            const uint c3 = 0x_0F0F0F0Fu;
+            const uint c4 = 0x_01010101u;
+
+            value -= (value >> 1) & c1;
+            value = (value & c2) + ((value >> 2) & c2);
+            value = (((value + (value >> 4)) & c3) * c4) >> 24;
+
+            return (int)value;
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static int PopCntSoftwareFallback(ulong value)
+        {
+            const ulong c1 = 0x_55555555_55555555ul;
+            const ulong c2 = 0x_33333333_33333333ul;
+            const ulong c3 = 0x_0F0F0F0F_0F0F0F0Ful;
+            const ulong c4 = 0x_01010101_01010101ul;
+
+            value -= (value >> 1) & c1;
+            value = (value & c2) + ((value >> 2) & c2);
+            value = (((value + (value >> 4)) & c3) * c4) >> 56;
+
+            return (int)value;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 PopCount(ref this Byte value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 PopCount(ref this Int16 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value & 0xFFFF) : PopCntSoftwareFallback((UInt32)value & 0xFFFF);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 PopCount(ref this UInt16 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 PopCount(ref this Int32 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 PopCount(ref this UInt32 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.PopCount((UInt32)value) : PopCntSoftwareFallback((UInt32)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 PopCount(ref this Int64 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.X64.PopCount((UInt64)value) : PopCntSoftwareFallback((UInt64)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 PopCount(ref this UInt64 value) => System.Runtime.Intrinsics.X86.Popcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Popcnt.X64.PopCount((UInt64)value) : PopCntSoftwareFallback((UInt64)value);
+        #endregion
+
+        #region LeadingZeroCount - originally an explicit intrinsic check per call, one type at a time
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static int LzCntSoftwareFallback(Byte value)
+        {
+            if (value == 0) return 8;
+            return 7 - Log2SoftwareFallback((UInt32)value & 0xFF);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static int LzCntSoftwareFallback(UInt16 value)
+        {
+            if (value == 0) return 16;
+            return 15 - Log2SoftwareFallback((UInt32)value & 0xFFFF);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static int LzCntSoftwareFallback(UInt32 value)
+        {
+            if (value == 0) return 32;
+            return 31 - Log2SoftwareFallback(value);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        static int LzCntSoftwareFallback(UInt64 value)
+        {
+            if (value == 0) return 64;
+            var n = Log2SoftwareFallback((UInt32)(value >> 32));
+            if (n > 0) n += 32;
+            else n = Log2SoftwareFallback((UInt32)value);
+            return 63 - n;
+        }
+
+        private static readonly byte[] Log2DeBruijn =
+        {
+            00, 09, 01, 10, 13, 21, 02, 29,
+            11, 14, 16, 18, 22, 25, 03, 30,
+            08, 12, 20, 28, 15, 17, 24, 07,
+            19, 27, 23, 06, 26, 05, 04, 31
+        };
+        private static int Log2SoftwareFallback(uint value)
+        {
+            value |= value >> 01;
+            value |= value >> 02;
+            value |= value >> 04;
+            value |= value >> 08;
+            value |= value >> 16;
+            return Log2DeBruijn[(value * 0x07C4ACDDu) >> 27];
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 LeadingZeroCount(ref this Byte value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value) - 24 : LzCntSoftwareFallback(value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 LeadingZeroCount(ref this Int16 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value & 0xFFFF) - 16 : LzCntSoftwareFallback((UInt16)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 LeadingZeroCount(ref this UInt16 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value) - 16 : LzCntSoftwareFallback((UInt16)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 LeadingZeroCount(ref this Int32 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value) : LzCntSoftwareFallback((UInt32)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 LeadingZeroCount(ref this UInt32 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.LeadingZeroCount((UInt32)value) : LzCntSoftwareFallback((UInt32)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 LeadingZeroCount(ref this Int64 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.X64.LeadingZeroCount((UInt64)value) : LzCntSoftwareFallback((UInt64)value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static Int32 LeadingZeroCount(ref this UInt64 value) => System.Runtime.Intrinsics.X86.Lzcnt.IsSupported ? (Int32)System.Runtime.Intrinsics.X86.Lzcnt.X64.LeadingZeroCount((UInt64)value) : LzCntSoftwareFallback((UInt64)value);
+        #endregion
+
+        #region ReverseBits - originally a 256 entry table lookup for every width
+        internal static readonly byte[] BitReverseLookup =
+        {
+            0x00, 0x80, 0x40, 0xc0, 0x20, 0xa0, 0x60, 0xe0, 0x10, 0x90, 0x50, 0xd0, 0x30, 0xb0, 0x70, 0xf0,
+            0x08, 0x88, 0x48, 0xc8, 0x28, 0xa8, 0x68, 0xe8, 0x18, 0x98, 0x58, 0xd8, 0x38, 0xb8, 0x78, 0xf8,
+            0x04, 0x84, 0x44, 0xc4, 0x24, 0xa4, 0x64, 0xe4, 0x14, 0x94, 0x54, 0xd4, 0x34, 0xb4, 0x74, 0xf4,
+            0x0c, 0x8c, 0x4c, 0xcc, 0x2c, 0xac, 0x6c, 0xec, 0x1c, 0x9c, 0x5c, 0xdc, 0x3c, 0xbc, 0x7c, 0xfc,
+            0x02, 0x82, 0x42, 0xc2, 0x22, 0xa2, 0x62, 0xe2, 0x12, 0x92, 0x52, 0xd2, 0x32, 0xb2, 0x72, 0xf2,
+            0x0a, 0x8a, 0x4a, 0xca, 0x2a, 0xaa, 0x6a, 0xea, 0x1a, 0x9a, 0x5a, 0xda, 0x3a, 0xba, 0x7a, 0xfa,
+            0x06, 0x86, 0x46, 0xc6, 0x26, 0xa6, 0x66, 0xe6, 0x16, 0x96, 0x56, 0xd6, 0x36, 0xb6, 0x76, 0xf6,
+            0x0e, 0x8e, 0x4e, 0xce, 0x2e, 0xae, 0x6e, 0xee, 0x1e, 0x9e, 0x5e, 0xde, 0x3e, 0xbe, 0x7e, 0xfe,
+            0x01, 0x81, 0x41, 0xc1, 0x21, 0xa1, 0x61, 0xe1, 0x11, 0x91, 0x51, 0xd1, 0x31, 0xb1, 0x71, 0xf1,
+            0x09, 0x89, 0x49, 0xc9, 0x29, 0xa9, 0x69, 0xe9, 0x19, 0x99, 0x59, 0xd9, 0x39, 0xb9, 0x79, 0xf9,
+            0x05, 0x85, 0x45, 0xc5, 0x25, 0xa5, 0x65, 0xe5, 0x15, 0x95, 0x55, 0xd5, 0x35, 0xb5, 0x75, 0xf5,
+            0x0d, 0x8d, 0x4d, 0xcd, 0x2d, 0xad, 0x6d, 0xed, 0x1d, 0x9d, 0x5d, 0xdd, 0x3d, 0xbd, 0x7d, 0xfd,
+            0x03, 0x83, 0x43, 0xc3, 0x23, 0xa3, 0x63, 0xe3, 0x13, 0x93, 0x53, 0xd3, 0x33, 0xb3, 0x73, 0xf3,
+            0x0b, 0x8b, 0x4b, 0xcb, 0x2b, 0xab, 0x6b, 0xeb, 0x1b, 0x9b, 0x5b, 0xdb, 0x3b, 0xbb, 0x7b, 0xfb,
+            0x07, 0x87, 0x47, 0xc7, 0x27, 0xa7, 0x67, 0xe7, 0x17, 0x97, 0x57, 0xd7, 0x37, 0xb7, 0x77, 0xf7,
+            0x0f, 0x8f, 0x4f, 0xcf, 0x2f, 0xaf, 0x6f, 0xef, 0x1f, 0x9f, 0x5f, 0xdf, 0x3f, 0xbf, 0x7f, 0xff
+        };
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseBits(ref this Byte value) => value = BitReverseLookup[value];
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseBits(ref this Int16 value) => value = (Int16)((UInt16)BitReverseLookup[(UInt16)value >> 8]
+                                                                              | (UInt16)((UInt16)BitReverseLookup[(UInt16)value & 0xFF] << (UInt16)8));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseBits(ref this UInt16 value) => value = (UInt16)((UInt16)BitReverseLookup[(UInt16)value >> 8]
+                                                                                | (UInt16)((UInt16)BitReverseLookup[(UInt16)value & 0xFF] << (UInt16)8));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseBits(ref this Int32 value) => value = (Int32)((UInt32)BitReverseLookup[(Int32)((UInt32)value >> 24)]
+                                                                              | (UInt32)BitReverseLookup[(Int32)(((UInt32)value >> 16) & 0xFF)] << 8
+                                                                              | (UInt32)BitReverseLookup[(Int32)(((UInt32)value >> 8) & 0xFF)] << 16
+                                                                              | (UInt32)BitReverseLookup[(Int32)(((UInt32)value & 0xFF))] << 24);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseBits(ref this UInt32 value) => value = (UInt32)((UInt32)BitReverseLookup[(Int32)((UInt32)value >> 24)]
+                                                                                | (UInt32)BitReverseLookup[(Int32)(((UInt32)value >> 16) & 0xFF)] << 8
+                                                                                | (UInt32)BitReverseLookup[(Int32)(((UInt32)value >> 8) & 0xFF)] << 16
+                                                                                | (UInt32)BitReverseLookup[(Int32)((UInt32)value & 0xFF)] << 24);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseBits(ref this Int64 value) => value = (Int64)((UInt64)BitReverseLookup[(Int32)((UInt64)value >> 56)]
+                                                                              | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 48) & 0xFF)] << 8
+                                                                              | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 40) & 0xFF)] << 16
+                                                                              | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 32) & 0xFF)] << 24
+                                                                              | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 24) & 0xFF)] << 32
+                                                                              | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 16) & 0xFF)] << 40
+                                                                              | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 8) & 0xFF)] << 48
+                                                                              | (UInt64)BitReverseLookup[(Int32)((UInt64)value & 0xFF)] << 56);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseBits(ref this UInt64 value) => value = (UInt64)((UInt64)BitReverseLookup[(Int32)((UInt64)value >> 56)]
+                                                                                | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 48) & 0xFF)] << 8
+                                                                                | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 40) & 0xFF)] << 16
+                                                                                | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 32) & 0xFF)] << 24
+                                                                                | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 24) & 0xFF)] << 32
+                                                                                | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 16) & 0xFF)] << 40
+                                                                                | (UInt64)BitReverseLookup[(Int32)(((UInt64)value >> 8) & 0xFF)] << 48
+                                                                                | (UInt64)BitReverseLookup[(Int32)((UInt64)value & 0xFF)] << 56);
+        #endregion
+
+        #region ReverseEndianness
+        // Reproduced exactly as it shipped in 1.0.7, bug included: the fast path below is guarded by
+        // "#if NETCOREAPP31", a compile constant the old .csproj never actually defined anywhere (every
+        // TargetFramework condition in it set "BEFORENETCOREAPP3" instead - note the missing "BEFORE" and
+        // extra "1"). So this method always ran the manual software fallback in every build that ever shipped,
+        // on every target framework, even net6.0/net8.0 where BinaryPrimitives.ReverseEndianness (a single
+        // BSWAP instruction) was sitting right there unused. Fixed in 2.0.0: see BitUtilsEndinanessExtensions.cs.
+#pragma warning disable CS0219 // kept obviously unreachable to document the historical intent, never compiled
+        private const bool NeverDefined_NETCOREAPP31 = false;
+#pragma warning restore CS0219
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseEndianness(ref this SByte value) { }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseEndianness(ref this Byte value) { }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseEndianness(ref this Int16 value) => ReverseEndiannessSoftwareFallback(ref value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseEndianness(ref this UInt16 value) => ReverseEndiannessSoftwareFallback(ref value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseEndianness(ref this Int32 value) => ReverseEndiannessSoftwareFallback(ref value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseEndianness(ref this UInt32 value) => ReverseEndiannessSoftwareFallback(ref value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseEndianness(ref this Int64 value) => ReverseEndiannessSoftwareFallback(ref value);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static void ReverseEndianness(ref this UInt64 value) => ReverseEndiannessSoftwareFallback(ref value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void ReverseEndiannessSoftwareFallback(ref Int16 value) => value = (Int16)(((UInt16)value >> 8) + ((UInt16)value << 8));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void ReverseEndiannessSoftwareFallback(ref UInt16 value) => value = (UInt16)((UInt16)(value >> 8) | (UInt16)(value << 8));
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void ReverseEndiannessSoftwareFallback(ref Int32 value)
+        {
+            var a = ((UInt32)value & 0x00FF00FFu);
+            a.Ror(8);
+            var b = ((UInt32)value & 0xFF00FF00u);
+            b.Rol(8);
+            value = (Int32)(a + b);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void ReverseEndiannessSoftwareFallback(ref UInt32 value)
+        {
+            var a = (value & 0x00FF00FFu);
+            a.Ror(8);
+            var b = (value & 0xFF00FF00u);
+            b.Rol(8);
+            value = a + b;
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void ReverseEndiannessSoftwareFallback(ref Int64 value)
+        {
+            var a = (UInt32)value;
+            a.ReverseEndianness();
+            var b = (UInt32)(value >> 32);
+            b.ReverseEndianness();
+            value = (Int64)(((UInt64)a << 32) + (UInt64)b);
+        }
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static void ReverseEndiannessSoftwareFallback(ref UInt64 value)
+        {
+            var a = (UInt32)value;
+            a.ReverseEndianness();
+            var b = (UInt32)(value >> 32);
+            b.ReverseEndianness();
+            value = ((UInt64)a << 32) + (UInt64)b;
+        }
         #endregion
     }
 }

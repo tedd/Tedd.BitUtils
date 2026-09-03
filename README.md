@@ -1,58 +1,57 @@
 # Tedd.BitUtils
 Available as NuGet Package: https://www.nuget.org/packages/Tedd.BitUtils/
 
-Bit manipulation extension methods for:<br />sbyte, byte, short (Int16), ushort (UInt16), int (Int32), uint (UInt32), long (Int64) and ulong (UInt64).
-Types can be manipulated in-place or by returning a modified copy. In-place modification uses reference for maximum performance.
+Fast bit manipulation extension methods for `sbyte`, `byte`, `short` (`Int16`), `ushort` (`UInt16`), `int` (`Int32`), `uint` (`UInt32`), `long` (`Int64`) and `ulong` (`UInt64`).
 
-Library offers standard bit manipulation methods that are fast. Wherever possible accellerated things such as specialized CPU instructions (intrinsics) or compiler magic is used to accellerate execution. If .Net version or CPU you are using doesn't support hardware accelleration for a particular function then software implementation is used.
+Every operation is available in two forms: **in-place** (modifies the variable via a `ref` extension method, avoiding a copy) and **copy** (returns a modified copy, leaving the original untouched, method name suffixed `Copy`).
+
+Targets **.NET 6, .NET 8 and .NET 10**. Every operation is backed by [`System.Numerics.BitOperations`](https://learn.microsoft.com/dotnet/api/system.numerics.bitoperations) and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM64 RBIT) where the CPU supports them, with an automatic runtime fallback where it doesn't - you never need to branch on this yourself. All methods are tagged for inline compilation.
 
 ## Extension methods
-Methods are implemented as extension methods. This should give you a list in editor when you type dot after a supported type.
-Note: Ror and Rol is only implemented for 32-bit and 64-bit integers.
+Methods are implemented as extension methods, so your editor will list them when you type `.` after a supported type. Bit positions are zero based, counted from the least significant bit.
 
 ### Get info
-* bool a = i.IsBitSet(n);
-* int a = i.PopCount();
-* int a = i.LeadingZeroCount();
-* string a = i.ToBitString();
-* string a = i.ToBitStringPadded();
+* `bool a = i.IsBitSet(n);`
+* `int a = i.PopCount();` — number of set bits
+* `int a = i.Parity();` — 1 if an odd number of bits are set, else 0
+* `int a = i.LeadingZeroCount();`
+* `int a = i.TrailingZeroCount();`
+* `int a = i.Log2();` — floor(log2(i)), i.e. the position of the highest set bit
+* `int a = i.BitLength();` — number of bits needed to represent i, i.e. `Log2() + 1`
+* `bool a = i.IsPowerOfTwo();`
+* `string a = i.ToBitString();`
+* `string a = i.ToBitStringPadded();`
 
 ### In-place
-Operates directly on variable, avoiding copy operation.
+Operates directly on the variable, avoiding a copy.
 
-* i.SetBit(n, bool);
-* i.SetBit0(n);
-* i.SetBit1(n);
-* i.Rol();
-* i.Rol(n);
-* i.Ror();
-* i.Ror(n);
-* i.ReverseBits();
-* i.ReverseEndianness();
-* i.Pack(5, 2, i2);
+* `i.SetBit(n, bool);`
+* `i.SetBit0(n);` / `i.SetBit1(n);` — faster than `SetBit` when the state is a compile-time constant
+* `i.ToggleBit(n);`
+* `i.Rol();` / `i.Rol(n);` — rotate left one position, or `n` positions
+* `i.Ror();` / `i.Ror(n);`
+* `i.ReverseBits();`
+* `i.ReverseEndianness();`
+* `i.RoundUpToPowerOf2();`
+* `i.Pack(offset, length, i2);`
+* `i.ExtractLowestSetBit();` — isolate the lowest set bit (`i & -i`)
+* `i.ResetLowestSetBit();` — clear the lowest set bit (`i & (i - 1)`)
+* `i.GetMaskUpToLowestSetBit();` — mask covering every bit up to and including the lowest set bit
+* `i.ExtractHighestSetBit();`
+* `i.ZeroHighBits(index);` — keep only the low `index` bits
+* `i.ZeroLowBits(index);` — clear the low `index` bits
+* `i.ParallelBitExtract(mask);` — gather the bits selected by `mask` into consecutive low bits (PEXT)
+* `i.ParallelBitDeposit(mask);` — scatter consecutive low bits into the positions selected by `mask` (PDEP)
 
 ### Copy
-Result is copied to return value, keeping original variable unchaned.
+Result is returned as a new value; the original variable is unchanged. Every in-place method above has a `...Copy` counterpart, e.g.:
 
-* i2 = i.SetBitCopy(n, bool);
-* i2 = i.SetBit0Copy(n);
-* i2 = i.SetBit1Copy(n);
-* i2 = i.RolCopy();
-* i2 = i.RolCopy(n);
-* i2 = i.RorCopy();
-* i2 = i.RorCopy(n);
-* i2 = i.ReverseBitsCopy();
-* i2 = i.ReverseEndiannessCopy();
-* i2 = i.PackCopy(5, 2, i3);
-* i2 = i.Unpack(5, 2);
-
-## Architectural Execution Flow
-
-The library adheres to a strictly **primitive bitwise operational paradigm**. It is designed for maximal performance utilizing in-place modifications (via reference parameters) and non-mutating copy operations.
-
-*   **Established Mechanics:** Operations execute deterministically on raw scalar types (`byte`, `short`, `int`, etc.). They automatically leverage low-level hardware intrinsics (e.g., `System.Runtime.Intrinsics.X86`) on modern frameworks (.NET Core 3.0+ through .NET 9.0/10.0+), falling back to optimized software routines when executing on unsupported architectures.
-*   **Architectural Scope:** The framework operates exclusively at the fundamental data layer. It **explicitly does not implement** hierarchical data binding or routed event infrastructures, mitigating any ambiguity regarding state propagation or complex DOM-like event bubbling architectures.
-*   **Planned Enhancements (Hypotheses):** Future architectural integrations (such as higher-order frameworks) remain purely speculative hypotheses and are not a constituent part of the current operational reality.
+* `i2 = i.SetBitCopy(n, bool);`
+* `i2 = i.RolCopy(n);`
+* `i2 = i.ReverseBitsCopy();`
+* `i2 = i.RoundUpToPowerOf2Copy();`
+* `i2 = i.PackCopy(offset, length, i3);`
+* `i2 = i.Unpack(offset, length);` — the only naturally non-mutating "get" operation, so it has no in-place form
 
 ## Simple example of usage
 ```cs
@@ -72,41 +71,57 @@ a.Rol();
 ```
 
 ## Pack / Unpack
-Pack and unpack allows you to copy portions of an integer into portions of another integer.
+Pack and Unpack copy a range of bits between two integers, similar to `Substring` but for bits. `offset` counts from the LSB (right) to the bit past the end of the field; `length` is the field's width.
 ```cs
 var i1 = 0b0000_1111_1100_0011;
 var i2 = 0b0000_0000_0000_0010;
-// We copy the 2 lowest bits of i2 into the 4th and 5th position from right in i1.
+// Copies the 2 lowest bits of i2 into bit positions 3 and 4 of i1 (offset 5, length 2: field is [offset-length, offset-1]).
 i1.Pack(5, 2, i2);
-// Arrows shows where the two lowest bits of i2 will be inserted into i1: 0b0000_1111_110 -> 0_0 <- 011
 // i1 is now: 0b0000_1111_1101_0011
 var i3 = i1.Unpack(5, 2);
 // i3 is now: 0b0000_0000_0000_0010
 ```
 
 ## Performance
-Ror() and Rol() are faster versions of Ror(1) and Ror(1). If you only need to roll one, use these.<br/>
-The same goes for SetBit1(n) and SetBit0(n) which are faster versions of SetBit(n, bool) where branching is not required. If you don't need to pass true/false as parameter use the faster versions.
+`Rol()`/`Ror()` (no count) are faster than `Rol(1)`/`Ror(1)`, since no count needs to be masked to the type's bit width. Likewise `SetBit0(n)`/`SetBit1(n)` are faster than `SetBit(n, bool)` when the state is known at the call site, since no branch is needed.
 
-All methods are tagged for inline compile.
-
-Note that for SByte, Byte, Int16 and UInt16 the CPU uses 32-bit word size anyway, so there is no speed gained in smaller datatypes. If you decompile to MSIL it will in fact show more instructions due to casting between types, but if you further look at the JIT generated ASM (final code executed) the code is identical for all datatypes.
+Note that for `sbyte`, `byte`, `short` and `ushort` the CPU operates at 32-bit word size regardless, so there's no speed to be gained from the smaller datatypes themselves - the JIT-generated assembly for these operations ends up identical across the narrower integer types.
 
 ### Hardware intrinsics
-For .Net Core 3.0 and above library uses hardware intrinsics for operations where available. This is possible because of new features supported in .Net Core 3.0 and above. For frameworks (.Net 4.x and .Net Standard) and processors (i.e. non-x86/x64 CPU) where this is not supported a software implementation is used. The software implementation is naturally slower than the hardware accellerated implementation.
+| Operation                              | Backing intrinsic (when supported)     |
+| --------------------------------------- | --------------------------------------- |
+| `Rol`, `Ror`                            | `BitOperations.RotateLeft`/`RotateRight` (ROL/ROR) |
+| `PopCount`, `Parity`                    | `BitOperations.PopCount` (POPCNT)       |
+| `LeadingZeroCount`, `BitLength`         | `BitOperations.LeadingZeroCount` (LZCNT) |
+| `TrailingZeroCount`                     | `BitOperations.TrailingZeroCount` (TZCNT) |
+| `Log2`                                  | `BitOperations.Log2`                    |
+| `IsPowerOfTwo`, `RoundUpToPowerOf2`     | `BitOperations.IsPow2`/`RoundUpToPowerOf2` |
+| `ReverseEndianness`                     | `BinaryPrimitives.ReverseEndianness` (BSWAP) |
+| `ReverseBits`                           | ARM64 `RBIT`; branch-free SWAR bit-swap on x86/x64 |
+| `ExtractLowestSetBit`/`ResetLowestSetBit`/`GetMaskUpToLowestSetBit` | BMI1 (`BLSI`/`BLSR`/`BLSMSK`) |
+| `ZeroHighBits`                          | BMI2 (`BZHI`)                           |
+| `ParallelBitExtract`/`ParallelBitDeposit` | BMI2 (`PEXT`/`PDEP`); portable bit-by-bit fallback elsewhere |
 
-| Command              | .Net 4.x | .Net Standard | .Net Core 2.x | .Net Core 3.0 | .Net Core 3.1 | .Net 5.0+ (up to 10.0+) |
-| -------------------- |  :---:   |     :---:     |     :---:     |     :---:     |     :---:     |     :---:     |
-| SetBit               |    Y     |       Y       |       Y       |       Y       |       Y       |       Y       |
-| SetBit0              |    Y     |       Y       |       Y       |       Y       |       Y       |       Y       |
-| SetBit1              |    Y     |       Y       |       Y       |       Y       |       Y       |       Y       |
-| Rol                  |  RyuJit  |     RyuJit    |       Y       |       Y       |       Y       |       Y       |
-| Ror                  |  RyuJit  |     RyuJit    |       Y       |       Y       |       Y       |       Y       |
-| ReverseBits          |    N     |       N       |       N       |       Y       |       Y       |       Y       |
-| PopCount             |    N     |       N       |       N       |       Y       |       Y       |       Y       |
-| LeadingZeroCount     |    N     |       N       |       N       |       Y       |       Y       |       Y       |
-| ReverseEndianness    |    N     |       N       |       N       |       N       |       YC      |       YC      |
-| ToBitString          |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |      N/A      |
-| ToBitStringPadded    |   N/A    |      N/A      |      N/A      |      N/A      |      N/A      |      N/A      |
+Every entry above falls back automatically to a portable software implementation on CPUs or platforms without the matching instruction (e.g. ARM without RBIT for `ReverseBits`, or x86 without BMI2 for `ParallelBitExtract`/`ParallelBitDeposit`) - there's no configuration or feature flag involved.
 
-*C = One copy operation.
+## Benchmarks
+`src/Tedd.BitUtils.Benchmarks` uses [BenchmarkDotNet](https://benchmarkdotnet.org/) to compare this version against a frozen snapshot of the pre-2.0 implementation (`src/Tedd.BitUtils.Archive`), operation by operation. Run it with:
+```
+cd src/Tedd.BitUtils.Benchmarks
+dotnet run -c Release
+```
+or target one comparison directly, e.g. `dotnet run -c Release --filter *ReverseBits*`.
+
+## Changelog
+
+### 2.0.0
+* **Breaking:** now targets .NET 6, .NET 8 and .NET 10 only. .NET Framework and .NET Standard consumers should stay on the 1.x line.
+* All operations now go through `System.Numerics.BitOperations` and hardware intrinsics directly, rather than each method doing its own `IsSupported` check.
+* New operations: `ToggleBit`, `Parity`, `TrailingZeroCount`, `Log2`, `BitLength`, `IsPowerOfTwo`, `RoundUpToPowerOf2`, `ExtractLowestSetBit`, `ResetLowestSetBit`, `GetMaskUpToLowestSetBit`, `ExtractHighestSetBit`, `ZeroHighBits`, `ZeroLowBits`, `ParallelBitExtract`, `ParallelBitDeposit`.
+* `Rol`/`Ror` are now implemented for `sbyte`/`byte`/`short`/`ushort` too (previously 32/64-bit only), and every operation now has an `sbyte` overload.
+* **Fixed:** `ReverseEndianness` never actually took its fast path in 1.x, due to a compile constant that was never defined anywhere in the project - it silently ran the manual software fallback on every call, on every target framework, even where `BinaryPrimitives.ReverseEndianness` (a single BSWAP) was available. It now always uses the intrinsic-backed path.
+* **Fixed:** `Pack`/`Unpack` for `int`/`uint`/`long`/`ulong` computed their mask as `(1 << length) - 1` (or `(1 << offset) - 1` for `Unpack`); when `length`/`offset` equalled the full width of the type, that shift count wrapped to a no-op and silently produced a mask of 0 instead of all-ones.
+* `ReverseBits` on x86/x64 now uses a branch-free SWAR bit-swap instead of four table lookups.
+
+## License
+MIT - see [LICENSE](LICENSE).

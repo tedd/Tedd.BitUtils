@@ -1,306 +1,75 @@
-﻿using System;
-#if NETCOREAPP31
+using System;
 using System.Buffers.Binary;
-#endif
 using System.Runtime.CompilerServices;
 
 namespace Tedd;
 
+/// <summary>Endianness swap extension methods.</summary>
+/// <remarks>
+/// Note on naming: the type name keeps the historical "Endinaness" spelling for source compatibility
+/// with existing consumers; the methods it exposes are correctly spelled (<see cref="ReverseEndianness(ref short)"/> etc.).
+/// </remarks>
 [CLSCompliant(false)]
 public static class BitUtilsEndinanessExtensions
 {
     #region In-Place
-    /// <summary>
-    /// This is a no-op and added only for consistency.
-    /// </summary> 
+    /// <summary>This is a no-op and exists only for consistency: a single byte has no endianness.</summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ReverseEndianness(ref this SByte value) { }
+    public static void ReverseEndianness(ref this sbyte value) { }
 
-    /// <summary>
-    /// This is a no-op and added only for consistency.
-    /// </summary> 
+    /// <summary>This is a no-op and exists only for consistency: a single byte has no endianness.</summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void ReverseEndianness(ref this Byte value) { }
+    public static void ReverseEndianness(ref this byte value) { }
 
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    /// <summary>Reverses the byte order of the value (BSWAP).</summary>
+    /// <param name="value">Value to modify in place.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static void ReverseEndianness(ref this Int16 value) => value = BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static void ReverseEndianness(ref this Int16 value) => ReverseEndiannessSoftwareFallback(ref value);
-#endif
-
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static void ReverseEndianness(ref this short value) => value = BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndianness(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static void ReverseEndianness(ref this UInt16 value) => value = BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static void ReverseEndianness(ref this UInt16 value) => ReverseEndiannessSoftwareFallback(ref value);
-#endif
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static void ReverseEndianness(ref this ushort value) => value = BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndianness(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static void ReverseEndianness(ref this Int32 value) => value = BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static void ReverseEndianness(ref this Int32 value) => ReverseEndiannessSoftwareFallback(ref value);
-#endif
-
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static void ReverseEndianness(ref this int value) => value = BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndianness(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static void ReverseEndianness(ref this UInt32 value) => value = BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static void ReverseEndianness(ref this UInt32 value) => ReverseEndiannessSoftwareFallback(ref value);
-#endif
-
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static void ReverseEndianness(ref this uint value) => value = BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndianness(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static void ReverseEndianness(ref this Int64 value) => value = BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static void ReverseEndianness(ref this Int64 value) => ReverseEndiannessSoftwareFallback(ref value);
-#endif
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static void ReverseEndianness(ref this long value) => value = BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndianness(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static void ReverseEndianness(ref this UInt64 value) => value = BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static void ReverseEndianness(ref this UInt64 value) => ReverseEndiannessSoftwareFallback(ref value);
-#endif
-
-
-
-
+    public static void ReverseEndianness(ref this ulong value) => value = BinaryPrimitives.ReverseEndianness(value);
     #endregion
-
 
     #region Copy
-    /// <summary>
-    /// This is a no-op and added only for consistency.
-    /// </summary> 
+    /// <summary>This is a no-op and exists only for consistency: a single byte has no endianness.</summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static SByte ReverseEndiannessCopy(ref this SByte value) => value;
+    public static sbyte ReverseEndiannessCopy(ref this sbyte value) => value;
 
-    /// <summary>
-    /// This is a no-op and added only for consistency.
-    /// </summary> 
+    /// <summary>This is a no-op and exists only for consistency: a single byte has no endianness.</summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static Byte ReverseEndiannessCopy(ref this Byte value) => value;
+    public static byte ReverseEndiannessCopy(ref this byte value) => value;
 
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    /// <summary>Returns a copy of <paramref name="value"/> with the byte order reversed (BSWAP).</summary>
+    /// <param name="value">Original value (not modified).</param>
+    /// <returns>Byte-order-reversed copy.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static Int16 ReverseEndiannessCopy(ref this Int16 value) => BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static Int16 ReverseEndiannessCopy(ref this Int16 value)
-    {
-        var v = value;
-        ReverseEndiannessSoftwareFallback(ref v);
-        return v;
-    }
-#endif
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static short ReverseEndiannessCopy(ref this short value) => BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndiannessCopy(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static UInt16 ReverseEndiannessCopy(ref this UInt16 value) => BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static UInt16 ReverseEndiannessCopy(ref this UInt16 value)
-    {
-        var v = value;
-        ReverseEndiannessSoftwareFallback(ref v);
-        return v;
-    }
-#endif
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static ushort ReverseEndiannessCopy(ref this ushort value) => BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndiannessCopy(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static Int32 ReverseEndiannessCopy(ref this Int32 value) => BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static Int32 ReverseEndiannessCopy(ref this Int32 value)
-    {
-        var v = value;
-        ReverseEndiannessSoftwareFallback(ref v);
-        return v;
-    }
-#endif
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static int ReverseEndiannessCopy(ref this int value) => BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndiannessCopy(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static UInt32 ReverseEndiannessCopy(ref this UInt32 value) => BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static UInt32 ReverseEndiannessCopy(ref this UInt32 value)
-    {
-        var v = value;
-        ReverseEndiannessSoftwareFallback(ref v);
-        return v;
-    }
-#endif
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static uint ReverseEndiannessCopy(ref this uint value) => BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndiannessCopy(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static Int64 ReverseEndiannessCopy(ref this Int64 value) => BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static Int64 ReverseEndiannessCopy(ref this Int64 value)
-    {
-        var v = value;
-        ReverseEndiannessSoftwareFallback(ref v);
-        return v;
-    }
-#endif
-
-    /// <summary>
-    /// Reverses a primitive value - performs an endianness swap
-    /// </summary> 
+    public static long ReverseEndiannessCopy(ref this long value) => BinaryPrimitives.ReverseEndianness(value);
+    /// <inheritdoc cref="ReverseEndiannessCopy(ref short)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#if NETCOREAPP31
-        public static UInt64 ReverseEndiannessCopy(ref this UInt64 value) => BinaryPrimitives.ReverseEndianness(value);
-#else
-    public static UInt64 ReverseEndiannessCopy(ref this UInt64 value)
-    {
-        var v = value;
-        ReverseEndiannessSoftwareFallback(ref v);
-        return v;
-    }
-#endif
-
-    #endregion
-
-    #region SoftwareFallback
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void ReverseEndiannessSoftwareFallback(ref Int16 value) =>
-        // Don't need to AND with 0xFF00 or 0x00FF since the final
-        // cast back to ushort will clear out all bits above [ 15 .. 00 ].
-        // This is normally implemented via "movzx eax, ax" on the return.
-        // Alternatively, the compiler could elide the movzx instruction
-        // entirely if it knows the caller is only going to access "ax"
-        // instead of "eax" / "rax" when the function returns.
-        value = (Int16)(((UInt16)value >> 8) + ((UInt16)value << 8));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void ReverseEndiannessSoftwareFallback(ref UInt16 value) =>
-        // Don't need to AND with 0xFF00 or 0x00FF since the final
-        // cast back to ushort will clear out all bits above [ 15 .. 00 ].
-        // This is normally implemented via "movzx eax, ax" on the return.
-        // Alternatively, the compiler could elide the movzx instruction
-        // entirely if it knows the caller is only going to access "ax"
-        // instead of "eax" / "rax" when the function returns.
-        value = (UInt16)((UInt16)(value >> 8) | (UInt16)(value << 8));
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void ReverseEndiannessSoftwareFallback(ref Int32 value)
-    {
-        // This takes advantage of the fact that the JIT can detect
-        // ROL32 / ROR32 patterns and output the correct intrinsic.
-        //
-        // Input: value = [ ww xx yy zz ]
-        //
-        // First line generates : [ ww xx yy zz ]
-        //                      & [ 00 FF 00 FF ]
-        //                      = [ 00 xx 00 zz ]
-        //             ROR32(8) = [ zz 00 xx 00 ]
-        //
-        // Second line generates: [ ww xx yy zz ]
-        //                      & [ FF 00 FF 00 ]
-        //                      = [ ww 00 yy 00 ]
-        //             ROL32(8) = [ 00 yy 00 ww ]
-        //
-        //                (sum) = [ zz yy xx ww ]
-        //
-        // Testing shows that throughput increases if the AND
-        // is performed before the ROL / ROR.
-
-        var a = ((UInt32)value & 0x00FF00FFu);
-        a.Ror(8);
-        var b = ((UInt32)value & 0xFF00FF00u);
-        b.Rol(8);
-        value = (Int32)(a    // xx zz
-                        + b); // ww yy
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void ReverseEndiannessSoftwareFallback(ref UInt32 value)
-    {
-        // This takes advantage of the fact that the JIT can detect
-        // ROL32 / ROR32 patterns and output the correct intrinsic.
-        //
-        // Input: value = [ ww xx yy zz ]
-        //
-        // First line generates : [ ww xx yy zz ]
-        //                      & [ 00 FF 00 FF ]
-        //                      = [ 00 xx 00 zz ]
-        //             ROR32(8) = [ zz 00 xx 00 ]
-        //
-        // Second line generates: [ ww xx yy zz ]
-        //                      & [ FF 00 FF 00 ]
-        //                      = [ ww 00 yy 00 ]
-        //             ROL32(8) = [ 00 yy 00 ww ]
-        //
-        //                (sum) = [ zz yy xx ww ]
-        //
-        // Testing shows that throughput increases if the AND
-        // is performed before the ROL / ROR.
-
-        var a = (value & 0x00FF00FFu);
-        a.Ror(8);
-        var b = (value & 0xFF00FF00u);
-        b.Rol(8);
-        value = a // xx zz
-                + b; // ww yy
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void ReverseEndiannessSoftwareFallback(ref Int64 value)
-    {
-        // Operations on 32-bit values have higher throughput than
-        // operations on 64-bit values, so decompose.
-        var a = (UInt32)value;
-        a.ReverseEndianness();
-        var b = (UInt32)(value >> 32);
-        b.ReverseEndianness();
-        value = (Int64)(((UInt64)a << 32) + (UInt64)b);
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static void ReverseEndiannessSoftwareFallback(ref UInt64 value)
-    {
-        // Operations on 32-bit values have higher throughput than
-        // operations on 64-bit values, so decompose.
-        var a = (UInt32)value;
-        a.ReverseEndianness();
-        var b = (UInt32)(value >> 32);
-        b.ReverseEndianness();
-        value = ((UInt64)a << 32) + (UInt64)b;
-    }
+    public static ulong ReverseEndiannessCopy(ref this ulong value) => BinaryPrimitives.ReverseEndianness(value);
     #endregion
 }

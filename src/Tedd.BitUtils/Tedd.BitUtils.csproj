@@ -1,58 +1,52 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks>net4.6.2;netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0;net6.0;net8.0;net9.0;net10.0</TargetFrameworks>
-		<!--<TargetFramework>net6.0</TargetFramework>-->
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Description>Bit manipulation of Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64: Ror, Rol, Rotate, SetBit, IsBitSet, ReverseBits, PopCount, PopCnt, LzCnt, LeadingZeroCount, Pack, Unpack, ToBitString, ReverseEndianness, Pack, Unpack</Description>
-		<PackageTags>bit;setbit;getbit;isbitset;pack;unpack;ror;rol;rotate;reverse;reversebits;popcount;popcnt;leadingzerocount;lzcnt;pack;unpack;tostring;tobitstring;reverseendianness;endian;pack;unpack</PackageTags>
-		<Copyright>Tedd Hansen</Copyright>
-		<PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/tedd/Tedd.BitUtils.git</RepositoryUrl>
-		<Version>1.0.7</Version>
-		<Authors>tedd</Authors>
-		<Company>Tedd Hansen</Company>
-		<RepositoryType>git</RepositoryType>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Copyright>Tedd Hansen</Copyright>
-		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-		<EnableNETAnalyzers>True</EnableNETAnalyzers>
-		<AnalysisLevel>latest-all</AnalysisLevel>
-		<LangVersion>latest</LangVersion>
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
+  <PropertyGroup>
+    <!--
+      net6.0  : floor. Oldest .NET this package supports (System.Numerics.BitOperations + hardware intrinsics with
+                automatic runtime fallback on unsupported CPUs). .NET Framework / .NET Standard are no longer targeted.
+      net8.0  : current LTS.
+      net10.0 : latest LTS. net7.0/net9.0 (STS, both EOL) consumers resolve to the net6.0 or net8.0 asset.
+    -->
+    <TargetFrameworks>net6.0;net8.0;net10.0</TargetFrameworks>
+    <RootNamespace>Tedd</RootNamespace>
+    <AssemblyName>Tedd.BitUtils</AssemblyName>
+    <Version>2.0.0</Version>
+    <Authors>tedd</Authors>
+    <Company>Tedd Hansen</Company>
+    <Copyright>Tedd Hansen</Copyright>
+    <Description>Fast bit manipulation extension methods for SByte, Byte, Int16, UInt16, Int32, UInt32, Int64 and UInt64: SetBit, SetBit0, SetBit1, ToggleBit, IsBitSet, Rol, Ror, ReverseBits, ReverseEndianness, PopCount, Parity, LeadingZeroCount, TrailingZeroCount, Log2, BitLength, IsPowerOfTwo, RoundUpToPowerOf2, ExtractLowestSetBit, ResetLowestSetBit, GetMaskUpToLowestSetBit, ExtractHighestSetBit, ZeroHighBits, ZeroLowBits, ParallelBitExtract (PEXT), ParallelBitDeposit (PDEP), Pack, Unpack, ToBitString. Backed by System.Numerics.BitOperations and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM RBIT) with automatic runtime fallback.</Description>
+    <PackageTags>bit;bits;bitwise;setbit;getbit;isbitset;togglebit;pack;unpack;ror;rol;rotate;reverse;reversebits;popcount;popcnt;parity;leadingzerocount;lzcnt;trailingzerocount;tzcnt;log2;bitlength;ispow2;poweroftwo;bmi1;bmi2;pext;pdep;bzhi;blsi;blsr;tobitstring;reverseendianness;endian;bswap;intrinsics</PackageTags>
+    <PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tedd/Tedd.BitUtils.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>2.0.0: BREAKING - now targets net6.0, net8.0 and net10.0 only; .NET Framework and .NET Standard consumers must stay on 1.x. Every operation is now backed directly by System.Numerics.BitOperations and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM64 RBIT). New: ToggleBit, Parity, TrailingZeroCount, Log2, BitLength, IsPowerOfTwo, RoundUpToPowerOf2, ExtractLowestSetBit, ResetLowestSetBit, GetMaskUpToLowestSetBit, ExtractHighestSetBit, ZeroHighBits, ZeroLowBits, ParallelBitExtract, ParallelBitDeposit, Rol/Ror for SByte/Byte/Int16/UInt16, plus SByte overloads throughout. Fixed: ReverseEndianness previously never took the intrinsic path due to an always-false compile constant and always ran the naive software fallback; it now always calls BinaryPrimitives.ReverseEndianness. Faster ReverseBits on x86/x64 (branch-free SWAR instead of table lookups).</PackageReleaseNotes>
 
-	<ItemGroup>
-		<None Include="..\..\LICENSE">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<None Include="..\..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp1'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp2'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('net3'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard1'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard2'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <IsTrimmable>true</IsTrimmable>
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
+  </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tedd.BitUtils.Tests" />
+    <InternalsVisibleTo Include="Tedd.BitUtils.Benchmarks" />
+  </ItemGroup>
 
 </Project>

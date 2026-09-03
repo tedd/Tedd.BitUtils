@@ -2,9 +2,9 @@ name: .NET
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build-test-publish:
@@ -12,36 +12,26 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - name: Setup .NET 6.0.x
-      uses: actions/setup-dotnet@v1
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.x
-    - name: Add msbuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
-    - name: Setup Nuget
-      uses: Nuget/setup-nuget@v1.0.5
-
-    - name: Restore nuget packages
-      working-directory: src
-      run: nuget restore
+        dotnet-version: |
+          6.0.x
+          8.0.x
+          10.0.x
 
     - name: Restore dependencies
       working-directory: src
       run: dotnet restore
     - name: Build
       working-directory: src
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore -c Release
     - name: Test
       working-directory: src
-      run: dotnet test --no-build --verbosity normal
-
-#    - name: Get version
-#      uses: dotnet/nbgv@master
-#      id: nbgv
-#    - run: echo 'SemVer2=${{ steps.nbgv.outputs.SemVer2 }}'
+      run: dotnet test --no-build -c Release --verbosity normal
 
     # Publish
     - name: publish on version change
@@ -59,10 +49,10 @@ jobs:
 
         # Add symbols to NuGet package. (Default: false)
         INCLUDE_SYMBOLS: true
-        
+
         # Current Git commit should be tagged upon successful upload to NuGet. (Default: false)
         TAG_COMMIT: true
-        
+
         # Name of Git tag. * will be replaced by version number. (Default: v*)
         #TAG_FORMAT: v*
 
@@ -77,9 +67,9 @@ jobs:
 
         # Useful with external providers like Nerdbank.GitVersioning where you could for example set it to variable (dollar){{env.GitBuildVersionSimple}}. Ignores VERSION_FILE_PATH & VERSION_REGEX.
         #VERSION_STATIC: ${{env.GitBuildVersionSimple}}
-        
+
         # Rebuild project in release mode? You may turn this off if you have built project in previous step. (default: true)
         #REBUILD_PROJECT: true
-        
+
         # Log level (DEBUG, INFO, WARN). (default: DEBUG)
         #LOG_LEVEL: DEBUG
