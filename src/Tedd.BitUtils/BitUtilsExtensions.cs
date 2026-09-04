@@ -86,13 +86,13 @@ public static partial class BitUtilsExtensions
     /// <param name="value">Value to modify in place.</param>
     /// <param name="pos">Zero based bit position counted from the least significant bit.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void SetBit1(ref this sbyte value, int pos) => value = (sbyte)(value | (1 << pos));
+    public static void SetBit1(ref this sbyte value, int pos) => value = (sbyte)((byte)value | (1 << pos));
     /// <inheritdoc cref="SetBit1(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetBit1(ref this byte value, int pos) => value = (byte)(value | (1 << pos));
     /// <inheritdoc cref="SetBit1(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void SetBit1(ref this short value, int pos) => value = (short)(value | (1 << pos));
+    public static void SetBit1(ref this short value, int pos) => value = (short)((ushort)value | (1 << pos));
     /// <inheritdoc cref="SetBit1(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static void SetBit1(ref this ushort value, int pos) => value = (ushort)(value | (1 << pos));

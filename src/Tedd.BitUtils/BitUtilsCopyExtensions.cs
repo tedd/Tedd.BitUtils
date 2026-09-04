@@ -78,13 +78,13 @@ public static partial class BitUtilsCopyExtensions
     /// <param name="pos">Zero based bit position counted from the least significant bit.</param>
     /// <returns>Modified copy.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static sbyte SetBit1Copy(ref this sbyte value, int pos) => (sbyte)(value | (1 << pos));
+    public static sbyte SetBit1Copy(ref this sbyte value, int pos) => (sbyte)((byte)value | (1 << pos));
     /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static byte SetBit1Copy(ref this byte value, int pos) => (byte)(value | (1 << pos));
     /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static short SetBit1Copy(ref this short value, int pos) => (short)(value | (1 << pos));
+    public static short SetBit1Copy(ref this short value, int pos) => (short)((ushort)value | (1 << pos));
     /// <inheritdoc cref="SetBit1Copy(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ushort SetBit1Copy(ref this ushort value, int pos) => (ushort)(value | (1 << pos));

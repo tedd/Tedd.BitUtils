@@ -1,5 +1,9 @@
 # Tedd.BitUtils
-Available as NuGet Package: https://www.nuget.org/packages/Tedd.BitUtils/
+
+[![NuGet](https://img.shields.io/nuget/v/Tedd.BitUtils.svg)](https://www.nuget.org/packages/Tedd.BitUtils/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/Tedd.BitUtils.svg)](https://www.nuget.org/packages/Tedd.BitUtils/)
+[![.NET](https://github.com/tedd/Tedd.BitUtils/actions/workflows/dotnet.yml/badge.svg)](https://github.com/tedd/Tedd.BitUtils/actions/workflows/dotnet.yml)
+[![License](https://img.shields.io/github/license/tedd/Tedd.BitUtils)](LICENSE)
 
 Fast bit manipulation extension methods for `sbyte`, `byte`, `short` (`Int16`), `ushort` (`UInt16`), `int` (`Int32`), `uint` (`UInt32`), `long` (`Int64`) and `ulong` (`UInt64`).
 
@@ -121,7 +125,7 @@ or target one comparison directly, e.g. `dotnet run -c Release --filter *Reverse
 * `Rol`/`Ror` are now implemented for `sbyte`/`byte`/`short`/`ushort` too (previously 32/64-bit only), and every operation now has an `sbyte` overload.
 * **Fixed:** `ReverseEndianness` never actually took its fast path in 1.x, due to a compile constant that was never defined anywhere in the project - it silently ran the manual software fallback on every call, on every target framework, even where `BinaryPrimitives.ReverseEndianness` (a single BSWAP) was available. It now always uses the intrinsic-backed path.
 * **Fixed:** `Pack`/`Unpack` for `int`/`uint`/`long`/`ulong` computed their mask as `(1 << length) - 1` (or `(1 << offset) - 1` for `Unpack`); when `length`/`offset` equalled the full width of the type, that shift count wrapped to a no-op and silently produced a mask of 0 instead of all-ones.
-* `ReverseBits` on x86/x64 now uses a branch-free SWAR bit-swap instead of four table lookups.
+* `ReverseBits` on x86/x64 now uses a branch-free SWAR bit-swap instead of four table lookups (measured ~1.5x faster for `uint`, ~3.5x for `ulong` - see `Tedd.BitUtils.Benchmarks`).
 
 ## License
-MIT - see [LICENSE](LICENSE).
+GNU Lesser General Public License v3.0 (LGPL-3.0) - see [LICENSE](LICENSE).
