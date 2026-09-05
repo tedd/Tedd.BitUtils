@@ -9,6 +9,8 @@ Fast bit manipulation extension methods for `sbyte`, `byte`, `short` (`Int16`), 
 
 Every operation is available in two forms: **in-place** (modifies the variable via a `ref` extension method, avoiding a copy) and **copy** (returns a modified copy, leaving the original untouched, method name suffixed `Copy`).
 
+On top of the per-integer operations the package also has a **bit packing** layer that works over `Span<byte>`: arbitrary width bit fields (`BitPacking`, `BitWriter`, `BitReader`) and the byte oriented variable length integer encodings built on them (`VarInt`, `EbmlVInt`, `SizePrefix`). See [Bit packing](#bit-packing) below.
+
 Targets **.NET 6, .NET 8 and .NET 10**. Every operation is backed by [`System.Numerics.BitOperations`](https://learn.microsoft.com/dotnet/api/system.numerics.bitoperations) and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM64 RBIT) where the CPU supports them, with an automatic runtime fallback where it doesn't - you never need to branch on this yourself. All methods are tagged for inline compilation.
 
 ## Extension methods
@@ -18,6 +20,7 @@ Methods are implemented as extension methods, so your editor will list them when
 * `bool a = i.IsBitSet(n);`
 * `int a = i.PopCount();` — number of set bits
 * `int a = i.Parity();` — 1 if an odd number of bits are set, else 0
+* `uint a = i.ZigZagEncode();` / `int a = u.ZigZagDecode();` — fold a signed value onto an unsigned one so small magnitudes of either sign stay small (0, -1, 1, -2 map to 0, 1, 2, 3)
 * `int a = i.LeadingZeroCount();`
 * `int a = i.TrailingZeroCount();`
 * `int a = i.Log2();` — floor(log2(i)), i.e. the position of the highest set bit
@@ -86,6 +89,69 @@ var i3 = i1.Unpack(5, 2);
 // i3 is now: 0b0000_0000_0000_0010
 ```
 
+## Bit packing
+Everything above operates on a single integer. These types operate on a `Span<byte>`, for building and parsing binary formats. They validate their arguments and throw, and every operation also has a `Try...` form that reports failure instead. All of them are allocation free.
+
+### Arbitrary width bit fields
+`BitPacking` reads and writes fields of 0 to 64 bits at any bit offset, ignoring byte boundaries. Bits are laid out **most significant bit first** (offset 0 is the `0x80` bit of byte 0), which is the order used by EBML, MPEG, JPEG and most network protocols. Writes are read-modify-write, so the buffer needs no zeroing and neighbouring fields survive:
+```cs
+Span<byte> buffer = stackalloc byte[2];
+BitPacking.WriteBits(buffer, 0, 3, 0b101);     // buffer[0] == 0b101_00000
+BitPacking.WriteBits(buffer, 3, 5, 0b11011);   // buffer[0] == 0b101_11011
+var field = BitPacking.ReadBits(buffer, 3, 5); // 0b11011
+```
+`BitWriter` and `BitReader` are `ref struct`s that do the same thing sequentially, tracking the bit position for you:
+```cs
+Span<byte> buffer = stackalloc byte[4];
+var writer = new BitWriter(buffer);
+writer.Write(0b101, 3);
+writer.Write(0xABC, 12);
+writer.AlignToByte();                  // pad to the next byte boundary
+var packet = writer.WrittenSpan;       // just the bytes touched
+
+var reader = new BitReader(packet);
+var first = reader.Read(3);            // 0b101
+var second = reader.Read(12);          // 0xABC
+```
+
+### Variable length integers
+`VarInt` holds four byte oriented encodings where small values take fewer bytes. All split the value into 7 bit groups, least significant first, with a continuation bit in the high bit of every byte but the last; they differ only in how the sign is carried.
+
+| Method pair | Format | Also known as |
+| --- | --- | --- |
+| `WriteUnsigned` / `ReadUnsigned` | ULEB128 | LEB128 (DWARF, WebAssembly), Protocol Buffers `uint32`/`uint64` |
+| `WriteSigned` / `ReadSigned` | SLEB128, two's complement sign extended | signed LEB128 (DWARF, WebAssembly) |
+| `WriteZigZag` / `ReadZigZag` | ZigZag folded, then ULEB128 | Protocol Buffers `sint32`/`sint64` |
+| `WriteSignMagnitude` / `ReadSignMagnitude` | sign in bit 6 of the first byte | **non-standard**, the format Tedd.SpanUtils writes |
+
+`WriteSigned` and `WriteZigZag` produce the same number of bytes for every value - folding costs exactly the one bit that sign extension would have - so choose between them by what the other side speaks, not by size. `WriteSignMagnitude` exists to keep data already written by Tedd.SpanUtils readable; prefer ZigZag for new formats, since the sign-magnitude form has no encoding for the most negative value of a width and works around it with a sentinel that depends on that width.
+
+```cs
+Span<byte> buffer = stackalloc byte[VarInt.MaxLength];
+var length = VarInt.WriteZigZag(buffer, -300);
+var value = VarInt.ReadZigZag(buffer, out var bytesRead);   // -300
+var needed = VarInt.MeasureZigZag(-300);                    // bytes it will take, without writing
+```
+The `bits` argument on the read methods bounds what the caller will accept (8 for a byte, 16 for a short, ...), turning an out of range value into an `OverflowException` rather than a silently truncated result:
+```cs
+VarInt.ReadUnsigned(buffer, out _, bits: 16);   // throws OverflowException above 65535
+```
+
+### Other encodings
+`EbmlVInt` is the EBML variable-length integer of RFC 8794, used by Matroska, WebM and MKV. The length lives in the position of the first set bit of the first byte and the payload is big endian, so a decoder knows the full length after one byte and encoded values sort in the same order as the numbers. An all-ones payload is the reserved "unknown size" marker (`IsUnknown`).
+```cs
+Span<byte> buffer = stackalloc byte[EbmlVInt.MaxLength];
+EbmlVInt.Write(buffer, 127);            // 0x40 0x7F
+var v = EbmlVInt.Read(buffer);
+// v.Value == 127, v.Length == 2 (bytes on the wire), v.Size == 2 (bytes the shortest form needs)
+```
+`SizePrefix` is a prefix-varint length field: the top two bits of the first byte give the byte count (1 to 4) and the rest is big endian payload, holding up to 30 bits. It packs more into four bytes than LEB128 does (30 bits against 28) and the decoder learns the length from the first byte, at the cost of no range beyond 30 bits. Same idea as the QUIC varint of RFC 9000, but not the same encoding (QUIC selects 1/2/4/8 bytes); unrelated to Bitcoin's CompactSize.
+```cs
+Span<byte> buffer = stackalloc byte[SizePrefix.MaxLength];
+var length = SizePrefix.Write(buffer, 16384);          // 0x80 0x40 0x00
+var size = SizePrefix.Read(buffer, out var bytesRead); // 16384
+```
+
 ## Performance
 `Rol()`/`Ror()` (no count) are faster than `Rol(1)`/`Ror(1)`, since no count needs to be masked to the type's bit width. Likewise `SetBit0(n)`/`SetBit1(n)` are faster than `SetBit(n, bool)` when the state is known at the call site, since no branch is needed.
 
@@ -117,6 +183,12 @@ dotnet run -c Release
 or target one comparison directly, e.g. `dotnet run -c Release --filter *ReverseBits*`.
 
 ## Changelog
+
+### 2.1.0
+* New **bit packing** layer over `Span<byte>`: `BitPacking` (arbitrary width bit fields at any bit offset, MSB first), plus the `BitWriter`/`BitReader` `ref struct`s for sequential packing.
+* New **variable length integer** encodings in `VarInt`: ULEB128, SLEB128, ZigZag (Protocol Buffers `sint`) and the non-standard sign-magnitude format Tedd.SpanUtils writes.
+* New `EbmlVInt` (RFC 8794 VINT, as used by Matroska/WebM) and `SizePrefix` (prefix-varint length field, 30 bits in up to 4 bytes).
+* New `ZigZagEncode`/`ZigZagDecode` extension methods for `sbyte`/`short`/`int`/`long` and their unsigned counterparts.
 
 ### 2.0.0
 * **Breaking:** now targets .NET 6, .NET 8 and .NET 10 only. .NET Framework and .NET Standard consumers should stay on the 1.x line.
