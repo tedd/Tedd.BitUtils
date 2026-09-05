@@ -118,167 +118,167 @@ public static partial class BitUtilsExtensions
     /// <summary>Returns the number of bits set to 1 (population count, POPCNT).</summary>
     /// <param name="value">Value to inspect. Signed values are counted as their two's complement bit pattern.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int PopCount(ref this sbyte value) => BitOperations.PopCount((byte)value);
+    public static int PopCount(ref this sbyte value) => BitOps.PopCount((byte)value);
     /// <inheritdoc cref="PopCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int PopCount(ref this byte value) => BitOperations.PopCount(value);
+    public static int PopCount(ref this byte value) => BitOps.PopCount(value);
     /// <inheritdoc cref="PopCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int PopCount(ref this short value) => BitOperations.PopCount((ushort)value);
+    public static int PopCount(ref this short value) => BitOps.PopCount((ushort)value);
     /// <inheritdoc cref="PopCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int PopCount(ref this ushort value) => BitOperations.PopCount(value);
+    public static int PopCount(ref this ushort value) => BitOps.PopCount(value);
     /// <inheritdoc cref="PopCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int PopCount(ref this int value) => BitOperations.PopCount((uint)value);
+    public static int PopCount(ref this int value) => BitOps.PopCount((uint)value);
     /// <inheritdoc cref="PopCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int PopCount(ref this uint value) => BitOperations.PopCount(value);
+    public static int PopCount(ref this uint value) => BitOps.PopCount(value);
     /// <inheritdoc cref="PopCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int PopCount(ref this long value) => BitOperations.PopCount((ulong)value);
+    public static int PopCount(ref this long value) => BitOps.PopCount((ulong)value);
     /// <inheritdoc cref="PopCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int PopCount(ref this ulong value) => BitOperations.PopCount(value);
+    public static int PopCount(ref this ulong value) => BitOps.PopCount(value);
     #endregion
 
     #region Parity
     /// <summary>Returns the parity of the value: 1 when an odd number of bits are set, 0 when an even number of bits are set.</summary>
     /// <param name="value">Value to inspect. Signed values are treated as their two's complement bit pattern.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Parity(ref this sbyte value) => BitOperations.PopCount((byte)value) & 1;
+    public static int Parity(ref this sbyte value) => BitOps.PopCount((byte)value) & 1;
     /// <inheritdoc cref="Parity(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Parity(ref this byte value) => BitOperations.PopCount(value) & 1;
+    public static int Parity(ref this byte value) => BitOps.PopCount(value) & 1;
     /// <inheritdoc cref="Parity(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Parity(ref this short value) => BitOperations.PopCount((ushort)value) & 1;
+    public static int Parity(ref this short value) => BitOps.PopCount((ushort)value) & 1;
     /// <inheritdoc cref="Parity(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Parity(ref this ushort value) => BitOperations.PopCount(value) & 1;
+    public static int Parity(ref this ushort value) => BitOps.PopCount(value) & 1;
     /// <inheritdoc cref="Parity(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Parity(ref this int value) => BitOperations.PopCount((uint)value) & 1;
+    public static int Parity(ref this int value) => BitOps.PopCount((uint)value) & 1;
     /// <inheritdoc cref="Parity(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Parity(ref this uint value) => BitOperations.PopCount(value) & 1;
+    public static int Parity(ref this uint value) => BitOps.PopCount(value) & 1;
     /// <inheritdoc cref="Parity(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Parity(ref this long value) => BitOperations.PopCount((ulong)value) & 1;
+    public static int Parity(ref this long value) => BitOps.PopCount((ulong)value) & 1;
     /// <inheritdoc cref="Parity(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Parity(ref this ulong value) => BitOperations.PopCount(value) & 1;
+    public static int Parity(ref this ulong value) => BitOps.PopCount(value) & 1;
     #endregion
 
     #region LeadingZeroCount
     /// <summary>Returns the number of consecutive 0 bits starting from the most significant bit (LZCNT). Returns the bit width of the type for 0.</summary>
     /// <param name="value">Value to inspect. Signed values are treated as their two's complement bit pattern, so negative values return 0.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int LeadingZeroCount(ref this sbyte value) => BitOperations.LeadingZeroCount((byte)value) - 24;
+    public static int LeadingZeroCount(ref this sbyte value) => BitOps.LeadingZeroCount((byte)value) - 24;
     /// <inheritdoc cref="LeadingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int LeadingZeroCount(ref this byte value) => BitOperations.LeadingZeroCount(value) - 24;
+    public static int LeadingZeroCount(ref this byte value) => BitOps.LeadingZeroCount(value) - 24;
     /// <inheritdoc cref="LeadingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int LeadingZeroCount(ref this short value) => BitOperations.LeadingZeroCount((ushort)value) - 16;
+    public static int LeadingZeroCount(ref this short value) => BitOps.LeadingZeroCount((ushort)value) - 16;
     /// <inheritdoc cref="LeadingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int LeadingZeroCount(ref this ushort value) => BitOperations.LeadingZeroCount(value) - 16;
+    public static int LeadingZeroCount(ref this ushort value) => BitOps.LeadingZeroCount(value) - 16;
     /// <inheritdoc cref="LeadingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int LeadingZeroCount(ref this int value) => BitOperations.LeadingZeroCount((uint)value);
+    public static int LeadingZeroCount(ref this int value) => BitOps.LeadingZeroCount((uint)value);
     /// <inheritdoc cref="LeadingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int LeadingZeroCount(ref this uint value) => BitOperations.LeadingZeroCount(value);
+    public static int LeadingZeroCount(ref this uint value) => BitOps.LeadingZeroCount(value);
     /// <inheritdoc cref="LeadingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int LeadingZeroCount(ref this long value) => BitOperations.LeadingZeroCount((ulong)value);
+    public static int LeadingZeroCount(ref this long value) => BitOps.LeadingZeroCount((ulong)value);
     /// <inheritdoc cref="LeadingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int LeadingZeroCount(ref this ulong value) => BitOperations.LeadingZeroCount(value);
+    public static int LeadingZeroCount(ref this ulong value) => BitOps.LeadingZeroCount(value);
     #endregion
 
     #region TrailingZeroCount
     /// <summary>Returns the number of consecutive 0 bits starting from the least significant bit (TZCNT). Returns the bit width of the type for 0.</summary>
     /// <param name="value">Value to inspect. Signed values are treated as their two's complement bit pattern.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int TrailingZeroCount(ref this sbyte value) => BitOperations.TrailingZeroCount((byte)value | 0x100u);
+    public static int TrailingZeroCount(ref this sbyte value) => BitOps.TrailingZeroCount((byte)value | 0x100u);
     /// <inheritdoc cref="TrailingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int TrailingZeroCount(ref this byte value) => BitOperations.TrailingZeroCount(value | 0x100u);
+    public static int TrailingZeroCount(ref this byte value) => BitOps.TrailingZeroCount(value | 0x100u);
     /// <inheritdoc cref="TrailingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int TrailingZeroCount(ref this short value) => BitOperations.TrailingZeroCount((ushort)value | 0x10000u);
+    public static int TrailingZeroCount(ref this short value) => BitOps.TrailingZeroCount((ushort)value | 0x10000u);
     /// <inheritdoc cref="TrailingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int TrailingZeroCount(ref this ushort value) => BitOperations.TrailingZeroCount(value | 0x10000u);
+    public static int TrailingZeroCount(ref this ushort value) => BitOps.TrailingZeroCount(value | 0x10000u);
     /// <inheritdoc cref="TrailingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int TrailingZeroCount(ref this int value) => BitOperations.TrailingZeroCount((uint)value);
+    public static int TrailingZeroCount(ref this int value) => BitOps.TrailingZeroCount((uint)value);
     /// <inheritdoc cref="TrailingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int TrailingZeroCount(ref this uint value) => BitOperations.TrailingZeroCount(value);
+    public static int TrailingZeroCount(ref this uint value) => BitOps.TrailingZeroCount(value);
     /// <inheritdoc cref="TrailingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int TrailingZeroCount(ref this long value) => BitOperations.TrailingZeroCount((ulong)value);
+    public static int TrailingZeroCount(ref this long value) => BitOps.TrailingZeroCount((ulong)value);
     /// <inheritdoc cref="TrailingZeroCount(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int TrailingZeroCount(ref this ulong value) => BitOperations.TrailingZeroCount(value);
+    public static int TrailingZeroCount(ref this ulong value) => BitOps.TrailingZeroCount(value);
     #endregion
 
     #region Log2
     /// <summary>Returns the integer base 2 logarithm, i.e. the position of the highest set bit (floor(log2(value))). Returns 0 for 0 (mathematically undefined).</summary>
     /// <param name="value">Value to inspect. Signed values are treated as their two's complement bit pattern, so negative values return the highest bit position.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Log2(ref this sbyte value) => BitOperations.Log2((byte)value);
+    public static int Log2(ref this sbyte value) => BitOps.Log2((byte)value);
     /// <inheritdoc cref="Log2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Log2(ref this byte value) => BitOperations.Log2(value);
+    public static int Log2(ref this byte value) => BitOps.Log2(value);
     /// <inheritdoc cref="Log2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Log2(ref this short value) => BitOperations.Log2((ushort)value);
+    public static int Log2(ref this short value) => BitOps.Log2((ushort)value);
     /// <inheritdoc cref="Log2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Log2(ref this ushort value) => BitOperations.Log2(value);
+    public static int Log2(ref this ushort value) => BitOps.Log2(value);
     /// <inheritdoc cref="Log2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Log2(ref this int value) => BitOperations.Log2((uint)value);
+    public static int Log2(ref this int value) => BitOps.Log2((uint)value);
     /// <inheritdoc cref="Log2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Log2(ref this uint value) => BitOperations.Log2(value);
+    public static int Log2(ref this uint value) => BitOps.Log2(value);
     /// <inheritdoc cref="Log2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Log2(ref this long value) => BitOperations.Log2((ulong)value);
+    public static int Log2(ref this long value) => BitOps.Log2((ulong)value);
     /// <inheritdoc cref="Log2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int Log2(ref this ulong value) => BitOperations.Log2(value);
+    public static int Log2(ref this ulong value) => BitOps.Log2(value);
     #endregion
 
     #region BitLength
     /// <summary>Returns the number of bits needed to represent the value, i.e. the position of the highest set bit plus one. Returns 0 for 0.</summary>
     /// <param name="value">Value to inspect. Signed values are treated as their two's complement bit pattern, so negative values return the full bit width.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int BitLength(ref this sbyte value) => 32 - BitOperations.LeadingZeroCount((byte)value);
+    public static int BitLength(ref this sbyte value) => 32 - BitOps.LeadingZeroCount((byte)value);
     /// <inheritdoc cref="BitLength(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int BitLength(ref this byte value) => 32 - BitOperations.LeadingZeroCount(value);
+    public static int BitLength(ref this byte value) => 32 - BitOps.LeadingZeroCount(value);
     /// <inheritdoc cref="BitLength(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int BitLength(ref this short value) => 32 - BitOperations.LeadingZeroCount((ushort)value);
+    public static int BitLength(ref this short value) => 32 - BitOps.LeadingZeroCount((ushort)value);
     /// <inheritdoc cref="BitLength(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int BitLength(ref this ushort value) => 32 - BitOperations.LeadingZeroCount(value);
+    public static int BitLength(ref this ushort value) => 32 - BitOps.LeadingZeroCount(value);
     /// <inheritdoc cref="BitLength(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int BitLength(ref this int value) => 32 - BitOperations.LeadingZeroCount((uint)value);
+    public static int BitLength(ref this int value) => 32 - BitOps.LeadingZeroCount((uint)value);
     /// <inheritdoc cref="BitLength(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int BitLength(ref this uint value) => 32 - BitOperations.LeadingZeroCount(value);
+    public static int BitLength(ref this uint value) => 32 - BitOps.LeadingZeroCount(value);
     /// <inheritdoc cref="BitLength(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int BitLength(ref this long value) => 64 - BitOperations.LeadingZeroCount((ulong)value);
+    public static int BitLength(ref this long value) => 64 - BitOps.LeadingZeroCount((ulong)value);
     /// <inheritdoc cref="BitLength(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int BitLength(ref this ulong value) => 64 - BitOperations.LeadingZeroCount(value);
+    public static int BitLength(ref this ulong value) => 64 - BitOps.LeadingZeroCount(value);
     #endregion
 }

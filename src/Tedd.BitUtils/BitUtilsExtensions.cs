@@ -13,8 +13,10 @@ namespace Tedd;
 /// <para>Methods in this class either modify the value in place (<c>ref this</c>) or return information about the value.
 /// Variants that leave the original untouched and return a modified copy live in <see cref="BitUtilsCopyExtensions"/>.</para>
 /// <para>Every public method is a thin wrapper that the JIT inlines into the caller. On .NET 6 and later the implementations
-/// use <see cref="System.Numerics.BitOperations"/> and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM RBIT)
-/// with automatic software fallbacks. On .NET Standard 2.0 (.NET Framework, Mono, Unity) portable software implementations are used.</para>
+/// use <c>System.Numerics.BitOperations</c> and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM RBIT)
+/// with automatic software fallbacks. On .NET Standard 2.1 (.NET Core 3.x, Mono, Xamarin, Unity) neither of those APIs
+/// exists, so portable software implementations are used instead; see <c>BitOps</c>. Note that .NET Framework does not
+/// support .NET Standard 2.1 and is not a target of this package.</para>
 /// <para>Bit positions are zero based and counted from the least significant bit. Signed types are treated as their
 /// two's complement bit pattern. No argument validation is performed: a bit position, count, offset or length outside the
 /// bit width of the type gives an unspecified (but never throwing) result.</para>

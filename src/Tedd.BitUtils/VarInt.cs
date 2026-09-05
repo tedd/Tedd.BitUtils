@@ -46,7 +46,7 @@ public static class VarInt
     /// <param name="value">Value to measure.</param>
     /// <returns>The encoded length in bytes, 1 to 10.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int MeasureUnsigned(ulong value) => (64 - BitOperations.LeadingZeroCount(value | 1UL) + 6) / 7;
+    public static int MeasureUnsigned(ulong value) => (64 - BitOps.LeadingZeroCount(value | 1UL) + 6) / 7;
 
     /// <summary>Writes <paramref name="value"/> as an unsigned LEB128 variable length integer.</summary>
     /// <param name="destination">Buffer to write into.</param>
@@ -154,7 +154,7 @@ public static class VarInt
         // groups. Complementing a negative value gives the same count for -n as for n - 1, which is what two's
         // complement sign extension needs: -64 fits in 7 bits, -65 does not.
         var magnitude = (ulong)(value < 0 ? ~value : value);
-        return (64 - BitOperations.LeadingZeroCount(magnitude) + 1 + 6) / 7;
+        return (64 - BitOps.LeadingZeroCount(magnitude) + 1 + 6) / 7;
     }
 
     /// <summary>Writes <paramref name="value"/> as a signed LEB128 variable length integer (two's complement, sign extended).</summary>
@@ -328,7 +328,7 @@ public static class VarInt
         var magnitude = (ulong)(value < 0 ? -value : value);
         // One bit more than the magnitude needs, for the sign, rounded up to whole 7 bit groups. The first byte
         // holds six payload bits and every later byte seven, which is what "(bitlength + 1 + 6) / 7" comes out as.
-        return (65 - BitOperations.LeadingZeroCount(magnitude | 1UL) + 6) / 7;
+        return (65 - BitOps.LeadingZeroCount(magnitude | 1UL) + 6) / 7;
     }
 
     /// <summary>Writes <paramref name="value"/> in the non-standard sign-magnitude variable length format used by Tedd.SpanUtils. Prefer <see cref="WriteZigZag"/> for new formats.</summary>

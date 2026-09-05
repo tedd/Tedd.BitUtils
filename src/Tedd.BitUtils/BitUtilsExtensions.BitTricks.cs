@@ -1,5 +1,7 @@
 using System.Runtime.CompilerServices;
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
 using System.Runtime.Intrinsics.X86;
+#endif
 
 namespace Tedd;
 
@@ -32,16 +34,32 @@ public static partial class BitUtilsExtensions
     public static ushort ExtractLowestSetBit(ref this ushort value) => (ushort)(value & (ushort)(0 - value));
     /// <inheritdoc cref="ExtractLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int ExtractLowestSetBit(ref this int value) => Bmi1.IsSupported ? (int)Bmi1.ExtractLowestSetBit((uint)value) : value & -value;
+    public static int ExtractLowestSetBit(ref this int value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.IsSupported ? (int)Bmi1.ExtractLowestSetBit((uint)value) :
+#endif
+        value & -value;
     /// <inheritdoc cref="ExtractLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static uint ExtractLowestSetBit(ref this uint value) => Bmi1.IsSupported ? Bmi1.ExtractLowestSetBit(value) : value & (0u - value);
+    public static uint ExtractLowestSetBit(ref this uint value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.IsSupported ? Bmi1.ExtractLowestSetBit(value) :
+#endif
+        value & (0u - value);
     /// <inheritdoc cref="ExtractLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static long ExtractLowestSetBit(ref this long value) => Bmi1.X64.IsSupported ? (long)Bmi1.X64.ExtractLowestSetBit((ulong)value) : value & -value;
+    public static long ExtractLowestSetBit(ref this long value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.X64.IsSupported ? (long)Bmi1.X64.ExtractLowestSetBit((ulong)value) :
+#endif
+        value & -value;
     /// <inheritdoc cref="ExtractLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ulong ExtractLowestSetBit(ref this ulong value) => Bmi1.X64.IsSupported ? Bmi1.X64.ExtractLowestSetBit(value) : value & (0ul - value);
+    public static ulong ExtractLowestSetBit(ref this ulong value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.X64.IsSupported ? Bmi1.X64.ExtractLowestSetBit(value) :
+#endif
+        value & (0ul - value);
     #endregion
 
     #region ResetLowestSetBit
@@ -60,16 +78,32 @@ public static partial class BitUtilsExtensions
     public static ushort ResetLowestSetBit(ref this ushort value) => (ushort)(value & (value - 1));
     /// <inheritdoc cref="ResetLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int ResetLowestSetBit(ref this int value) => Bmi1.IsSupported ? (int)Bmi1.ResetLowestSetBit((uint)value) : value & (value - 1);
+    public static int ResetLowestSetBit(ref this int value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.IsSupported ? (int)Bmi1.ResetLowestSetBit((uint)value) :
+#endif
+        value & (value - 1);
     /// <inheritdoc cref="ResetLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static uint ResetLowestSetBit(ref this uint value) => Bmi1.IsSupported ? Bmi1.ResetLowestSetBit(value) : value & (value - 1);
+    public static uint ResetLowestSetBit(ref this uint value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.IsSupported ? Bmi1.ResetLowestSetBit(value) :
+#endif
+        value & (value - 1);
     /// <inheritdoc cref="ResetLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static long ResetLowestSetBit(ref this long value) => Bmi1.X64.IsSupported ? (long)Bmi1.X64.ResetLowestSetBit((ulong)value) : value & (value - 1);
+    public static long ResetLowestSetBit(ref this long value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.X64.IsSupported ? (long)Bmi1.X64.ResetLowestSetBit((ulong)value) :
+#endif
+        value & (value - 1);
     /// <inheritdoc cref="ResetLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ulong ResetLowestSetBit(ref this ulong value) => Bmi1.X64.IsSupported ? Bmi1.X64.ResetLowestSetBit(value) : value & (value - 1);
+    public static ulong ResetLowestSetBit(ref this ulong value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.X64.IsSupported ? Bmi1.X64.ResetLowestSetBit(value) :
+#endif
+        value & (value - 1);
     #endregion
 
     #region GetMaskUpToLowestSetBit
@@ -88,44 +122,60 @@ public static partial class BitUtilsExtensions
     public static ushort GetMaskUpToLowestSetBit(ref this ushort value) => (ushort)(value ^ (value - 1));
     /// <inheritdoc cref="GetMaskUpToLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int GetMaskUpToLowestSetBit(ref this int value) => Bmi1.IsSupported ? (int)Bmi1.GetMaskUpToLowestSetBit((uint)value) : value ^ (value - 1);
+    public static int GetMaskUpToLowestSetBit(ref this int value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.IsSupported ? (int)Bmi1.GetMaskUpToLowestSetBit((uint)value) :
+#endif
+        value ^ (value - 1);
     /// <inheritdoc cref="GetMaskUpToLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static uint GetMaskUpToLowestSetBit(ref this uint value) => Bmi1.IsSupported ? Bmi1.GetMaskUpToLowestSetBit(value) : value ^ (value - 1);
+    public static uint GetMaskUpToLowestSetBit(ref this uint value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.IsSupported ? Bmi1.GetMaskUpToLowestSetBit(value) :
+#endif
+        value ^ (value - 1);
     /// <inheritdoc cref="GetMaskUpToLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static long GetMaskUpToLowestSetBit(ref this long value) => Bmi1.X64.IsSupported ? (long)Bmi1.X64.GetMaskUpToLowestSetBit((ulong)value) : value ^ (value - 1);
+    public static long GetMaskUpToLowestSetBit(ref this long value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.X64.IsSupported ? (long)Bmi1.X64.GetMaskUpToLowestSetBit((ulong)value) :
+#endif
+        value ^ (value - 1);
     /// <inheritdoc cref="GetMaskUpToLowestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ulong GetMaskUpToLowestSetBit(ref this ulong value) => Bmi1.X64.IsSupported ? Bmi1.X64.GetMaskUpToLowestSetBit(value) : value ^ (value - 1);
+    public static ulong GetMaskUpToLowestSetBit(ref this ulong value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi1.X64.IsSupported ? Bmi1.X64.GetMaskUpToLowestSetBit(value) :
+#endif
+        value ^ (value - 1);
     #endregion
 
     #region ExtractHighestSetBit
     /// <summary>Returns a copy of <paramref name="value"/> with only the highest set bit kept. Returns 0 for 0.</summary>
     /// <param name="value">Value to inspect. Signed values are treated as their two's complement bit pattern.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static sbyte ExtractHighestSetBit(ref this sbyte value) { byte b = (byte)value; return (sbyte)(b == 0 ? 0 : 1 << (31 - System.Numerics.BitOperations.LeadingZeroCount(b))); }
+    public static sbyte ExtractHighestSetBit(ref this sbyte value) { byte b = (byte)value; return (sbyte)(b == 0 ? 0 : 1 << (31 - BitOps.LeadingZeroCount(b))); }
     /// <inheritdoc cref="ExtractHighestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static byte ExtractHighestSetBit(ref this byte value) => value == 0 ? (byte)0 : (byte)(1 << (31 - System.Numerics.BitOperations.LeadingZeroCount(value)));
+    public static byte ExtractHighestSetBit(ref this byte value) => value == 0 ? (byte)0 : (byte)(1 << (31 - BitOps.LeadingZeroCount(value)));
     /// <inheritdoc cref="ExtractHighestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static short ExtractHighestSetBit(ref this short value) { ushort u = (ushort)value; return (short)(u == 0 ? 0 : 1 << (31 - System.Numerics.BitOperations.LeadingZeroCount(u))); }
+    public static short ExtractHighestSetBit(ref this short value) { ushort u = (ushort)value; return (short)(u == 0 ? 0 : 1 << (31 - BitOps.LeadingZeroCount(u))); }
     /// <inheritdoc cref="ExtractHighestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ushort ExtractHighestSetBit(ref this ushort value) => value == 0 ? (ushort)0 : (ushort)(1 << (31 - System.Numerics.BitOperations.LeadingZeroCount(value)));
+    public static ushort ExtractHighestSetBit(ref this ushort value) => value == 0 ? (ushort)0 : (ushort)(1 << (31 - BitOps.LeadingZeroCount(value)));
     /// <inheritdoc cref="ExtractHighestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int ExtractHighestSetBit(ref this int value) => value == 0 ? 0 : (int)(1u << (31 - System.Numerics.BitOperations.LeadingZeroCount((uint)value)));
+    public static int ExtractHighestSetBit(ref this int value) => value == 0 ? 0 : (int)(1u << (31 - BitOps.LeadingZeroCount((uint)value)));
     /// <inheritdoc cref="ExtractHighestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static uint ExtractHighestSetBit(ref this uint value) => value == 0 ? 0u : 1u << (31 - System.Numerics.BitOperations.LeadingZeroCount(value));
+    public static uint ExtractHighestSetBit(ref this uint value) => value == 0 ? 0u : 1u << (31 - BitOps.LeadingZeroCount(value));
     /// <inheritdoc cref="ExtractHighestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static long ExtractHighestSetBit(ref this long value) => value == 0 ? 0L : (long)(1ul << (63 - System.Numerics.BitOperations.LeadingZeroCount((ulong)value)));
+    public static long ExtractHighestSetBit(ref this long value) => value == 0 ? 0L : (long)(1ul << (63 - BitOps.LeadingZeroCount((ulong)value)));
     /// <inheritdoc cref="ExtractHighestSetBit(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ulong ExtractHighestSetBit(ref this ulong value) => value == 0 ? 0ul : 1ul << (63 - System.Numerics.BitOperations.LeadingZeroCount(value));
+    public static ulong ExtractHighestSetBit(ref this ulong value) => value == 0 ? 0ul : 1ul << (63 - BitOps.LeadingZeroCount(value));
     #endregion
 
     #region ZeroHighBits
@@ -145,16 +195,32 @@ public static partial class BitUtilsExtensions
     public static ushort ZeroHighBits(ref this ushort value, int index) => (ushort)(value & ZeroHighBitsMask32(index, 16));
     /// <inheritdoc cref="ZeroHighBits(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static int ZeroHighBits(ref this int value, int index) => Bmi2.IsSupported ? (int)Bmi2.ZeroHighBits((uint)value, (uint)index) : (int)((uint)value & ZeroHighBitsMask32(index, 32));
+    public static int ZeroHighBits(ref this int value, int index) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi2.IsSupported ? (int)Bmi2.ZeroHighBits((uint)value, (uint)index) :
+#endif
+        (int)((uint)value & ZeroHighBitsMask32(index, 32));
     /// <inheritdoc cref="ZeroHighBits(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static uint ZeroHighBits(ref this uint value, int index) => Bmi2.IsSupported ? Bmi2.ZeroHighBits(value, (uint)index) : value & ZeroHighBitsMask32(index, 32);
+    public static uint ZeroHighBits(ref this uint value, int index) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi2.IsSupported ? Bmi2.ZeroHighBits(value, (uint)index) :
+#endif
+        value & ZeroHighBitsMask32(index, 32);
     /// <inheritdoc cref="ZeroHighBits(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static long ZeroHighBits(ref this long value, int index) => Bmi2.X64.IsSupported ? (long)Bmi2.X64.ZeroHighBits((ulong)value, (ulong)index) : (long)((ulong)value & ZeroHighBitsMask64(index, 64));
+    public static long ZeroHighBits(ref this long value, int index) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi2.X64.IsSupported ? (long)Bmi2.X64.ZeroHighBits((ulong)value, (ulong)index) :
+#endif
+        (long)((ulong)value & ZeroHighBitsMask64(index, 64));
     /// <inheritdoc cref="ZeroHighBits(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ulong ZeroHighBits(ref this ulong value, int index) => Bmi2.X64.IsSupported ? Bmi2.X64.ZeroHighBits(value, (ulong)index) : value & ZeroHighBitsMask64(index, 64);
+    public static ulong ZeroHighBits(ref this ulong value, int index) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi2.X64.IsSupported ? Bmi2.X64.ZeroHighBits(value, (ulong)index) :
+#endif
+        value & ZeroHighBitsMask64(index, 64);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static uint ZeroHighBitsMask32(int index, int width) => index <= 0 ? 0u : index >= width ? uint.MaxValue : (1u << index) - 1;
@@ -200,13 +266,21 @@ public static partial class BitUtilsExtensions
     /// <param name="mask">Selects which bits of <paramref name="value"/> are gathered.</param>
     /// <example>ParallelBitExtract(0b_1101_1010u, 0b_0000_1111u) == 0b1010</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static uint ParallelBitExtract(ref this uint value, uint mask) => Bmi2.IsSupported ? Bmi2.ParallelBitExtract(value, mask) : ParallelBitExtractSoftwareFallback(value, mask);
+    public static uint ParallelBitExtract(ref this uint value, uint mask) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi2.IsSupported ? Bmi2.ParallelBitExtract(value, mask) :
+#endif
+        ParallelBitExtractSoftwareFallback(value, mask);
     /// <inheritdoc cref="ParallelBitExtract(ref uint, uint)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int ParallelBitExtract(ref this int value, int mask) { var v = (uint)value; return (int)v.ParallelBitExtract((uint)mask); }
     /// <inheritdoc cref="ParallelBitExtract(ref uint, uint)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ulong ParallelBitExtract(ref this ulong value, ulong mask) => Bmi2.X64.IsSupported ? Bmi2.X64.ParallelBitExtract(value, mask) : ParallelBitExtractSoftwareFallback(value, mask);
+    public static ulong ParallelBitExtract(ref this ulong value, ulong mask) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi2.X64.IsSupported ? Bmi2.X64.ParallelBitExtract(value, mask) :
+#endif
+        ParallelBitExtractSoftwareFallback(value, mask);
     /// <inheritdoc cref="ParallelBitExtract(ref uint, uint)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static long ParallelBitExtract(ref this long value, long mask) { var v = (ulong)value; return (long)v.ParallelBitExtract((ulong)mask); }
@@ -249,13 +323,21 @@ public static partial class BitUtilsExtensions
     /// <param name="mask">Selects which bit positions receive bits from <paramref name="value"/>.</param>
     /// <example>ParallelBitDeposit(0b1010u, 0b_0000_1111u) == 0b_0000_1010u</example>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static uint ParallelBitDeposit(ref this uint value, uint mask) => Bmi2.IsSupported ? Bmi2.ParallelBitDeposit(value, mask) : ParallelBitDepositSoftwareFallback(value, mask);
+    public static uint ParallelBitDeposit(ref this uint value, uint mask) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi2.IsSupported ? Bmi2.ParallelBitDeposit(value, mask) :
+#endif
+        ParallelBitDepositSoftwareFallback(value, mask);
     /// <inheritdoc cref="ParallelBitDeposit(ref uint, uint)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int ParallelBitDeposit(ref this int value, int mask) { var v = (uint)value; return (int)v.ParallelBitDeposit((uint)mask); }
     /// <inheritdoc cref="ParallelBitDeposit(ref uint, uint)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static ulong ParallelBitDeposit(ref this ulong value, ulong mask) => Bmi2.X64.IsSupported ? Bmi2.X64.ParallelBitDeposit(value, mask) : ParallelBitDepositSoftwareFallback(value, mask);
+    public static ulong ParallelBitDeposit(ref this ulong value, ulong mask) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+        Bmi2.X64.IsSupported ? Bmi2.X64.ParallelBitDeposit(value, mask) :
+#endif
+        ParallelBitDepositSoftwareFallback(value, mask);
     /// <inheritdoc cref="ParallelBitDeposit(ref uint, uint)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static long ParallelBitDeposit(ref this long value, long mask) { var v = (ulong)value; return (long)v.ParallelBitDeposit((ulong)mask); }

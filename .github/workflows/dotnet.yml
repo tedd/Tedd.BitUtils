@@ -7,8 +7,30 @@ on:
     branches: [ main ]
 
 jobs:
+  # Runs the whole suite against the portable code paths that the netstandard2.1 asset ships. That target cannot
+  # host a test project directly, and a normal run on .NET 8/10 would only ever exercise the intrinsic backed
+  # paths, so -p:ForcePortable=true compiles the modern targets down the portable branches instead. Kept in its
+  # own job so a portable-compiled assembly can never end up in the published package.
+  verify-portable-paths:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: |
+          6.0.x
+          8.0.x
+          10.0.x
+    - name: Test portable paths
+      working-directory: src
+      run: dotnet test Tedd.BitUtils.Tests/Tedd.BitUtils.Tests.csproj -c Release -p:ForcePortable=true --verbosity normal
+
   build-test-publish:
 
+    needs: verify-portable-paths
     runs-on: windows-latest
 
     steps:

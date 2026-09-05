@@ -11,7 +11,9 @@ Every operation is available in two forms: **in-place** (modifies the variable v
 
 On top of the per-integer operations the package also has a **bit packing** layer that works over `Span<byte>`: arbitrary width bit fields (`BitPacking`, `BitWriter`, `BitReader`) and the byte oriented variable length integer encodings built on them (`VarInt`, `EbmlVInt`, `SizePrefix`). See [Bit packing](#bit-packing) below.
 
-Targets **.NET 6, .NET 8 and .NET 10**. Every operation is backed by [`System.Numerics.BitOperations`](https://learn.microsoft.com/dotnet/api/system.numerics.bitoperations) and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM64 RBIT) where the CPU supports them, with an automatic runtime fallback where it doesn't - you never need to branch on this yourself. All methods are tagged for inline compilation.
+Targets **.NET Standard 2.1, .NET 6, .NET 8 and .NET 10**. On .NET 6 and later every operation is backed by [`System.Numerics.BitOperations`](https://learn.microsoft.com/dotnet/api/system.numerics.bitoperations) and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM64 RBIT) where the CPU supports them, with an automatic runtime fallback where it doesn't - you never need to branch on this yourself. All methods are tagged for inline compilation.
+
+The .NET Standard 2.1 target (.NET Core 3.x, Mono, Xamarin, Unity 2021+) has neither of those APIs available, so it compiles to portable software implementations instead - same results, same API, no configuration. Note that .NET Framework does **not** support .NET Standard 2.1; .NET Framework consumers should stay on the 1.x line. No package dependencies on any target.
 
 ## Extension methods
 Methods are implemented as extension methods, so your editor will list them when you type `.` after a supported type. Bit positions are zero based, counted from the least significant bit.
@@ -174,6 +176,16 @@ Note that for `sbyte`, `byte`, `short` and `ushort` the CPU operates at 32-bit w
 
 Every entry above falls back automatically to a portable software implementation on CPUs or platforms without the matching instruction (e.g. ARM without RBIT for `ReverseBits`, or x86 without BMI2 for `ParallelBitExtract`/`ParallelBitDeposit`) - there's no configuration or feature flag involved.
 
+### .NET Standard 2.1
+`System.Numerics.BitOperations` arrived in .NET Core 3.0 and `System.Runtime.Intrinsics` is .NET Core 3.0+ too, so neither exists on .NET Standard 2.1. Every use of them sits behind a `#if NET6_0_OR_GREATER`, with the portable algorithm as the shared fallback; `BitOps` is the single place the whole library reaches for `BitOperations`, so there is one file to audit rather than ninety-odd call sites.
+
+Those portable paths are not shipped untested. A .NET Standard 2.1 target cannot host a test project, and a normal test run on .NET 8/10 would only ever execute the intrinsic-backed branches, so the library can be compiled down the portable branches on a modern target instead:
+```
+cd src
+dotnet test Tedd.BitUtils.Tests/Tedd.BitUtils.Tests.csproj -c Release -p:ForcePortable=true
+```
+CI runs the full suite both ways on every push, and publishing is gated on the portable run passing.
+
 ## Benchmarks
 `src/Tedd.BitUtils.Benchmarks` uses [BenchmarkDotNet](https://benchmarkdotnet.org/) to compare this version against a frozen snapshot of the pre-2.0 implementation (`src/Tedd.BitUtils.Archive`), operation by operation. Run it with:
 ```
@@ -185,6 +197,7 @@ or target one comparison directly, e.g. `dotnet run -c Release --filter *Reverse
 ## Changelog
 
 ### 2.1.0
+* New target: **.NET Standard 2.1** (.NET Core 3.x, Mono, Xamarin, Unity 2021+), alongside net6.0/net8.0/net10.0. Everything that needs `System.Numerics.BitOperations` or `System.Runtime.Intrinsics` is behind a `#if`, so modern targets keep the intrinsic-backed paths unchanged and .NET Standard 2.1 gets portable implementations. Still no package dependencies. (.NET Framework does not support .NET Standard 2.1 and stays on the 1.x line.)
 * New **bit packing** layer over `Span<byte>`: `BitPacking` (arbitrary width bit fields at any bit offset, MSB first), plus the `BitWriter`/`BitReader` `ref struct`s for sequential packing.
 * New **variable length integer** encodings in `VarInt`: ULEB128, SLEB128, ZigZag (Protocol Buffers `sint`) and the non-standard sign-magnitude format Tedd.SpanUtils writes.
 * New `EbmlVInt` (RFC 8794 VINT, as used by Matroska/WebM) and `SizePrefix` (prefix-varint length field, 30 bits in up to 4 bytes).

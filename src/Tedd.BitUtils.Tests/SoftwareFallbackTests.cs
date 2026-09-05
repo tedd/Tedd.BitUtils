@@ -245,5 +245,89 @@ namespace Tedd.BitUtils.Tests
         [InlineData(0b1010u, 0b_1111_0000u, 0b_1010_0000u)] // contiguous high mask -> shift up then AND
         public void ParallelBitDeposit_UInt32_KnownValues(uint value, uint mask, uint expected)
             => Assert.Equal(expected, BitUtilsExtensions.ParallelBitDepositSoftwareFallback(value, mask));
+
+        [Fact]
+        public void RotateLeft_UInt32_MatchesBitOperations()
+        {
+            // Offsets 0 and 32 are the interesting ones: they rely on C# masking the shift count to 31, so that
+            // the complementary shift becomes a no-op rather than clearing the value.
+            for (var offset = 0; offset <= 32; offset++)
+                foreach (var v in new uint[] { 0u, 1u, 0x80000000u, 0xFFFFFFFFu, 0x12345678u })
+                    Assert.Equal(BitOperations.RotateLeft(v, offset), BitUtilsExtensions.RotateLeftSoftwareFallback(v, offset));
+            for (var i = 0; i < Iterations; i++)
+            {
+                var v = (uint)_rnd.Next(int.MinValue, int.MaxValue);
+                var offset = _rnd.Next(0, 33);
+                Assert.Equal(BitOperations.RotateLeft(v, offset), BitUtilsExtensions.RotateLeftSoftwareFallback(v, offset));
+            }
+        }
+
+        [Fact]
+        public void RotateRight_UInt32_MatchesBitOperations()
+        {
+            for (var offset = 0; offset <= 32; offset++)
+                foreach (var v in new uint[] { 0u, 1u, 0x80000000u, 0xFFFFFFFFu, 0x12345678u })
+                    Assert.Equal(BitOperations.RotateRight(v, offset), BitUtilsExtensions.RotateRightSoftwareFallback(v, offset));
+            for (var i = 0; i < Iterations; i++)
+            {
+                var v = (uint)_rnd.Next(int.MinValue, int.MaxValue);
+                var offset = _rnd.Next(0, 33);
+                Assert.Equal(BitOperations.RotateRight(v, offset), BitUtilsExtensions.RotateRightSoftwareFallback(v, offset));
+            }
+        }
+
+        [Fact]
+        public void RotateLeft_UInt64_MatchesBitOperations()
+        {
+            for (var offset = 0; offset <= 64; offset++)
+                foreach (var v in new ulong[] { 0ul, 1ul, 0x8000000000000000ul, ulong.MaxValue, 0x0123456789ABCDEFul })
+                    Assert.Equal(BitOperations.RotateLeft(v, offset), BitUtilsExtensions.RotateLeftSoftwareFallback(v, offset));
+            for (var i = 0; i < Iterations; i++)
+            {
+                var v = (ulong)_rnd.NextInt64();
+                var offset = _rnd.Next(0, 65);
+                Assert.Equal(BitOperations.RotateLeft(v, offset), BitUtilsExtensions.RotateLeftSoftwareFallback(v, offset));
+            }
+        }
+
+        [Fact]
+        public void RotateRight_UInt64_MatchesBitOperations()
+        {
+            for (var offset = 0; offset <= 64; offset++)
+                foreach (var v in new ulong[] { 0ul, 1ul, 0x8000000000000000ul, ulong.MaxValue, 0x0123456789ABCDEFul })
+                    Assert.Equal(BitOperations.RotateRight(v, offset), BitUtilsExtensions.RotateRightSoftwareFallback(v, offset));
+            for (var i = 0; i < Iterations; i++)
+            {
+                var v = (ulong)_rnd.NextInt64();
+                var offset = _rnd.Next(0, 65);
+                Assert.Equal(BitOperations.RotateRight(v, offset), BitUtilsExtensions.RotateRightSoftwareFallback(v, offset));
+            }
+        }
+
+        [Fact]
+        public void IsPow2_UInt32_MatchesBitOperations()
+        {
+            Assert.False(BitUtilsExtensions.IsPow2SoftwareFallback(0u));
+            for (var bit = 0; bit < 32; bit++)
+                Assert.True(BitUtilsExtensions.IsPow2SoftwareFallback(1u << bit));
+            for (var i = 0; i < Iterations; i++)
+            {
+                var v = (uint)_rnd.Next(int.MinValue, int.MaxValue);
+                Assert.Equal(BitOperations.IsPow2(v), BitUtilsExtensions.IsPow2SoftwareFallback(v));
+            }
+        }
+
+        [Fact]
+        public void IsPow2_UInt64_MatchesBitOperations()
+        {
+            Assert.False(BitUtilsExtensions.IsPow2SoftwareFallback(0ul));
+            for (var bit = 0; bit < 64; bit++)
+                Assert.True(BitUtilsExtensions.IsPow2SoftwareFallback(1ul << bit));
+            for (var i = 0; i < Iterations; i++)
+            {
+                var v = (ulong)_rnd.NextInt64();
+                Assert.Equal(BitOperations.IsPow2(v), BitUtilsExtensions.IsPow2SoftwareFallback(v));
+            }
+        }
     }
 }

@@ -69,7 +69,7 @@ public readonly struct EbmlVInt : IEquatable<EbmlVInt>
         if (value > MaxValue) throw new ArgumentOutOfRangeException(nameof(value), value, "EBML data integers have at most 56 payload bits, with the all-one value reserved.");
         // Measured on value + 1, so a value that is all ones for its width rolls up into the next size rather than
         // colliding with that width unknown-size marker.
-        return (64 - BitOperations.LeadingZeroCount(value + 1) + 6) / 7;
+        return (64 - BitOps.LeadingZeroCount(value + 1) + 6) / 7;
     }
 
     /// <summary>Reads an EBML variable-length integer from the start of <paramref name="source"/>.</summary>

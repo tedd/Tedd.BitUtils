@@ -175,7 +175,8 @@ public static class BitPacking
             var available = 8 - used;
             var take = available < remaining ? available : remaining;
             var shift = available - take;
-            result = (result << take) | (ulong)((source[byteIndex] >> shift) & ((1 << take) - 1));
+            var chunk = (uint)(source[byteIndex] >> shift) & ((1u << take) - 1);
+            result = (result << take) | chunk;
             remaining -= take;
             bitOffset += take;
         }

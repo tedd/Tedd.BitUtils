@@ -1,7 +1,11 @@
 using System;
 using System.Runtime.CompilerServices;
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
 using System.Runtime.InteropServices;
+#endif
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
 using System.Runtime.Intrinsics.Arm;
+#endif
 
 namespace Tedd;
 
@@ -38,8 +42,14 @@ public static partial class BitUtilsExtensions
     /// <summary>Portable 8 bit reverse (table lookup). Used on platforms without RBIT.</summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static byte ReverseBitsSoftwareFallback(byte value)
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
         // A byte can never index outside the 256 entry table, so skip the bounds check.
         => Unsafe.Add(ref MemoryMarshal.GetReference(BitReverseLookup), value);
+#else
+        // System.Runtime.CompilerServices.Unsafe is a separate NuGet package on .NET Standard 2.1, and this library
+        // takes no dependencies, so index normally and let the (never taken) bounds check stand.
+        => BitReverseLookup[value];
+#endif
 
     /// <summary>Portable 16 bit reverse (SWAR). Used on platforms without RBIT.</summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -75,20 +85,32 @@ public static partial class BitUtilsExtensions
 
     #region Core
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static byte ReverseBitsCore8(byte value)
-        => ArmBase.IsSupported ? (byte)(ArmBase.ReverseElementBits(value) >> 24) : ReverseBitsSoftwareFallback(value);
+    private static byte ReverseBitsCore8(byte value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+            ArmBase.IsSupported ? (byte)(ArmBase.ReverseElementBits(value) >> 24) :
+#endif
+            ReverseBitsSoftwareFallback(value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static ushort ReverseBitsCore16(ushort value)
-        => ArmBase.IsSupported ? (ushort)(ArmBase.ReverseElementBits(value) >> 16) : ReverseBitsSoftwareFallback(value);
+    private static ushort ReverseBitsCore16(ushort value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+            ArmBase.IsSupported ? (ushort)(ArmBase.ReverseElementBits(value) >> 16) :
+#endif
+            ReverseBitsSoftwareFallback(value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static uint ReverseBitsCore32(uint value)
-        => ArmBase.IsSupported ? ArmBase.ReverseElementBits(value) : ReverseBitsSoftwareFallback(value);
+    private static uint ReverseBitsCore32(uint value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+            ArmBase.IsSupported ? ArmBase.ReverseElementBits(value) :
+#endif
+            ReverseBitsSoftwareFallback(value);
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static ulong ReverseBitsCore64(ulong value)
-        => ArmBase.Arm64.IsSupported ? ArmBase.Arm64.ReverseElementBits(value) : ReverseBitsSoftwareFallback(value);
+    private static ulong ReverseBitsCore64(ulong value) =>
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+            ArmBase.Arm64.IsSupported ? ArmBase.Arm64.ReverseElementBits(value) :
+#endif
+            ReverseBitsSoftwareFallback(value);
     #endregion
 
     #region ReverseBits

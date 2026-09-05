@@ -30,8 +30,8 @@ namespace Tedd.BitUtils.Tests
             for (var i = 0; i < bitCount; i++)
             {
                 var position = bitOffset + i;
-                var bit = (source[(int)(position >> 3)] >> (7 - (int)(position & 7))) & 1;
-                result = (result << 1) | (ulong)bit;
+                var bit = (uint)(source[(int)(position >> 3)] >> (7 - (int)(position & 7))) & 1u;
+                result = (result << 1) | bit;
             }
             return result;
         }

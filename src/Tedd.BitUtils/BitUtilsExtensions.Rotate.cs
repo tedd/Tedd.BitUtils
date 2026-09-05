@@ -9,6 +9,28 @@ public static partial class BitUtilsExtensions
     // single ROL/ROR instruction on x86/x64 and ARM64. 8 and 16 bit rotates are composed from shifts on the zero
     // extended value; the count is reduced modulo the bit width first.
 
+    #region Software fallbacks (exercised by tests via InternalsVisibleTo)
+    // C# masks a shift count to 31 (uint) or 63 (ulong), which is what makes the complementary shift correct for
+    // offset 0 and for offset equal to the width: "value >> 32" is "value >> 0", so the two halves recombine into
+    // the original value. These are the same expressions System.Numerics.BitOperations uses.
+
+    /// <summary>Portable rotate left.</summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static uint RotateLeftSoftwareFallback(uint value, int offset) => (value << offset) | (value >> (32 - offset));
+
+    /// <inheritdoc cref="RotateLeftSoftwareFallback(uint, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static ulong RotateLeftSoftwareFallback(ulong value, int offset) => (value << offset) | (value >> (64 - offset));
+
+    /// <summary>Portable rotate right.</summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static uint RotateRightSoftwareFallback(uint value, int offset) => (value >> offset) | (value << (32 - offset));
+
+    /// <inheritdoc cref="RotateRightSoftwareFallback(uint, int)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static ulong RotateRightSoftwareFallback(ulong value, int offset) => (value >> offset) | (value << (64 - offset));
+    #endregion
+
     #region Core
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static byte RotateLeftCore8(byte value, int count)
@@ -56,16 +78,16 @@ public static partial class BitUtilsExtensions
     public static void Rol(ref this ushort value, int count) => value = RotateLeftCore16(value, count);
     /// <inheritdoc cref="Rol(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Rol(ref this int value, int count) => value = (int)BitOperations.RotateLeft((uint)value, count);
+    public static void Rol(ref this int value, int count) => value = (int)BitOps.RotateLeft((uint)value, count);
     /// <inheritdoc cref="Rol(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Rol(ref this uint value, int count) => value = BitOperations.RotateLeft(value, count);
+    public static void Rol(ref this uint value, int count) => value = BitOps.RotateLeft(value, count);
     /// <inheritdoc cref="Rol(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Rol(ref this long value, int count) => value = (long)BitOperations.RotateLeft((ulong)value, count);
+    public static void Rol(ref this long value, int count) => value = (long)BitOps.RotateLeft((ulong)value, count);
     /// <inheritdoc cref="Rol(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Rol(ref this ulong value, int count) => value = BitOperations.RotateLeft(value, count);
+    public static void Rol(ref this ulong value, int count) => value = BitOps.RotateLeft(value, count);
     #endregion
 
     #region Ror(count)
@@ -85,16 +107,16 @@ public static partial class BitUtilsExtensions
     public static void Ror(ref this ushort value, int count) => value = RotateRightCore16(value, count);
     /// <inheritdoc cref="Ror(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Ror(ref this int value, int count) => value = (int)BitOperations.RotateRight((uint)value, count);
+    public static void Ror(ref this int value, int count) => value = (int)BitOps.RotateRight((uint)value, count);
     /// <inheritdoc cref="Ror(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Ror(ref this uint value, int count) => value = BitOperations.RotateRight(value, count);
+    public static void Ror(ref this uint value, int count) => value = BitOps.RotateRight(value, count);
     /// <inheritdoc cref="Ror(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Ror(ref this long value, int count) => value = (long)BitOperations.RotateRight((ulong)value, count);
+    public static void Ror(ref this long value, int count) => value = (long)BitOps.RotateRight((ulong)value, count);
     /// <inheritdoc cref="Ror(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Ror(ref this ulong value, int count) => value = BitOperations.RotateRight(value, count);
+    public static void Ror(ref this ulong value, int count) => value = BitOps.RotateRight(value, count);
     #endregion
 
     #region Rol()
@@ -113,16 +135,16 @@ public static partial class BitUtilsExtensions
     public static void Rol(ref this ushort value) => value = (ushort)((value << 1) | (value >> 15));
     /// <inheritdoc cref="Rol(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Rol(ref this int value) => value = (int)BitOperations.RotateLeft((uint)value, 1);
+    public static void Rol(ref this int value) => value = (int)BitOps.RotateLeft((uint)value, 1);
     /// <inheritdoc cref="Rol(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Rol(ref this uint value) => value = BitOperations.RotateLeft(value, 1);
+    public static void Rol(ref this uint value) => value = BitOps.RotateLeft(value, 1);
     /// <inheritdoc cref="Rol(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Rol(ref this long value) => value = (long)BitOperations.RotateLeft((ulong)value, 1);
+    public static void Rol(ref this long value) => value = (long)BitOps.RotateLeft((ulong)value, 1);
     /// <inheritdoc cref="Rol(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Rol(ref this ulong value) => value = BitOperations.RotateLeft(value, 1);
+    public static void Rol(ref this ulong value) => value = BitOps.RotateLeft(value, 1);
     #endregion
 
     #region Ror()
@@ -141,16 +163,16 @@ public static partial class BitUtilsExtensions
     public static void Ror(ref this ushort value) => value = (ushort)((value >> 1) | (value << 15));
     /// <inheritdoc cref="Ror(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Ror(ref this int value) => value = (int)BitOperations.RotateRight((uint)value, 1);
+    public static void Ror(ref this int value) => value = (int)BitOps.RotateRight((uint)value, 1);
     /// <inheritdoc cref="Ror(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Ror(ref this uint value) => value = BitOperations.RotateRight(value, 1);
+    public static void Ror(ref this uint value) => value = BitOps.RotateRight(value, 1);
     /// <inheritdoc cref="Ror(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Ror(ref this long value) => value = (long)BitOperations.RotateRight((ulong)value, 1);
+    public static void Ror(ref this long value) => value = (long)BitOps.RotateRight((ulong)value, 1);
     /// <inheritdoc cref="Ror(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void Ror(ref this ulong value) => value = BitOperations.RotateRight(value, 1);
+    public static void Ror(ref this ulong value) => value = BitOps.RotateRight(value, 1);
     #endregion
 }
 

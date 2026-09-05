@@ -6,6 +6,14 @@ namespace Tedd;
 public static partial class BitUtilsExtensions
 {
     #region Software fallback (exercised by tests via InternalsVisibleTo)
+    /// <summary>Portable power of two test: clearing the lowest set bit of a power of two leaves 0.</summary>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static bool IsPow2SoftwareFallback(uint value) => (value & (value - 1)) == 0 && value != 0;
+
+    /// <inheritdoc cref="IsPow2SoftwareFallback(uint)"/>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static bool IsPow2SoftwareFallback(ulong value) => (value & (value - 1)) == 0 && value != 0;
+
     /// <summary>Portable round up to power of two. 0 stays 0; values whose next power of two does not fit give 0.</summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal static uint RoundUpToPowerOf2SoftwareFallback(uint value)
@@ -38,28 +46,28 @@ public static partial class BitUtilsExtensions
     /// <summary>Returns <see langword="true"/> when exactly one bit is set, i.e. the value is a positive power of two. 0 and negative values give <see langword="false"/>.</summary>
     /// <param name="value">Value to inspect.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsPowerOfTwo(ref this sbyte value) => value > 0 && BitOperations.IsPow2((byte)value);
+    public static bool IsPowerOfTwo(ref this sbyte value) => value > 0 && BitOps.IsPow2((byte)value);
     /// <inheritdoc cref="IsPowerOfTwo(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsPowerOfTwo(ref this byte value) => BitOperations.IsPow2(value);
+    public static bool IsPowerOfTwo(ref this byte value) => BitOps.IsPow2(value);
     /// <inheritdoc cref="IsPowerOfTwo(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsPowerOfTwo(ref this short value) => value > 0 && BitOperations.IsPow2((ushort)value);
+    public static bool IsPowerOfTwo(ref this short value) => value > 0 && BitOps.IsPow2((ushort)value);
     /// <inheritdoc cref="IsPowerOfTwo(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsPowerOfTwo(ref this ushort value) => BitOperations.IsPow2(value);
+    public static bool IsPowerOfTwo(ref this ushort value) => BitOps.IsPow2(value);
     /// <inheritdoc cref="IsPowerOfTwo(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsPowerOfTwo(ref this int value) => value > 0 && BitOperations.IsPow2((uint)value);
+    public static bool IsPowerOfTwo(ref this int value) => value > 0 && BitOps.IsPow2((uint)value);
     /// <inheritdoc cref="IsPowerOfTwo(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsPowerOfTwo(ref this uint value) => BitOperations.IsPow2(value);
+    public static bool IsPowerOfTwo(ref this uint value) => BitOps.IsPow2(value);
     /// <inheritdoc cref="IsPowerOfTwo(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsPowerOfTwo(ref this long value) => value > 0 && BitOperations.IsPow2((ulong)value);
+    public static bool IsPowerOfTwo(ref this long value) => value > 0 && BitOps.IsPow2((ulong)value);
     /// <inheritdoc cref="IsPowerOfTwo(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsPowerOfTwo(ref this ulong value) => BitOperations.IsPow2(value);
+    public static bool IsPowerOfTwo(ref this ulong value) => BitOps.IsPow2(value);
     #endregion
 
     #region RoundUpToPowerOf2
@@ -70,28 +78,28 @@ public static partial class BitUtilsExtensions
     /// </summary>
     /// <param name="value">Value to modify in place.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void RoundUpToPowerOf2(ref this sbyte value) => value = (sbyte)BitOperations.RoundUpToPowerOf2((byte)value);
+    public static void RoundUpToPowerOf2(ref this sbyte value) => value = (sbyte)BitOps.RoundUpToPowerOf2((byte)value);
     /// <inheritdoc cref="RoundUpToPowerOf2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void RoundUpToPowerOf2(ref this byte value) => value = (byte)BitOperations.RoundUpToPowerOf2(value);
+    public static void RoundUpToPowerOf2(ref this byte value) => value = (byte)BitOps.RoundUpToPowerOf2(value);
     /// <inheritdoc cref="RoundUpToPowerOf2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void RoundUpToPowerOf2(ref this short value) => value = (short)BitOperations.RoundUpToPowerOf2((ushort)value);
+    public static void RoundUpToPowerOf2(ref this short value) => value = (short)BitOps.RoundUpToPowerOf2((ushort)value);
     /// <inheritdoc cref="RoundUpToPowerOf2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void RoundUpToPowerOf2(ref this ushort value) => value = (ushort)BitOperations.RoundUpToPowerOf2(value);
+    public static void RoundUpToPowerOf2(ref this ushort value) => value = (ushort)BitOps.RoundUpToPowerOf2(value);
     /// <inheritdoc cref="RoundUpToPowerOf2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void RoundUpToPowerOf2(ref this int value) => value = (int)BitOperations.RoundUpToPowerOf2((uint)value);
+    public static void RoundUpToPowerOf2(ref this int value) => value = (int)BitOps.RoundUpToPowerOf2((uint)value);
     /// <inheritdoc cref="RoundUpToPowerOf2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void RoundUpToPowerOf2(ref this uint value) => value = BitOperations.RoundUpToPowerOf2(value);
+    public static void RoundUpToPowerOf2(ref this uint value) => value = BitOps.RoundUpToPowerOf2(value);
     /// <inheritdoc cref="RoundUpToPowerOf2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void RoundUpToPowerOf2(ref this long value) => value = (long)BitOperations.RoundUpToPowerOf2((ulong)value);
+    public static void RoundUpToPowerOf2(ref this long value) => value = (long)BitOps.RoundUpToPowerOf2((ulong)value);
     /// <inheritdoc cref="RoundUpToPowerOf2(ref sbyte)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static void RoundUpToPowerOf2(ref this ulong value) => value = BitOperations.RoundUpToPowerOf2(value);
+    public static void RoundUpToPowerOf2(ref this ulong value) => value = BitOps.RoundUpToPowerOf2(value);
     #endregion
 }
 

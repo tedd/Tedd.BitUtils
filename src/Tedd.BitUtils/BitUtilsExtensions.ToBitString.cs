@@ -18,15 +18,15 @@ public static partial class BitUtilsExtensions
     });
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int GetLength(ulong value) => value == 0 ? 1 : 64 - BitOperations.LeadingZeroCount(value);
+    private static int GetLength(ulong value) => value == 0 ? 1 : 64 - BitOps.LeadingZeroCount(value);
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int GetLength(uint value) => value == 0 ? 1 : 32 - BitOperations.LeadingZeroCount(value);
+    private static int GetLength(uint value) => value == 0 ? 1 : 32 - BitOps.LeadingZeroCount(value);
     // Note: value is widened to uint before counting, so LeadingZeroCount is always computed over 32 bits
     // regardless of the source type's width - subtract from 32 here too, not from 16/8.
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int GetLength(ushort value) => value == 0 ? 1 : 32 - BitOperations.LeadingZeroCount((uint)value);
+    private static int GetLength(ushort value) => value == 0 ? 1 : 32 - BitOps.LeadingZeroCount((uint)value);
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static int GetLength(byte value) => value == 0 ? 1 : 32 - BitOperations.LeadingZeroCount((uint)value);
+    private static int GetLength(byte value) => value == 0 ? 1 : 32 - BitOps.LeadingZeroCount((uint)value);
     #endregion
 
     #region ToBitStringPadded
