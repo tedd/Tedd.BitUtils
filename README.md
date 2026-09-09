@@ -59,6 +59,8 @@ Result is returned as a new value; the original variable is unchanged. Every in-
 
 ## Simple example of usage
 ```cs
+using Tedd;
+
 var a = 0;
 a.SetBit(0, true);
 // a == 1
@@ -77,6 +79,8 @@ a.Rol();
 ## Pack / Unpack
 Pack and Unpack copy a range of bits between two integers, similar to `Substring` but for bits. `offset` counts from the LSB (right) to the bit past the end of the field; `length` is the field's width.
 ```cs
+using Tedd;
+
 var i1 = 0b0000_1111_1100_0011;
 var i2 = 0b0000_0000_0000_0010;
 // Copies the 2 lowest bits of i2 into bit positions 3 and 4 of i1 (offset 5, length 2: field is [offset-length, offset-1]).
