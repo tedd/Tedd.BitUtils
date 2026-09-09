@@ -93,19 +93,20 @@ namespace Tedd.BitUtils.Tests.Copy
                 Assert.Equal(expected, actual);
             }
         }
-        [Fact]
-        public void TestUInt64()
+        [Theory]
+        [InlineData(0ul)]
+        [InlineData(1ul)]
+        [InlineData(ulong.MaxValue)]
+        [InlineData(0x00000000000000FFul)]
+        [InlineData(0xFF00000000000000ul)]
+        public void TestUInt64(UInt64 r)
         {
-            for (var i = 0; i < 100; i++)
-            {
-                var r = (Int64)rnd.Next() | (Int64)rnd.Next() << 32;
-                var expected = new string(Convert.ToString(r, 2).PadLeft(sizeof(UInt64) * 8, '0').Reverse().ToArray());
-                var o = r;
-                var n = r.ReverseBitsCopy();
-                Assert.Equal(o, r);
-                var actual = new string(Convert.ToString(n, 2).PadLeft(sizeof(UInt64) * 8, '0').ToArray());
-                Assert.Equal(expected, actual);
-            }
+            var expected = new string(Convert.ToString((long)r, 2).PadLeft(sizeof(UInt64) * 8, '0').Reverse().ToArray());
+            var o = r;
+            var n = r.ReverseBitsCopy();
+            Assert.Equal(o, r);
+            var actual = new string(Convert.ToString((long)n, 2).PadLeft(sizeof(UInt64) * 8, '0').ToArray());
+            Assert.Equal(expected, actual);
         }
     }
 }
