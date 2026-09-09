@@ -5,102 +5,95 @@ namespace Tedd.BitUtils.Tests.InPlace
 {
     public class ToBitStringTest
     {
-        [Fact]
-        public void TestByte()
+        [Theory]
+        [InlineData((byte)0)]
+        [InlineData((byte)1)]
+        [InlineData((byte)2)]
+        [InlineData(127)]
+        [InlineData(255)]
+        public void TestByte(byte value)
         {
-            var values = new Byte[] { 0, 1, 2, 127, Byte.MaxValue };
-
-            for (var i = 0; i < values.Length; i++)
-            {
-                var value = values[i];
-                var actual = value.ToBitString();
-                var expected = Convert.ToString(value, 2);
-                Assert.Equal(expected, actual);
-            }
+            var actual = value.ToBitString();
+            var expected = Convert.ToString(value, 2);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void TestInt16()
+        [Theory]
+        [InlineData((Int16)0)]
+        [InlineData((Int16)1)]
+        [InlineData((Int16)(-1))]
+        [InlineData(Int16.MinValue)]
+        [InlineData(Int16.MaxValue)]
+        public void TestInt16(Int16 value)
         {
-            var values = new Int16[] { 0, 1, -1, Int16.MinValue, Int16.MaxValue };
-
-            for (var i = 0; i < values.Length; i++)
-            {
-                var value = values[i];
-                var actual = value.ToBitString();
-                var expected = Convert.ToString((UInt32)value & 0xFFFF, 2);
-                Assert.Equal(expected, actual);
-            }
+            var actual = value.ToBitString();
+            var expected = Convert.ToString((UInt32)value & 0xFFFF, 2);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void TestUInt16()
+        [Theory]
+        [InlineData((UInt16)0)]
+        [InlineData((UInt16)1)]
+        [InlineData((UInt16)2)]
+        [InlineData(32768)]
+        [InlineData(UInt16.MaxValue)]
+        public void TestUInt16(UInt16 value)
         {
-            var values = new UInt16[] { 0, 1, 2, 32768, UInt16.MaxValue };
-
-            for (var i = 0; i < values.Length; i++)
-            {
-                var value = values[i];
-                var actual = value.ToBitString();
-                var expected = Convert.ToString((UInt32)value, 2);
-                Assert.Equal(expected, actual);
-            }
+            var actual = value.ToBitString();
+            var expected = Convert.ToString((UInt32)value, 2);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void TestInt32()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(-1)]
+        [InlineData(Int32.MinValue)]
+        [InlineData(Int32.MaxValue)]
+        public void TestInt32(Int32 value)
         {
-            var values = new Int32[] { 0, 1, -1, Int32.MinValue, Int32.MaxValue };
-
-            for (var i = 0; i < values.Length; i++)
-            {
-                var value = values[i];
-                var actual = value.ToBitString();
-                var expected = Convert.ToString(value, 2);
-                Assert.Equal(expected, actual);
-            }
+            var actual = value.ToBitString();
+            var expected = Convert.ToString(value, 2);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void TestUInt32()
+        [Theory]
+        [InlineData(0u)]
+        [InlineData(1u)]
+        [InlineData(2u)]
+        [InlineData(0x80000000u)]
+        [InlineData(UInt32.MaxValue)]
+        public void TestUInt32(UInt32 value)
         {
-            var values = new UInt32[] { 0, 1, 2, 0x80000000, UInt32.MaxValue };
-
-            for (var i = 0; i < values.Length; i++)
-            {
-                var value = values[i];
-                var actual = value.ToBitString();
-                var expected = Convert.ToString((Int32)value, 2);
-                Assert.Equal(expected, actual);
-            }
+            var actual = value.ToBitString();
+            var expected = Convert.ToString((Int32)value, 2);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void TestInt64()
+        [Theory]
+        [InlineData(0L)]
+        [InlineData(1L)]
+        [InlineData(-1L)]
+        [InlineData(Int64.MinValue)]
+        [InlineData(Int64.MaxValue)]
+        public void TestInt64(Int64 value)
         {
-            var values = new Int64[] { 0, 1, -1, Int64.MinValue, Int64.MaxValue };
-
-            for (var i = 0; i < values.Length; i++)
-            {
-                var value = values[i];
-                var actual = value.ToBitString();
-                var expected = Convert.ToString(value, 2);
-                Assert.Equal(expected, actual);
-            }
+            var actual = value.ToBitString();
+            var expected = Convert.ToString(value, 2);
+            Assert.Equal(expected, actual);
         }
 
-        [Fact]
-        public void TestUInt64()
+        [Theory]
+        [InlineData(0ul)]
+        [InlineData(1ul)]
+        [InlineData(2ul)]
+        [InlineData(0x8000000000000000ul)]
+        [InlineData(UInt64.MaxValue)]
+        public void TestUInt64(UInt64 value)
         {
-            var values = new UInt64[] { 0, 1, 2, 0x8000000000000000, UInt64.MaxValue };
-
-            for (var i = 0; i < values.Length; i++)
-            {
-                var value = values[i];
-                var actual = value.ToBitString();
-                var expected = Convert.ToString((Int64)value, 2);
-                Assert.Equal(expected, actual);
-            }
+            var actual = value.ToBitString();
+            var expected = Convert.ToString((long)value, 2);
+            Assert.Equal(expected, actual);
         }
     }
 }
