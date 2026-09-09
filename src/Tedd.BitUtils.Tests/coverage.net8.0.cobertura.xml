@@ -1,0 +1,2006 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0.21420000000000003" branch-rate="0" version="1.9" timestamp="1785977205" lines-covered="96" lines-valid="448" branches-covered="0" branches-valid="86">
+  <sources>
+    <source>/app/src/Tedd.BitUtils/</source>
+  </sources>
+  <packages>
+    <package name="Tedd.BitUtils" line-rate="0.21420000000000003" branch-rate="0" complexity="233">
+      <classes>
+        <class name="Tedd.BitUtilsCopyExtensions" filename="BitUtilsCopyExtensions.cs" line-rate="0.3815" branch-rate="0" complexity="51">
+          <methods>
+            <method name="RolCopy" signature="(System.Int32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RolCopy" signature="(System.UInt32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RolCopy" signature="(System.Int64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RolCopy" signature="(System.UInt64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RorCopy" signature="(System.Int32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RorCopy" signature="(System.UInt32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="34" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RorCopy" signature="(System.Int64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="37" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RorCopy" signature="(System.UInt64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="40" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RolCopy" signature="(System.Int32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="47" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RolCopy" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="50" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RolCopy" signature="(System.Int64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="53" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RolCopy" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="56" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RorCopy" signature="(System.Int32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="63" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RorCopy" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="66" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RorCopy" signature="(System.Int64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="69" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="RorCopy" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="72" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBitCopy" signature="(System.Byte&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="79" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="1" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="SetBitCopy" signature="(System.Int16&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="82" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="1" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="SetBitCopy" signature="(System.UInt16&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="86" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="1" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="87" hits="0" branch="False" />
+                <line number="88" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBitCopy" signature="(System.Int32&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="92" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="1" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="93" hits="0" branch="False" />
+                <line number="94" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBitCopy" signature="(System.UInt32&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="98" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="1" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="99" hits="0" branch="False" />
+                <line number="100" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBitCopy" signature="(System.Int64&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="104" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="1" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="105" hits="0" branch="False" />
+                <line number="106" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBitCopy" signature="(System.UInt64&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="110" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="1" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="111" hits="0" branch="False" />
+                <line number="112" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0Copy" signature="(System.Byte&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="119" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0Copy" signature="(System.Int16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="122" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0Copy" signature="(System.UInt16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="125" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0Copy" signature="(System.Int32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="128" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0Copy" signature="(System.UInt32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="131" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0Copy" signature="(System.Int64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="134" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0Copy" signature="(System.UInt64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="137" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1Copy" signature="(System.Byte&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="145" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1Copy" signature="(System.Int16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="148" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1Copy" signature="(System.UInt16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="151" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1Copy" signature="(System.Int32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="154" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1Copy" signature="(System.UInt32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="157" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1Copy" signature="(System.Int64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="160" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1Copy" signature="(System.UInt64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="163" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBitsCopy" signature="(System.Byte&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="170" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBitsCopy" signature="(System.Int16&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="172" hits="7" branch="False" />
+                <line number="173" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBitsCopy" signature="(System.UInt16&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="175" hits="5" branch="False" />
+                <line number="176" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBitsCopy" signature="(System.Int32&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="178" hits="7" branch="False" />
+                <line number="179" hits="7" branch="False" />
+                <line number="180" hits="7" branch="False" />
+                <line number="181" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBitsCopy" signature="(System.UInt32&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="183" hits="5" branch="False" />
+                <line number="184" hits="5" branch="False" />
+                <line number="185" hits="5" branch="False" />
+                <line number="186" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBitsCopy" signature="(System.Int64&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="188" hits="7" branch="False" />
+                <line number="189" hits="7" branch="False" />
+                <line number="190" hits="7" branch="False" />
+                <line number="191" hits="7" branch="False" />
+                <line number="192" hits="7" branch="False" />
+                <line number="193" hits="7" branch="False" />
+                <line number="194" hits="7" branch="False" />
+                <line number="195" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBitsCopy" signature="(System.UInt64&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="198" hits="5" branch="False" />
+                <line number="199" hits="5" branch="False" />
+                <line number="200" hits="5" branch="False" />
+                <line number="201" hits="5" branch="False" />
+                <line number="202" hits="5" branch="False" />
+                <line number="203" hits="5" branch="False" />
+                <line number="204" hits="5" branch="False" />
+                <line number="205" hits="5" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="15" hits="0" branch="False" />
+            <line number="18" hits="0" branch="False" />
+            <line number="21" hits="0" branch="False" />
+            <line number="24" hits="0" branch="False" />
+            <line number="31" hits="0" branch="False" />
+            <line number="34" hits="0" branch="False" />
+            <line number="37" hits="0" branch="False" />
+            <line number="40" hits="0" branch="False" />
+            <line number="47" hits="0" branch="False" />
+            <line number="50" hits="0" branch="False" />
+            <line number="53" hits="0" branch="False" />
+            <line number="56" hits="0" branch="False" />
+            <line number="63" hits="0" branch="False" />
+            <line number="66" hits="0" branch="False" />
+            <line number="69" hits="0" branch="False" />
+            <line number="72" hits="0" branch="False" />
+            <line number="79" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="1" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="82" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="1" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="86" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="1" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="87" hits="0" branch="False" />
+            <line number="88" hits="0" branch="False" />
+            <line number="92" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="1" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="93" hits="0" branch="False" />
+            <line number="94" hits="0" branch="False" />
+            <line number="98" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="1" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="99" hits="0" branch="False" />
+            <line number="100" hits="0" branch="False" />
+            <line number="104" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="1" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="105" hits="0" branch="False" />
+            <line number="106" hits="0" branch="False" />
+            <line number="110" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="1" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="111" hits="0" branch="False" />
+            <line number="112" hits="0" branch="False" />
+            <line number="119" hits="0" branch="False" />
+            <line number="122" hits="0" branch="False" />
+            <line number="125" hits="0" branch="False" />
+            <line number="128" hits="0" branch="False" />
+            <line number="131" hits="0" branch="False" />
+            <line number="134" hits="0" branch="False" />
+            <line number="137" hits="0" branch="False" />
+            <line number="145" hits="0" branch="False" />
+            <line number="148" hits="0" branch="False" />
+            <line number="151" hits="0" branch="False" />
+            <line number="154" hits="0" branch="False" />
+            <line number="157" hits="0" branch="False" />
+            <line number="160" hits="0" branch="False" />
+            <line number="163" hits="0" branch="False" />
+            <line number="170" hits="5" branch="False" />
+            <line number="172" hits="7" branch="False" />
+            <line number="173" hits="7" branch="False" />
+            <line number="175" hits="5" branch="False" />
+            <line number="176" hits="5" branch="False" />
+            <line number="178" hits="7" branch="False" />
+            <line number="179" hits="7" branch="False" />
+            <line number="180" hits="7" branch="False" />
+            <line number="181" hits="7" branch="False" />
+            <line number="183" hits="5" branch="False" />
+            <line number="184" hits="5" branch="False" />
+            <line number="185" hits="5" branch="False" />
+            <line number="186" hits="5" branch="False" />
+            <line number="188" hits="7" branch="False" />
+            <line number="189" hits="7" branch="False" />
+            <line number="190" hits="7" branch="False" />
+            <line number="191" hits="7" branch="False" />
+            <line number="192" hits="7" branch="False" />
+            <line number="193" hits="7" branch="False" />
+            <line number="194" hits="7" branch="False" />
+            <line number="195" hits="7" branch="False" />
+            <line number="198" hits="5" branch="False" />
+            <line number="199" hits="5" branch="False" />
+            <line number="200" hits="5" branch="False" />
+            <line number="201" hits="5" branch="False" />
+            <line number="202" hits="5" branch="False" />
+            <line number="203" hits="5" branch="False" />
+            <line number="204" hits="5" branch="False" />
+            <line number="205" hits="5" branch="False" />
+          </lines>
+        </class>
+        <class name="Tedd.BitUtilsEndinanessExtensions" filename="BitUtilsEndinanessExtensions.cs" line-rate="0" branch-rate="1" complexity="22">
+          <methods>
+            <method name="ReverseEndianness" signature="(System.SByte&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndianness" signature="(System.Byte&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndianness" signature="(System.Int16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="32" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndianness" signature="(System.UInt16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="43" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndianness" signature="(System.Int32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="53" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndianness" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="64" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndianness" signature="(System.Int64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="75" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndianness" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="85" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessCopy" signature="(System.SByte&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="99" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessCopy" signature="(System.Byte&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="105" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessCopy" signature="(System.Int16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="115" hits="0" branch="False" />
+                <line number="116" hits="0" branch="False" />
+                <line number="117" hits="0" branch="False" />
+                <line number="118" hits="0" branch="False" />
+                <line number="119" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessCopy" signature="(System.UInt16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="130" hits="0" branch="False" />
+                <line number="131" hits="0" branch="False" />
+                <line number="132" hits="0" branch="False" />
+                <line number="133" hits="0" branch="False" />
+                <line number="134" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessCopy" signature="(System.Int32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="145" hits="0" branch="False" />
+                <line number="146" hits="0" branch="False" />
+                <line number="147" hits="0" branch="False" />
+                <line number="148" hits="0" branch="False" />
+                <line number="149" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessCopy" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="160" hits="0" branch="False" />
+                <line number="161" hits="0" branch="False" />
+                <line number="162" hits="0" branch="False" />
+                <line number="163" hits="0" branch="False" />
+                <line number="164" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessCopy" signature="(System.Int64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="175" hits="0" branch="False" />
+                <line number="176" hits="0" branch="False" />
+                <line number="177" hits="0" branch="False" />
+                <line number="178" hits="0" branch="False" />
+                <line number="179" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessCopy" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="190" hits="0" branch="False" />
+                <line number="191" hits="0" branch="False" />
+                <line number="192" hits="0" branch="False" />
+                <line number="193" hits="0" branch="False" />
+                <line number="194" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessSoftwareFallback" signature="(System.Int16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="208" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessSoftwareFallback" signature="(System.UInt16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="218" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessSoftwareFallback" signature="(System.Int32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="222" hits="0" branch="False" />
+                <line number="243" hits="0" branch="False" />
+                <line number="244" hits="0" branch="False" />
+                <line number="245" hits="0" branch="False" />
+                <line number="246" hits="0" branch="False" />
+                <line number="247" hits="0" branch="False" />
+                <line number="248" hits="0" branch="False" />
+                <line number="249" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessSoftwareFallback" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="253" hits="0" branch="False" />
+                <line number="274" hits="0" branch="False" />
+                <line number="275" hits="0" branch="False" />
+                <line number="276" hits="0" branch="False" />
+                <line number="277" hits="0" branch="False" />
+                <line number="278" hits="0" branch="False" />
+                <line number="279" hits="0" branch="False" />
+                <line number="280" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessSoftwareFallback" signature="(System.Int64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="284" hits="0" branch="False" />
+                <line number="287" hits="0" branch="False" />
+                <line number="288" hits="0" branch="False" />
+                <line number="289" hits="0" branch="False" />
+                <line number="290" hits="0" branch="False" />
+                <line number="291" hits="0" branch="False" />
+                <line number="292" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseEndiannessSoftwareFallback" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="296" hits="0" branch="False" />
+                <line number="299" hits="0" branch="False" />
+                <line number="300" hits="0" branch="False" />
+                <line number="301" hits="0" branch="False" />
+                <line number="302" hits="0" branch="False" />
+                <line number="303" hits="0" branch="False" />
+                <line number="304" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="17" hits="0" branch="False" />
+            <line number="23" hits="0" branch="False" />
+            <line number="32" hits="0" branch="False" />
+            <line number="43" hits="0" branch="False" />
+            <line number="53" hits="0" branch="False" />
+            <line number="64" hits="0" branch="False" />
+            <line number="75" hits="0" branch="False" />
+            <line number="85" hits="0" branch="False" />
+            <line number="99" hits="0" branch="False" />
+            <line number="105" hits="0" branch="False" />
+            <line number="115" hits="0" branch="False" />
+            <line number="116" hits="0" branch="False" />
+            <line number="117" hits="0" branch="False" />
+            <line number="118" hits="0" branch="False" />
+            <line number="119" hits="0" branch="False" />
+            <line number="130" hits="0" branch="False" />
+            <line number="131" hits="0" branch="False" />
+            <line number="132" hits="0" branch="False" />
+            <line number="133" hits="0" branch="False" />
+            <line number="134" hits="0" branch="False" />
+            <line number="145" hits="0" branch="False" />
+            <line number="146" hits="0" branch="False" />
+            <line number="147" hits="0" branch="False" />
+            <line number="148" hits="0" branch="False" />
+            <line number="149" hits="0" branch="False" />
+            <line number="160" hits="0" branch="False" />
+            <line number="161" hits="0" branch="False" />
+            <line number="162" hits="0" branch="False" />
+            <line number="163" hits="0" branch="False" />
+            <line number="164" hits="0" branch="False" />
+            <line number="175" hits="0" branch="False" />
+            <line number="176" hits="0" branch="False" />
+            <line number="177" hits="0" branch="False" />
+            <line number="178" hits="0" branch="False" />
+            <line number="179" hits="0" branch="False" />
+            <line number="190" hits="0" branch="False" />
+            <line number="191" hits="0" branch="False" />
+            <line number="192" hits="0" branch="False" />
+            <line number="193" hits="0" branch="False" />
+            <line number="194" hits="0" branch="False" />
+            <line number="208" hits="0" branch="False" />
+            <line number="218" hits="0" branch="False" />
+            <line number="222" hits="0" branch="False" />
+            <line number="243" hits="0" branch="False" />
+            <line number="244" hits="0" branch="False" />
+            <line number="245" hits="0" branch="False" />
+            <line number="246" hits="0" branch="False" />
+            <line number="247" hits="0" branch="False" />
+            <line number="248" hits="0" branch="False" />
+            <line number="249" hits="0" branch="False" />
+            <line number="253" hits="0" branch="False" />
+            <line number="274" hits="0" branch="False" />
+            <line number="275" hits="0" branch="False" />
+            <line number="276" hits="0" branch="False" />
+            <line number="277" hits="0" branch="False" />
+            <line number="278" hits="0" branch="False" />
+            <line number="279" hits="0" branch="False" />
+            <line number="280" hits="0" branch="False" />
+            <line number="284" hits="0" branch="False" />
+            <line number="287" hits="0" branch="False" />
+            <line number="288" hits="0" branch="False" />
+            <line number="289" hits="0" branch="False" />
+            <line number="290" hits="0" branch="False" />
+            <line number="291" hits="0" branch="False" />
+            <line number="292" hits="0" branch="False" />
+            <line number="296" hits="0" branch="False" />
+            <line number="299" hits="0" branch="False" />
+            <line number="300" hits="0" branch="False" />
+            <line number="301" hits="0" branch="False" />
+            <line number="302" hits="0" branch="False" />
+            <line number="303" hits="0" branch="False" />
+            <line number="304" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Tedd.BitUtilsExtensions" filename="BitUtilsExtensions.cs" line-rate="0.22329999999999997" branch-rate="0" complexity="160">
+          <methods>
+            <method name="Rol" signature="(System.Int32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Rol" signature="(System.UInt32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Rol" signature="(System.Int64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Rol" signature="(System.UInt64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Ror" signature="(System.Int32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="25" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Ror" signature="(System.UInt32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="27" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Ror" signature="(System.Int64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="29" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Ror" signature="(System.UInt64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="31" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Rol" signature="(System.Int32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="36" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Rol" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="38" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Rol" signature="(System.Int64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="40" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Rol" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="42" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Ror" signature="(System.Int32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="47" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Ror" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="49" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Ror" signature="(System.Int64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="51" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Ror" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="53" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit" signature="(System.Byte&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="58" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="2" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="SetBit" signature="(System.Int16&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="60" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="2" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="SetBit" signature="(System.UInt16&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="62" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="2" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="SetBit" signature="(System.Int32&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="64" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="2" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="SetBit" signature="(System.UInt32&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="66" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="2" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="SetBit" signature="(System.Int64&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="68" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="2" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="SetBit" signature="(System.UInt64&amp;,System.Int32,System.Boolean)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="70" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="2" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="SetBit0" signature="(System.Byte&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="75" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0" signature="(System.Int16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="77" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0" signature="(System.UInt16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="79" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0" signature="(System.Int32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="81" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0" signature="(System.UInt32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="83" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0" signature="(System.Int64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="85" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit0" signature="(System.UInt64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="87" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1" signature="(System.Byte&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="93" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1" signature="(System.Int16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="95" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1" signature="(System.UInt16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="97" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1" signature="(System.Int32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="99" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1" signature="(System.UInt32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="101" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1" signature="(System.Int64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="103" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="SetBit1" signature="(System.UInt64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="105" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="IsBitSet" signature="(System.Byte&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="111" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="IsBitSet" signature="(System.Int16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="113" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="IsBitSet" signature="(System.UInt16&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="115" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="IsBitSet" signature="(System.Int32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="117" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="IsBitSet" signature="(System.UInt32&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="119" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="IsBitSet" signature="(System.Int64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="121" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="IsBitSet" signature="(System.UInt64&amp;,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="123" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_BitReverseLookup" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="129" hits="346" branch="False" />
+                <line number="130" hits="346" branch="False" />
+                <line number="131" hits="346" branch="False" />
+                <line number="132" hits="346" branch="False" />
+                <line number="133" hits="346" branch="False" />
+                <line number="134" hits="346" branch="False" />
+                <line number="135" hits="346" branch="False" />
+                <line number="136" hits="346" branch="False" />
+                <line number="137" hits="346" branch="False" />
+                <line number="138" hits="346" branch="False" />
+                <line number="139" hits="346" branch="False" />
+                <line number="140" hits="346" branch="False" />
+                <line number="141" hits="346" branch="False" />
+                <line number="142" hits="346" branch="False" />
+                <line number="143" hits="346" branch="False" />
+                <line number="144" hits="346" branch="False" />
+                <line number="145" hits="346" branch="False" />
+                <line number="146" hits="346" branch="False" />
+                <line number="147" hits="346" branch="False" />
+                <line number="148" hits="346" branch="False" />
+                <line number="149" hits="346" branch="False" />
+                <line number="150" hits="346" branch="False" />
+                <line number="151" hits="346" branch="False" />
+                <line number="152" hits="346" branch="False" />
+                <line number="153" hits="346" branch="False" />
+                <line number="154" hits="346" branch="False" />
+                <line number="155" hits="346" branch="False" />
+                <line number="156" hits="346" branch="False" />
+                <line number="157" hits="346" branch="False" />
+                <line number="158" hits="346" branch="False" />
+                <line number="159" hits="346" branch="False" />
+                <line number="160" hits="346" branch="False" />
+                <line number="161" hits="346" branch="False" />
+                <line number="162" hits="346" branch="False" />
+                <line number="163" hits="346" branch="False" />
+                <line number="164" hits="346" branch="False" />
+                <line number="165" hits="346" branch="False" />
+                <line number="166" hits="346" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBits" signature="(System.Byte&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="170" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBits" signature="(System.Int16&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="172" hits="7" branch="False" />
+                <line number="173" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBits" signature="(System.UInt16&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="175" hits="5" branch="False" />
+                <line number="176" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBits" signature="(System.Int32&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="178" hits="7" branch="False" />
+                <line number="179" hits="7" branch="False" />
+                <line number="180" hits="7" branch="False" />
+                <line number="181" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBits" signature="(System.UInt32&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="183" hits="5" branch="False" />
+                <line number="184" hits="5" branch="False" />
+                <line number="185" hits="5" branch="False" />
+                <line number="186" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBits" signature="(System.Int64&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="188" hits="7" branch="False" />
+                <line number="189" hits="7" branch="False" />
+                <line number="190" hits="7" branch="False" />
+                <line number="191" hits="7" branch="False" />
+                <line number="192" hits="7" branch="False" />
+                <line number="193" hits="7" branch="False" />
+                <line number="194" hits="7" branch="False" />
+                <line number="195" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="ReverseBits" signature="(System.UInt64&amp;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="198" hits="5" branch="False" />
+                <line number="199" hits="5" branch="False" />
+                <line number="200" hits="5" branch="False" />
+                <line number="201" hits="5" branch="False" />
+                <line number="202" hits="5" branch="False" />
+                <line number="203" hits="5" branch="False" />
+                <line number="204" hits="5" branch="False" />
+                <line number="205" hits="5" branch="False" />
+              </lines>
+            </method>
+            <method name="PopCntSoftwareFallback" signature="(System.UInt32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="212" hits="0" branch="False" />
+                <line number="218" hits="0" branch="False" />
+                <line number="219" hits="0" branch="False" />
+                <line number="220" hits="0" branch="False" />
+                <line number="222" hits="0" branch="False" />
+                <line number="223" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PopCntSoftwareFallback" signature="(System.UInt64)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="226" hits="0" branch="False" />
+                <line number="232" hits="0" branch="False" />
+                <line number="233" hits="0" branch="False" />
+                <line number="234" hits="0" branch="False" />
+                <line number="236" hits="0" branch="False" />
+                <line number="237" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PopCount" signature="(System.Byte&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="242" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="PopCount" signature="(System.Int16&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="244" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="PopCount" signature="(System.UInt16&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="246" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="PopCount" signature="(System.Int32&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="248" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="PopCount" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="250" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="PopCount" signature="(System.Int64&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="252" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="PopCount" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="254" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="LzCntSoftwareFallback" signature="(System.Byte)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="278" hits="0" branch="False" />
+                <line number="280" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="281" hits="0" branch="False" />
+                <line number="283" hits="0" branch="False" />
+                <line number="284" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="LzCntSoftwareFallback" signature="(System.UInt16)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="287" hits="0" branch="False" />
+                <line number="289" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="290" hits="0" branch="False" />
+                <line number="292" hits="0" branch="False" />
+                <line number="293" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="LzCntSoftwareFallback" signature="(System.UInt32)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="296" hits="0" branch="False" />
+                <line number="298" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="299" hits="0" branch="False" />
+                <line number="301" hits="0" branch="False" />
+                <line number="302" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="LzCntSoftwareFallback" signature="(System.UInt64)" line-rate="0" branch-rate="0" complexity="4">
+              <lines>
+                <line number="306" hits="0" branch="False" />
+                <line number="308" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="8" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="309" hits="0" branch="False" />
+                <line number="311" hits="0" branch="False" />
+                <line number="312" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="32" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="313" hits="0" branch="False" />
+                <line number="315" hits="0" branch="False" />
+                <line number="317" hits="0" branch="False" />
+                <line number="318" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="LeadingZeroCount" signature="(System.Byte&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="323" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="LeadingZeroCount" signature="(System.Int16&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="325" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="LeadingZeroCount" signature="(System.UInt16&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="327" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="LeadingZeroCount" signature="(System.Int32&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="329" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="LeadingZeroCount" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="331" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="LeadingZeroCount" signature="(System.Int64&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="333" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="LeadingZeroCount" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="335" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="5" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+              </lines>
+            </method>
+            <method name="get_Log2DeBruijn" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="358" hits="0" branch="False" />
+                <line number="359" hits="0" branch="False" />
+                <line number="360" hits="0" branch="False" />
+                <line number="361" hits="0" branch="False" />
+                <line number="362" hits="0" branch="False" />
+                <line number="363" hits="0" branch="False" />
+                <line number="364" hits="0" branch="False" />
+                <line number="365" hits="0" branch="False" />
+                <line number="366" hits="0" branch="False" />
+                <line number="367" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Log2SoftwareFallback" signature="(System.UInt32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="369" hits="0" branch="False" />
+                <line number="374" hits="0" branch="False" />
+                <line number="375" hits="0" branch="False" />
+                <line number="376" hits="0" branch="False" />
+                <line number="377" hits="0" branch="False" />
+                <line number="378" hits="0" branch="False" />
+                <line number="382" hits="0" branch="False" />
+                <line number="383" hits="0" branch="False" />
+                <line number="384" hits="0" branch="False" />
+                <line number="385" hits="0" branch="False" />
+                <line number="386" hits="0" branch="False" />
+                <line number="390" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="CreateBitString" signature="(System.UInt64,System.Int32)" line-rate="0" branch-rate="0" complexity="4">
+              <lines>
+                <line number="404" hits="0" branch="False" />
+                <line number="405" hits="0" branch="False" />
+                <line number="406" hits="0" branch="False" />
+                <line number="407" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="56" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="408" hits="0" branch="False" />
+                <line number="409" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="28" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="410" hits="0" branch="False" />
+                <line number="411" hits="0" branch="False" />
+                <line number="412" hits="0" branch="False" />
+                <line number="413" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="GetLength" signature="(System.UInt64)" line-rate="0" branch-rate="0" complexity="4">
+              <lines>
+                <line number="430" hits="0" branch="False" />
+                <line number="431" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="8" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="432" hits="0" branch="False" />
+                <line number="433" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="27" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="434" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="GetLength" signature="(System.UInt32)" line-rate="0" branch-rate="0" complexity="4">
+              <lines>
+                <line number="438" hits="0" branch="False" />
+                <line number="439" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="440" hits="0" branch="False" />
+                <line number="441" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="26" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="442" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="GetLength" signature="(System.Byte)" line-rate="0" branch-rate="0" complexity="4">
+              <lines>
+                <line number="446" hits="0" branch="False" />
+                <line number="447" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="448" hits="0" branch="False" />
+                <line number="449" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="25" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="450" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="GetLength" signature="(System.UInt16)" line-rate="0" branch-rate="0" complexity="4">
+              <lines>
+                <line number="454" hits="0" branch="False" />
+                <line number="455" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="7" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="456" hits="0" branch="False" />
+                <line number="457" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="26" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="458" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitStringPadded" signature="(System.Byte&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="464" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitStringPadded" signature="(System.SByte&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="467" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitStringPadded" signature="(System.Int16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="470" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitStringPadded" signature="(System.UInt16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="473" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitStringPadded" signature="(System.Int32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="476" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitStringPadded" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="479" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitStringPadded" signature="(System.Int64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="482" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitStringPadded" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="485" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitString" signature="(System.Byte&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="491" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitString" signature="(System.Int16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="494" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitString" signature="(System.UInt16&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="497" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitString" signature="(System.Int32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="500" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitString" signature="(System.UInt32&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="503" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitString" signature="(System.Int64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="506" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="ToBitString" signature="(System.UInt64&amp;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="509" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Pack" signature="(System.SByte&amp;,System.Int32,System.Int32,System.SByte)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="523" hits="0" branch="False" />
+                <line number="525" hits="0" branch="False" />
+                <line number="527" hits="0" branch="False" />
+                <line number="528" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Pack" signature="(System.Byte&amp;,System.Int32,System.Int32,System.Byte)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="539" hits="0" branch="False" />
+                <line number="541" hits="0" branch="False" />
+                <line number="543" hits="0" branch="False" />
+                <line number="544" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Pack" signature="(System.UInt16&amp;,System.Int32,System.Int32,System.UInt16)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="555" hits="0" branch="False" />
+                <line number="557" hits="0" branch="False" />
+                <line number="559" hits="0" branch="False" />
+                <line number="560" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Pack" signature="(System.Int16&amp;,System.Int32,System.Int32,System.Int16)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="571" hits="0" branch="False" />
+                <line number="573" hits="0" branch="False" />
+                <line number="575" hits="0" branch="False" />
+                <line number="576" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Pack" signature="(System.UInt32&amp;,System.Int32,System.Int32,System.UInt32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="587" hits="0" branch="False" />
+                <line number="589" hits="0" branch="False" />
+                <line number="591" hits="0" branch="False" />
+                <line number="592" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Pack" signature="(System.Int32&amp;,System.Int32,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="603" hits="0" branch="False" />
+                <line number="605" hits="0" branch="False" />
+                <line number="607" hits="0" branch="False" />
+                <line number="608" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Pack" signature="(System.UInt64&amp;,System.Int32,System.Int32,System.UInt64)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="619" hits="0" branch="False" />
+                <line number="621" hits="0" branch="False" />
+                <line number="623" hits="0" branch="False" />
+                <line number="624" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Pack" signature="(System.Int64&amp;,System.Int32,System.Int32,System.Int64)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="635" hits="0" branch="False" />
+                <line number="637" hits="0" branch="False" />
+                <line number="639" hits="0" branch="False" />
+                <line number="640" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PackCopy" signature="(System.SByte,System.Int32,System.Int32,System.SByte)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="653" hits="0" branch="False" />
+                <line number="655" hits="0" branch="False" />
+                <line number="657" hits="0" branch="False" />
+                <line number="658" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PackCopy" signature="(System.Byte,System.Int32,System.Int32,System.Byte)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="670" hits="0" branch="False" />
+                <line number="672" hits="0" branch="False" />
+                <line number="674" hits="0" branch="False" />
+                <line number="675" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PackCopy" signature="(System.UInt16,System.Int32,System.Int32,System.UInt16)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="687" hits="0" branch="False" />
+                <line number="689" hits="0" branch="False" />
+                <line number="691" hits="0" branch="False" />
+                <line number="692" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PackCopy" signature="(System.Int16,System.Int32,System.Int32,System.Int16)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="704" hits="0" branch="False" />
+                <line number="706" hits="0" branch="False" />
+                <line number="708" hits="0" branch="False" />
+                <line number="709" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PackCopy" signature="(System.UInt32,System.Int32,System.Int32,System.UInt32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="721" hits="0" branch="False" />
+                <line number="723" hits="0" branch="False" />
+                <line number="725" hits="0" branch="False" />
+                <line number="726" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PackCopy" signature="(System.Int32,System.Int32,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="738" hits="0" branch="False" />
+                <line number="740" hits="0" branch="False" />
+                <line number="742" hits="0" branch="False" />
+                <line number="743" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PackCopy" signature="(System.UInt64,System.Int32,System.Int32,System.UInt64)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="755" hits="0" branch="False" />
+                <line number="757" hits="0" branch="False" />
+                <line number="759" hits="0" branch="False" />
+                <line number="760" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="PackCopy" signature="(System.Int64,System.Int32,System.Int32,System.Int64)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="772" hits="0" branch="False" />
+                <line number="774" hits="0" branch="False" />
+                <line number="776" hits="0" branch="False" />
+                <line number="777" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Unpack" signature="(System.SByte&amp;,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="792" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Unpack" signature="(System.Byte&amp;,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="803" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Unpack" signature="(System.UInt16&amp;,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="814" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Unpack" signature="(System.Int16&amp;,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="825" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Unpack" signature="(System.UInt32&amp;,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="836" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Unpack" signature="(System.Int32&amp;,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="847" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Unpack" signature="(System.UInt64&amp;,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="858" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="Unpack" signature="(System.Int64&amp;,System.Int32,System.Int32)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="869" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="15" hits="0" branch="False" />
+            <line number="17" hits="0" branch="False" />
+            <line number="19" hits="0" branch="False" />
+            <line number="21" hits="0" branch="False" />
+            <line number="25" hits="0" branch="False" />
+            <line number="27" hits="0" branch="False" />
+            <line number="29" hits="0" branch="False" />
+            <line number="31" hits="0" branch="False" />
+            <line number="36" hits="0" branch="False" />
+            <line number="38" hits="0" branch="False" />
+            <line number="40" hits="0" branch="False" />
+            <line number="42" hits="0" branch="False" />
+            <line number="47" hits="0" branch="False" />
+            <line number="49" hits="0" branch="False" />
+            <line number="51" hits="0" branch="False" />
+            <line number="53" hits="0" branch="False" />
+            <line number="58" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="2" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="60" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="2" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="62" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="2" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="64" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="2" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="66" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="2" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="68" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="2" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="70" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="2" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="75" hits="0" branch="False" />
+            <line number="77" hits="0" branch="False" />
+            <line number="79" hits="0" branch="False" />
+            <line number="81" hits="0" branch="False" />
+            <line number="83" hits="0" branch="False" />
+            <line number="85" hits="0" branch="False" />
+            <line number="87" hits="0" branch="False" />
+            <line number="93" hits="0" branch="False" />
+            <line number="95" hits="0" branch="False" />
+            <line number="97" hits="0" branch="False" />
+            <line number="99" hits="0" branch="False" />
+            <line number="101" hits="0" branch="False" />
+            <line number="103" hits="0" branch="False" />
+            <line number="105" hits="0" branch="False" />
+            <line number="111" hits="0" branch="False" />
+            <line number="113" hits="0" branch="False" />
+            <line number="115" hits="0" branch="False" />
+            <line number="117" hits="0" branch="False" />
+            <line number="119" hits="0" branch="False" />
+            <line number="121" hits="0" branch="False" />
+            <line number="123" hits="0" branch="False" />
+            <line number="129" hits="346" branch="False" />
+            <line number="130" hits="346" branch="False" />
+            <line number="131" hits="346" branch="False" />
+            <line number="132" hits="346" branch="False" />
+            <line number="133" hits="346" branch="False" />
+            <line number="134" hits="346" branch="False" />
+            <line number="135" hits="346" branch="False" />
+            <line number="136" hits="346" branch="False" />
+            <line number="137" hits="346" branch="False" />
+            <line number="138" hits="346" branch="False" />
+            <line number="139" hits="346" branch="False" />
+            <line number="140" hits="346" branch="False" />
+            <line number="141" hits="346" branch="False" />
+            <line number="142" hits="346" branch="False" />
+            <line number="143" hits="346" branch="False" />
+            <line number="144" hits="346" branch="False" />
+            <line number="145" hits="346" branch="False" />
+            <line number="146" hits="346" branch="False" />
+            <line number="147" hits="346" branch="False" />
+            <line number="148" hits="346" branch="False" />
+            <line number="149" hits="346" branch="False" />
+            <line number="150" hits="346" branch="False" />
+            <line number="151" hits="346" branch="False" />
+            <line number="152" hits="346" branch="False" />
+            <line number="153" hits="346" branch="False" />
+            <line number="154" hits="346" branch="False" />
+            <line number="155" hits="346" branch="False" />
+            <line number="156" hits="346" branch="False" />
+            <line number="157" hits="346" branch="False" />
+            <line number="158" hits="346" branch="False" />
+            <line number="159" hits="346" branch="False" />
+            <line number="160" hits="346" branch="False" />
+            <line number="161" hits="346" branch="False" />
+            <line number="162" hits="346" branch="False" />
+            <line number="163" hits="346" branch="False" />
+            <line number="164" hits="346" branch="False" />
+            <line number="165" hits="346" branch="False" />
+            <line number="166" hits="346" branch="False" />
+            <line number="170" hits="5" branch="False" />
+            <line number="172" hits="7" branch="False" />
+            <line number="173" hits="7" branch="False" />
+            <line number="175" hits="5" branch="False" />
+            <line number="176" hits="5" branch="False" />
+            <line number="178" hits="7" branch="False" />
+            <line number="179" hits="7" branch="False" />
+            <line number="180" hits="7" branch="False" />
+            <line number="181" hits="7" branch="False" />
+            <line number="183" hits="5" branch="False" />
+            <line number="184" hits="5" branch="False" />
+            <line number="185" hits="5" branch="False" />
+            <line number="186" hits="5" branch="False" />
+            <line number="188" hits="7" branch="False" />
+            <line number="189" hits="7" branch="False" />
+            <line number="190" hits="7" branch="False" />
+            <line number="191" hits="7" branch="False" />
+            <line number="192" hits="7" branch="False" />
+            <line number="193" hits="7" branch="False" />
+            <line number="194" hits="7" branch="False" />
+            <line number="195" hits="7" branch="False" />
+            <line number="198" hits="5" branch="False" />
+            <line number="199" hits="5" branch="False" />
+            <line number="200" hits="5" branch="False" />
+            <line number="201" hits="5" branch="False" />
+            <line number="202" hits="5" branch="False" />
+            <line number="203" hits="5" branch="False" />
+            <line number="204" hits="5" branch="False" />
+            <line number="205" hits="5" branch="False" />
+            <line number="212" hits="0" branch="False" />
+            <line number="218" hits="0" branch="False" />
+            <line number="219" hits="0" branch="False" />
+            <line number="220" hits="0" branch="False" />
+            <line number="222" hits="0" branch="False" />
+            <line number="223" hits="0" branch="False" />
+            <line number="226" hits="0" branch="False" />
+            <line number="232" hits="0" branch="False" />
+            <line number="233" hits="0" branch="False" />
+            <line number="234" hits="0" branch="False" />
+            <line number="236" hits="0" branch="False" />
+            <line number="237" hits="0" branch="False" />
+            <line number="242" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="244" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="246" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="248" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="250" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="252" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="254" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="278" hits="0" branch="False" />
+            <line number="280" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="281" hits="0" branch="False" />
+            <line number="283" hits="0" branch="False" />
+            <line number="284" hits="0" branch="False" />
+            <line number="287" hits="0" branch="False" />
+            <line number="289" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="290" hits="0" branch="False" />
+            <line number="292" hits="0" branch="False" />
+            <line number="293" hits="0" branch="False" />
+            <line number="296" hits="0" branch="False" />
+            <line number="298" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="299" hits="0" branch="False" />
+            <line number="301" hits="0" branch="False" />
+            <line number="302" hits="0" branch="False" />
+            <line number="306" hits="0" branch="False" />
+            <line number="308" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="8" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="309" hits="0" branch="False" />
+            <line number="311" hits="0" branch="False" />
+            <line number="312" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="32" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="313" hits="0" branch="False" />
+            <line number="315" hits="0" branch="False" />
+            <line number="317" hits="0" branch="False" />
+            <line number="318" hits="0" branch="False" />
+            <line number="323" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="325" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="327" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="329" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="331" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="333" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="335" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="5" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="358" hits="0" branch="False" />
+            <line number="359" hits="0" branch="False" />
+            <line number="360" hits="0" branch="False" />
+            <line number="361" hits="0" branch="False" />
+            <line number="362" hits="0" branch="False" />
+            <line number="363" hits="0" branch="False" />
+            <line number="364" hits="0" branch="False" />
+            <line number="365" hits="0" branch="False" />
+            <line number="366" hits="0" branch="False" />
+            <line number="367" hits="0" branch="False" />
+            <line number="369" hits="0" branch="False" />
+            <line number="374" hits="0" branch="False" />
+            <line number="375" hits="0" branch="False" />
+            <line number="376" hits="0" branch="False" />
+            <line number="377" hits="0" branch="False" />
+            <line number="378" hits="0" branch="False" />
+            <line number="382" hits="0" branch="False" />
+            <line number="383" hits="0" branch="False" />
+            <line number="384" hits="0" branch="False" />
+            <line number="385" hits="0" branch="False" />
+            <line number="386" hits="0" branch="False" />
+            <line number="390" hits="0" branch="False" />
+            <line number="404" hits="0" branch="False" />
+            <line number="405" hits="0" branch="False" />
+            <line number="406" hits="0" branch="False" />
+            <line number="407" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="56" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="408" hits="0" branch="False" />
+            <line number="409" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="28" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="410" hits="0" branch="False" />
+            <line number="411" hits="0" branch="False" />
+            <line number="412" hits="0" branch="False" />
+            <line number="413" hits="0" branch="False" />
+            <line number="430" hits="0" branch="False" />
+            <line number="431" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="8" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="432" hits="0" branch="False" />
+            <line number="433" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="27" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="434" hits="0" branch="False" />
+            <line number="438" hits="0" branch="False" />
+            <line number="439" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="440" hits="0" branch="False" />
+            <line number="441" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="26" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="442" hits="0" branch="False" />
+            <line number="446" hits="0" branch="False" />
+            <line number="447" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="448" hits="0" branch="False" />
+            <line number="449" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="25" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="450" hits="0" branch="False" />
+            <line number="454" hits="0" branch="False" />
+            <line number="455" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="7" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="456" hits="0" branch="False" />
+            <line number="457" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="26" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="458" hits="0" branch="False" />
+            <line number="464" hits="0" branch="False" />
+            <line number="467" hits="0" branch="False" />
+            <line number="470" hits="0" branch="False" />
+            <line number="473" hits="0" branch="False" />
+            <line number="476" hits="0" branch="False" />
+            <line number="479" hits="0" branch="False" />
+            <line number="482" hits="0" branch="False" />
+            <line number="485" hits="0" branch="False" />
+            <line number="491" hits="0" branch="False" />
+            <line number="494" hits="0" branch="False" />
+            <line number="497" hits="0" branch="False" />
+            <line number="500" hits="0" branch="False" />
+            <line number="503" hits="0" branch="False" />
+            <line number="506" hits="0" branch="False" />
+            <line number="509" hits="0" branch="False" />
+            <line number="523" hits="0" branch="False" />
+            <line number="525" hits="0" branch="False" />
+            <line number="527" hits="0" branch="False" />
+            <line number="528" hits="0" branch="False" />
+            <line number="539" hits="0" branch="False" />
+            <line number="541" hits="0" branch="False" />
+            <line number="543" hits="0" branch="False" />
+            <line number="544" hits="0" branch="False" />
+            <line number="555" hits="0" branch="False" />
+            <line number="557" hits="0" branch="False" />
+            <line number="559" hits="0" branch="False" />
+            <line number="560" hits="0" branch="False" />
+            <line number="571" hits="0" branch="False" />
+            <line number="573" hits="0" branch="False" />
+            <line number="575" hits="0" branch="False" />
+            <line number="576" hits="0" branch="False" />
+            <line number="587" hits="0" branch="False" />
+            <line number="589" hits="0" branch="False" />
+            <line number="591" hits="0" branch="False" />
+            <line number="592" hits="0" branch="False" />
+            <line number="603" hits="0" branch="False" />
+            <line number="605" hits="0" branch="False" />
+            <line number="607" hits="0" branch="False" />
+            <line number="608" hits="0" branch="False" />
+            <line number="619" hits="0" branch="False" />
+            <line number="621" hits="0" branch="False" />
+            <line number="623" hits="0" branch="False" />
+            <line number="624" hits="0" branch="False" />
+            <line number="635" hits="0" branch="False" />
+            <line number="637" hits="0" branch="False" />
+            <line number="639" hits="0" branch="False" />
+            <line number="640" hits="0" branch="False" />
+            <line number="653" hits="0" branch="False" />
+            <line number="655" hits="0" branch="False" />
+            <line number="657" hits="0" branch="False" />
+            <line number="658" hits="0" branch="False" />
+            <line number="670" hits="0" branch="False" />
+            <line number="672" hits="0" branch="False" />
+            <line number="674" hits="0" branch="False" />
+            <line number="675" hits="0" branch="False" />
+            <line number="687" hits="0" branch="False" />
+            <line number="689" hits="0" branch="False" />
+            <line number="691" hits="0" branch="False" />
+            <line number="692" hits="0" branch="False" />
+            <line number="704" hits="0" branch="False" />
+            <line number="706" hits="0" branch="False" />
+            <line number="708" hits="0" branch="False" />
+            <line number="709" hits="0" branch="False" />
+            <line number="721" hits="0" branch="False" />
+            <line number="723" hits="0" branch="False" />
+            <line number="725" hits="0" branch="False" />
+            <line number="726" hits="0" branch="False" />
+            <line number="738" hits="0" branch="False" />
+            <line number="740" hits="0" branch="False" />
+            <line number="742" hits="0" branch="False" />
+            <line number="743" hits="0" branch="False" />
+            <line number="755" hits="0" branch="False" />
+            <line number="757" hits="0" branch="False" />
+            <line number="759" hits="0" branch="False" />
+            <line number="760" hits="0" branch="False" />
+            <line number="772" hits="0" branch="False" />
+            <line number="774" hits="0" branch="False" />
+            <line number="776" hits="0" branch="False" />
+            <line number="777" hits="0" branch="False" />
+            <line number="792" hits="0" branch="False" />
+            <line number="803" hits="0" branch="False" />
+            <line number="814" hits="0" branch="False" />
+            <line number="825" hits="0" branch="False" />
+            <line number="836" hits="0" branch="False" />
+            <line number="847" hits="0" branch="False" />
+            <line number="858" hits="0" branch="False" />
+            <line number="869" hits="0" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
