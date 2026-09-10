@@ -1,3 +1,6 @@
 ## 2026-06-18 - Bitwise Extensions Fallback Test Coverage
 **Observation:** Hardware intrinsics (`X86.Popcnt.IsSupported`, `X86.Lzcnt.IsSupported`) obscured execution pathways for software fallbacks (`PopCntSoftwareFallback`, `LzCntSoftwareFallback`) within `BitUtilsExtensions.cs`, resulting in < 100% code coverage. Additionally, negative boundary conditions were incorrectly evaluating `Int16` PopCount values due to missing sign-extension masks (`& 0xFFFF`), which was only caught by generating explicit boundary tests.
 **Strategic Action:** Utilize Reflection within a dedicated parameterized testing harness (`SoftwareFallbackTests.cs` using `[Theory]`/`[InlineData]`) to force deterministic execution of internal/private fallback routines, guaranteeing complete branch evaluation regardless of runtime hardware capabilities. Ensure boundary assertions apply 16-bit masks explicitly for 16-bit numeric derivations.
+## 2026-09-10 - PEXT/PDEP Software Fallback Coverage
+**Observation:** 64-bit software fallbacks for ParallelBitExtract (PEXT) and ParallelBitDeposit (PDEP) were untested since hardware intrinsics obfuscated coverage.
+**Strategic Action:** Developed explicit fallback test routines matching parameter sets for ulong inputs across boundaries (0, mask gaps, mask density) forcing 100% deterministic evaluation of the parallel algorithmic limits.

@@ -245,5 +245,33 @@ namespace Tedd.BitUtils.Tests
         [InlineData(0b1010u, 0b_1111_0000u, 0b_1010_0000u)] // contiguous high mask -> shift up then AND
         public void ParallelBitDeposit_UInt32_KnownValues(uint value, uint mask, uint expected)
             => Assert.Equal(expected, BitUtilsExtensions.ParallelBitDepositSoftwareFallback(value, mask));
+
+        [Fact]
+        public void ParallelBitExtract_UInt64_IsInverseOfParallelBitDeposit()
+        {
+            for (var i = 0; i < Iterations; i++)
+            {
+                var mask = ((ulong)(uint)_rnd.Next() << 32) | (uint)_rnd.Next();
+                var value = ((ulong)(uint)_rnd.Next() << 32) | (uint)_rnd.Next();
+                var deposited = BitUtilsExtensions.ParallelBitDepositSoftwareFallback(value, mask);
+                var extracted = BitUtilsExtensions.ParallelBitExtractSoftwareFallback(deposited, mask);
+                var expectedExtracted = value & (ulong)(BitOperations.PopCount(mask) == 64 ? ulong.MaxValue : (1ul << BitOperations.PopCount(mask)) - 1);
+
+                Assert.Equal(expectedExtracted, extracted);
+                Assert.Equal(0ul, deposited & ~mask); // every deposited bit landed inside the mask
+            }
+        }
+
+        [Theory]
+        [InlineData(0b_1101_1010ul, 0b_0000_1111ul, 0b1010ul)] // contiguous low mask -> plain AND
+        [InlineData(0b_1101_1010ul, 0b_1111_0000ul, 0b1101ul)] // contiguous high mask -> AND then shift down
+        public void ParallelBitExtract_UInt64_KnownValues(ulong value, ulong mask, ulong expected)
+            => Assert.Equal(expected, BitUtilsExtensions.ParallelBitExtractSoftwareFallback(value, mask));
+
+        [Theory]
+        [InlineData(0b1010ul, 0b_0000_1111ul, 0b_0000_1010ul)] // contiguous low mask -> plain AND
+        [InlineData(0b1010ul, 0b_1111_0000ul, 0b_1010_0000ul)] // contiguous high mask -> shift up then AND
+        public void ParallelBitDeposit_UInt64_KnownValues(ulong value, ulong mask, ulong expected)
+            => Assert.Equal(expected, BitUtilsExtensions.ParallelBitDepositSoftwareFallback(value, mask));
     }
 }
