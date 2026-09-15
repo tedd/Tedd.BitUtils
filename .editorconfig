@@ -1,0 +1,37 @@
+# Repository root; stops inheritance from any .editorconfig in parent folders.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{csproj,props,targets,sln,yml,yaml,json,xml,config}]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[*.cs]
+csharp_style_namespace_declarations = file_scoped:suggestion
+dotnet_sort_system_directives_first = true
+csharp_prefer_braces = when_multiline:suggestion
+
+# Analyzer noise that does not apply to a bit-twiddling library.
+dotnet_diagnostic.CA1720.severity = none   # Identifiers should not contain type names (Byte/Int16 overloads are the point)
+dotnet_diagnostic.CA1062.severity = none   # Validate arguments of public methods (no reference-type parameters here)
+dotnet_diagnostic.CA1305.severity = none   # IFormatProvider (only used in tests/benchmarks)
+dotnet_diagnostic.CA1707.severity = none   # Underscores in identifiers (test names)
+dotnet_diagnostic.CA1515.severity = none   # Consider making public types internal (test/benchmark projects)
+dotnet_diagnostic.CA5394.severity = none   # Random is fine for tests/benchmarks
+dotnet_diagnostic.CA1861.severity = none   # Constant arrays in tests
+dotnet_diagnostic.CA1814.severity = none
+dotnet_diagnostic.CA1508.severity = none
+dotnet_diagnostic.CA2211.severity = none
+dotnet_diagnostic.CA1810.severity = none
+dotnet_diagnostic.CA1852.severity = none
+dotnet_diagnostic.CA1822.severity = none   # Mark members static (benchmark methods must be instance)
+dotnet_diagnostic.IDE0130.severity = none  # Namespace does not match folder structure

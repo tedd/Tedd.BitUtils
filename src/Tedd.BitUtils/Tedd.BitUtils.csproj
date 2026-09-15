@@ -1,58 +1,69 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks>net4.6.2;netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0;net6.0;net8.0;net9.0;net10.0</TargetFrameworks>
-		<!--<TargetFramework>net6.0</TargetFramework>-->
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Description>Bit manipulation of Byte, Int16, UInt16, Int32, UInt32, Int64, UInt64: Ror, Rol, Rotate, SetBit, IsBitSet, ReverseBits, PopCount, PopCnt, LzCnt, LeadingZeroCount, Pack, Unpack, ToBitString, ReverseEndianness, Pack, Unpack</Description>
-		<PackageTags>bit;setbit;getbit;isbitset;pack;unpack;ror;rol;rotate;reverse;reversebits;popcount;popcnt;leadingzerocount;lzcnt;pack;unpack;tostring;tobitstring;reverseendianness;endian;pack;unpack</PackageTags>
-		<Copyright>Tedd Hansen</Copyright>
-		<PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/tedd/Tedd.BitUtils.git</RepositoryUrl>
-		<Version>1.0.7</Version>
-		<Authors>tedd</Authors>
-		<Company>Tedd Hansen</Company>
-		<RepositoryType>git</RepositoryType>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<Copyright>Tedd Hansen</Copyright>
-		<EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
-		<EnableNETAnalyzers>True</EnableNETAnalyzers>
-		<AnalysisLevel>latest-all</AnalysisLevel>
-		<LangVersion>latest</LangVersion>
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
+  <PropertyGroup>
+    <!--
+      netstandard2.1 : reach. .NET Core 3.x, Mono 6.4+, Xamarin and Unity 2021+. System.Numerics.BitOperations and
+                       System.Runtime.Intrinsics do not exist here, so everything routes through the portable
+                       software implementations (see BitOps.cs). Note that .NET Framework does NOT support
+                       netstandard2.1 and still needs the 1.x line.
+      net6.0         : oldest .NET with System.Numerics.BitOperations + hardware intrinsics and automatic runtime
+                       fallback on unsupported CPUs.
+      net8.0         : current LTS.
+      net10.0        : latest LTS. net7.0/net9.0 (STS, both EOL) consumers resolve to the net6.0 or net8.0 asset.
+    -->
+    <TargetFrameworks>netstandard2.1;net6.0;net8.0;net10.0</TargetFrameworks>
+    <RootNamespace>Tedd</RootNamespace>
+    <AssemblyName>Tedd.BitUtils</AssemblyName>
+    <Version>2.1.1</Version>
+    <Authors>tedd</Authors>
+    <Company>Tedd Hansen</Company>
+    <Copyright>Tedd Hansen</Copyright>
+    <Description>Fast bit manipulation extension methods for SByte, Byte, Int16, UInt16, Int32, UInt32, Int64 and UInt64: SetBit, SetBit0, SetBit1, ToggleBit, IsBitSet, Rol, Ror, ReverseBits, ReverseEndianness, PopCount, Parity, LeadingZeroCount, TrailingZeroCount, Log2, BitLength, IsPowerOfTwo, RoundUpToPowerOf2, ExtractLowestSetBit, ResetLowestSetBit, GetMaskUpToLowestSetBit, ExtractHighestSetBit, ZeroHighBits, ZeroLowBits, ParallelBitExtract (PEXT), ParallelBitDeposit (PDEP), Pack, Unpack, ZigZagEncode, ZigZagDecode, ToBitString. Backed by System.Numerics.BitOperations and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM RBIT) with automatic runtime fallback. Also includes an allocation-free bit packing layer over Span&lt;byte&gt;: BitPacking/BitWriter/BitReader for arbitrary width bit fields at any bit offset, and the variable length integer encodings built on them - VarInt (ULEB128, SLEB128, ZigZag), EbmlVInt (RFC 8794) and SizePrefix.</Description>
+    <PackageTags>bit;bits;netstandard;bitwise;setbit;getbit;isbitset;togglebit;pack;unpack;ror;rol;rotate;reverse;reversebits;popcount;popcnt;parity;leadingzerocount;lzcnt;trailingzerocount;tzcnt;log2;bitlength;ispow2;poweroftwo;bmi1;bmi2;pext;pdep;bzhi;blsi;blsr;tobitstring;reverseendianness;endian;bswap;intrinsics;bitpacking;bitwriter;bitreader;bitstream;varint;leb128;uleb128;sleb128;zigzag;vlq;ebml;vint;matroska;webm;span;serialization</PackageTags>
+    <PackageProjectUrl>https://github.com/tedd/Tedd.BitUtils</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tedd/Tedd.BitUtils.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>2.1.0: New target framework - netstandard2.1 (.NET Core 3.x, Mono, Xamarin, Unity 2021+), alongside net6.0/net8.0/net10.0; System.Numerics.BitOperations and System.Runtime.Intrinsics uses are behind #if, so modern targets keep the intrinsic backed paths unchanged and netstandard2.1 uses portable implementations. Still no package dependencies. (.NET Framework does not support netstandard2.1 and stays on the 1.x line.) New bit packing layer over Span&lt;byte&gt; - BitPacking (arbitrary width bit fields at any bit offset, MSB first) plus BitWriter/BitReader ref structs for sequential packing. New variable length integer encodings in VarInt: ULEB128, SLEB128, ZigZag (Protocol Buffers sint) and the non-standard sign-magnitude format Tedd.SpanUtils writes. New EbmlVInt (RFC 8794 VINT, as used by Matroska/WebM) and SizePrefix (prefix-varint length field holding 30 bits in up to 4 bytes). New ZigZagEncode/ZigZagDecode extension methods.
 
-	<ItemGroup>
-		<None Include="..\..\LICENSE">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
-		<None Include="..\..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
+2.0.0: BREAKING - now targets net6.0, net8.0 and net10.0 only; .NET Framework and .NET Standard consumers must stay on 1.x. Every operation is now backed directly by System.Numerics.BitOperations and hardware intrinsics (POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, ARM64 RBIT). New: ToggleBit, Parity, TrailingZeroCount, Log2, BitLength, IsPowerOfTwo, RoundUpToPowerOf2, ExtractLowestSetBit, ResetLowestSetBit, GetMaskUpToLowestSetBit, ExtractHighestSetBit, ZeroHighBits, ZeroLowBits, ParallelBitExtract, ParallelBitDeposit, Rol/Ror for SByte/Byte/Int16/UInt16, plus SByte overloads throughout. Fixed: ReverseEndianness previously never took the intrinsic path due to an always-false compile constant and always ran the naive software fallback; it now always calls BinaryPrimitives.ReverseEndianness. Faster ReverseBits on x86/x64 (branch-free SWAR instead of table lookups).</PackageReleaseNotes>
 
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp1'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp2'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('net3'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard1'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard2'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
 
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <IsTrimmable Condition="'$(TargetFramework)' != 'netstandard2.1'">true</IsTrimmable>
+    <IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))">true</IsAotCompatible>
+  </PropertyGroup>
+
+  <!--
+    Build with -p:ForcePortable=true to compile the .NET 6+ targets down the same portable code paths the
+    netstandard2.1 asset uses. That lets the full test suite (which cannot host netstandard2.1 directly) run
+    against the portable implementations rather than the intrinsic backed ones:
+      dotnet test src/Tedd.BitUtils.Tests -p:ForcePortable=true
+    It is a verification switch only - shipped packages are always built without it.
+  -->
+  <PropertyGroup Condition="'$(ForcePortable)' == 'true'">
+    <DefineConstants>$(DefineConstants);BITUTILS_PORTABLE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tedd.BitUtils.Tests" />
+    <InternalsVisibleTo Include="Tedd.BitUtils.Benchmarks" />
+  </ItemGroup>
 
 </Project>

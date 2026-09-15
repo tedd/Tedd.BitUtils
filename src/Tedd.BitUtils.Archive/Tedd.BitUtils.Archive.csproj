@@ -1,30 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFrameworks>net4.6.2;netstandard2.0;netstandard2.1;netcoreapp3.1;net5.0;net6.0;net8.0;net9.0;net10.0</TargetFrameworks>
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<ImplicitUsings>disable</ImplicitUsings>
-		<LangVersion>latest</LangVersion>
-		<Nullable>enable</Nullable>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp1'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netcoreapp2'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('net3'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('net4'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard1'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
-	<PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard2'))">
-		<DefineConstants>BEFORENETCOREAPP3</DefineConstants>
-	</PropertyGroup>
+  <PropertyGroup>
+    <!-- Frozen snapshot of the pre-2.0 implementation, kept only as a benchmark baseline (see Tedd.BitUtils.Benchmarks).
+         Targets net8.0 only, matching the benchmark host; this is not a published package. -->
+    <TargetFramework>net8.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <NoWarn>$(NoWarn);CS0618</NoWarn>
+  </PropertyGroup>
 
 </Project>
