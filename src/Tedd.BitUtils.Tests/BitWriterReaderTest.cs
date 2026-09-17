@@ -216,5 +216,46 @@ namespace Tedd.BitUtils.Tests
             Assert.Equal(0UL, value);
             Assert.False(reader.TryReadBit(out _));
         }
+
+        [Fact]
+        public void BitReader_Buffer_ReturnsOriginalSpan()
+        {
+            var data = new byte[] { 10, 20, 30, 40 };
+            var reader = new BitReader(data);
+            Assert.True(data.AsSpan().SequenceEqual(reader.Buffer));
+        }
+
+        [Theory]
+        [InlineData(0, 0)]
+        [InlineData(1, 1)]
+        [InlineData(7, 1)]
+        [InlineData(8, 1)]
+        [InlineData(9, 2)]
+        [InlineData(16, 2)]
+        [InlineData(17, 3)]
+        public void BitReader_BytesRead_ReturnsExpectedValues(int bitsToSkip, int expectedBytesRead)
+        {
+            var buffer = new byte[8];
+            var reader = new BitReader(buffer);
+            if (bitsToSkip > 0)
+                reader.Skip(bitsToSkip);
+            Assert.Equal(expectedBytesRead, reader.BytesRead);
+        }
+
+        [Theory]
+        [InlineData(0, true)]
+        [InlineData(1, false)]
+        [InlineData(7, false)]
+        [InlineData(8, true)]
+        [InlineData(9, false)]
+        [InlineData(16, true)]
+        public void BitReader_IsByteAligned_ReturnsExpectedValues(int bitsToSkip, bool expectedIsAligned)
+        {
+            var buffer = new byte[8];
+            var reader = new BitReader(buffer);
+            if (bitsToSkip > 0)
+                reader.Skip(bitsToSkip);
+            Assert.Equal(expectedIsAligned, reader.IsByteAligned);
+        }
     }
 }
