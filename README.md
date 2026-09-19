@@ -5,6 +5,8 @@
 [![.NET](https://github.com/tedd/Tedd.BitUtils/actions/workflows/dotnet.yml/badge.svg)](https://github.com/tedd/Tedd.BitUtils/actions/workflows/dotnet.yml)
 [![License](https://img.shields.io/github/license/tedd/Tedd.BitUtils)](LICENSE)
 
+[Website](https://tedd.no/Tedd.BitUtils/) · [NuGet](https://www.nuget.org/packages/Tedd.BitUtils/) · [Source](https://github.com/tedd/Tedd.BitUtils)
+
 Fast bit manipulation extension methods for `sbyte`, `byte`, `short` (`Int16`), `ushort` (`UInt16`), `int` (`Int32`), `uint` (`UInt32`), `long` (`Int64`) and `ulong` (`UInt64`).
 
 Every operation is available in two forms: **in-place** (modifies the variable via a `ref` extension method, avoiding a copy) and **copy** (returns a modified copy, leaving the original untouched, method name suffixed `Copy`).

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7faf9">
+  <meta name="description" content="Tedd.BitUtils provides fast bit manipulation, bit packing, and variable-length integer encodings for .NET.">
+  <title>Tedd.BitUtils — Bit manipulation and binary encoding for .NET</title>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Tedd.BitUtils home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span>TEDD<span class="brand-slash">/</span>BITUTILS</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#capabilities">Capabilities</a>
+      <a href="#packing">Bit packing</a>
+      <a href="#api">API</a>
+      <a href="https://github.com/tedd/Tedd.BitUtils">Source</a>
+      <a class="nav-cta" href="#install">Install</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="grid-field" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span> Binary primitives for .NET</p>
+        <h1>Bits at machine speed.<br><em>Formats at wire precision.</em></h1>
+        <p class="lede">Manipulate integer bits, pack arbitrary-width fields, and encode compact variable-length values through one dependency-free library.</p>
+        <div class="actions">
+          <a class="button primary" href="#install">Install from NuGet <span aria-hidden="true">↓</span></a>
+          <a class="button secondary" href="https://github.com/tedd/Tedd.BitUtils">Read the source <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <div class="code-window" aria-label="Tedd.BitUtils usage example">
+        <div class="window-bar"><span></span><span></span><span></span><b>PacketWriter.cs</b></div>
+        <pre><code><span class="code-type">Span&lt;byte&gt;</span> buffer = <span class="code-keyword">stackalloc</span> <span class="code-type">byte</span>[<span class="code-number">4</span>];
+
+<span class="code-keyword">var</span> writer = <span class="code-keyword">new</span> <span class="code-type">BitWriter</span>(buffer);
+writer.<span class="code-call">Write</span>(<span class="code-number">0b101</span>, <span class="code-number">3</span>);
+writer.<span class="code-call">Write</span>(<span class="code-number">0xABC</span>, <span class="code-number">12</span>);
+writer.<span class="code-call">AlignToByte</span>();
+
+<span class="code-keyword">var</span> packet = writer.WrittenSpan;</code></pre>
+        <div class="binary-strip" aria-hidden="true"><span>101</span><span>1010 1011 1100</span><span>0</span></div>
+      </div>
+    </section>
+
+    <section class="proof-strip" aria-label="Library summary">
+      <p><strong>8 integer types</strong><span>Signed and unsigned</span></p>
+      <p><strong>4 target frameworks</strong><span>.NET Standard 2.1 to .NET 10</span></p>
+      <p><strong>0 dependencies</strong><span>On every target</span></p>
+      <p><strong>Automatic fallback</strong><span>Intrinsic or portable path</span></p>
+    </section>
+
+    <section class="section-shell" id="capabilities">
+      <div class="section-intro reveal">
+        <div><p class="eyebrow">Integer operations</p><h2>Small operations.<br>Complete coverage.</h2></div>
+        <p>Every mutating operation has an in-place form and a copy-returning counterpart. Supported CPUs use runtime intrinsics; other platforms use equivalent software implementations.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card featured reveal"><span class="feature-icon">01</span><h3>Inspect</h3><p>Test bits, count population and parity, locate leading and trailing zeros, and calculate bit length or integer log₂.</p></article>
+        <article class="feature-card reveal"><span class="feature-icon">↻</span><h3>Transform</h3><p>Set, clear, toggle, rotate, reverse, or change endianness across every integral width.</p></article>
+        <article class="feature-card reveal"><span class="feature-icon">⌁</span><h3>Extract</h3><p>Pack and unpack ranges, isolate set bits, clear high or low regions, and apply PEXT or PDEP semantics.</p></article>
+        <article class="feature-card reveal"><span class="feature-icon">⇄</span><h3>Copy or mutate</h3><p>Choose direct <code>ref</code> mutation or a <code>Copy</code> method that preserves the original value.</p></article>
+        <article class="feature-card reveal"><span class="feature-icon">Z</span><h3>ZigZag</h3><p>Fold signed integers into unsigned values so small magnitudes retain compact representations.</p></article>
+        <article class="feature-card reveal"><span class="feature-icon">CPU</span><h3>Hardware-aware</h3><p>POPCNT, LZCNT, TZCNT, BMI1, BMI2, BSWAP, and ARM64 RBIT are selected when available.</p></article>
+      </div>
+    </section>
+
+    <section class="dark-section section-shell" id="packing">
+      <div class="dark-copy reveal">
+        <p class="eyebrow">Span-based binary formats</p>
+        <h2>Cross byte boundaries without allocations.</h2>
+        <p><code>BitPacking</code>, <code>BitWriter</code>, and <code>BitReader</code> operate over caller-owned spans. Fields may start at any bit offset and range from zero to 64 bits.</p>
+        <ul class="check-list">
+          <li><strong>MSB-first fields</strong> for common network and media layouts</li>
+          <li><strong>Read-modify-write</strong> preserves neighboring fields</li>
+          <li><strong>Try variants</strong> report malformed or undersized input without throwing</li>
+        </ul>
+      </div>
+      <div class="format-panel reveal">
+        <div class="format-row"><span>ULEB128</span><strong>Unsigned variable integers</strong><small>DWARF · WebAssembly · Protocol Buffers</small></div>
+        <div class="format-row"><span>SLEB128</span><strong>Signed variable integers</strong><small>Two's-complement sign extension</small></div>
+        <div class="format-row"><span>ZIGZAG</span><strong>Signed magnitude folding</strong><small>Protocol Buffers sint semantics</small></div>
+        <div class="format-row"><span>EBML VINT</span><strong>RFC 8794 integers</strong><small>Matroska · WebM</small></div>
+        <div class="format-row"><span>SIZE PREFIX</span><strong>One-to-four byte lengths</strong><small>Up to 30 payload bits</small></div>
+      </div>
+    </section>
+
+    <section class="section-shell soft-section" id="api">
+      <div class="section-intro reveal">
+        <div><p class="eyebrow">One vocabulary</p><h2>Use the same API across integer widths.</h2></div>
+        <p>Methods cover <code>sbyte</code>, <code>byte</code>, <code>short</code>, <code>ushort</code>, <code>int</code>, <code>uint</code>, <code>long</code>, and <code>ulong</code>.</p>
+      </div>
+      <div class="api-grid reveal" aria-label="Selected API methods">
+        <span>IsBitSet</span><span>PopCount</span><span>Parity</span><span>Rol / Ror</span><span>ReverseBits</span><span>ReverseEndianness</span><span>LeadingZeroCount</span><span>TrailingZeroCount</span><span>RoundUpToPowerOf2</span><span>ParallelBitExtract</span><span>ParallelBitDeposit</span><span>ToBitString</span>
+      </div>
+    </section>
+
+    <section class="install section-shell" id="install">
+      <div class="install-card reveal">
+        <div>
+          <p class="eyebrow">NuGet package</p>
+          <h2>Add one package.<br>Bring your own buffers.</h2>
+          <p>Tedd.BitUtils targets .NET Standard 2.1, .NET 6, .NET 8, and .NET 10 under LGPL-3.0.</p>
+        </div>
+        <div class="install-command">
+          <span>TERMINAL</span>
+          <code>dotnet add package Tedd.BitUtils</code>
+          <button type="button" data-copy="dotnet add package Tedd.BitUtils">Copy</button>
+        </div>
+        <div class="actions">
+          <a class="button primary" href="https://www.nuget.org/packages/Tedd.BitUtils/">View on NuGet <span aria-hidden="true">↗</span></a>
+          <a class="button secondary" href="https://github.com/tedd/Tedd.BitUtils#simple-example-of-usage">Read the examples</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span>TEDD/BITUTILS</span></a>
+    <p>Bit manipulation and binary encoding for .NET.</p>
+    <div><a href="https://www.nuget.org/packages/Tedd.BitUtils/">NuGet</a><a href="https://github.com/tedd/Tedd.BitUtils">Source</a><a href="https://github.com/tedd/Tedd.BitUtils/blob/main/LICENSE">LGPL-3.0</a></div>
+  </footer>
+</body>
+</html>
