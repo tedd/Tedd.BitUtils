@@ -1,4 +1,5 @@
 using System;
+using System.Buffers.Binary;
 using System.Runtime.CompilerServices;
 
 namespace Tedd;
@@ -143,10 +144,59 @@ public static class BitPacking
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool FitsIn(int byteLength, long bitOffset, int bitCount) => bitOffset + bitCount <= (long)byteLength << 3;
 
-    // Splits the field at byte boundaries and writes it one chunk at a time, high chunk first. At most nine
-    // iterations (a 64 bit field straddling a byte boundary), and one or two for the field widths that dominate.
+    // A field never spans more than the 64 bit window when it starts within the first byte of that window, so one
+    // big-endian load, one shift and one mask replace the byte-at-a-time walk below. The window is anchored at the
+    // field's own first byte where the buffer allows it, and at the last eight bytes of the buffer otherwise, which
+    // keeps the tail of a buffer on the fast path too; the offset is rebased onto whichever anchor was used.
+    // Returns -1 when no window covers the field, which happens for a buffer shorter than eight bytes and for a
+    // field of more than 56 bits that starts mid-byte.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static int WindowStart(int byteLength, long bitOffset, int bitCount, out int bitInWindow)
+    {
+        bitInWindow = 0;
+        if (byteLength < 8) return -1;
+        var byteIndex = (int)(bitOffset >> 3);
+        var start = byteIndex + 8 <= byteLength ? byteIndex : byteLength - 8;
+        var offsetInWindow = bitOffset - ((long)start << 3);
+        if (offsetInWindow + bitCount > 64) return -1;
+        bitInWindow = (int)offsetInWindow;
+        return start;
+    }
+
+    // One big-endian window load, one mask and one store, falling back to a byte-at-a-time walk (at most nine
+    // iterations) when no window covers the field.
     internal static void WriteBitsCore(Span<byte> destination, long bitOffset, int bitCount, ulong value)
     {
+        if (bitCount == 0) return;
+        // A field that lies inside one byte is cheaper to touch directly than to set a window up for: measured at
+        // 1 to 8 bits, the window's wider load and its anchor arithmetic cost more than they save.
+        var firstByte = (int)(bitOffset >> 3);
+        var usedBits = (int)(bitOffset & 7);
+        if (usedBits + bitCount <= 8)
+        {
+            var narrowMask = (1 << bitCount) - 1;
+            var narrowShift = 8 - usedBits - bitCount;
+            ref var target = ref destination[firstByte];
+            target = (byte)((target & ~(narrowMask << narrowShift)) | (((int)value & narrowMask) << narrowShift));
+            return;
+        }
+
+        var start = WindowStart(destination.Length, bitOffset, bitCount, out var bitInWindow);
+        if (start >= 0)
+        {
+            var window = destination.Slice(start, 8);
+            // 1UL << 64 is 1UL rather than 0 in C#, since the shift count is masked to the operand width, so the
+            // full width mask has to be spelled out rather than computed.
+            var valueMask = bitCount == MaxFieldBits ? ulong.MaxValue : (1UL << bitCount) - 1;
+            var windowShift = 64 - bitInWindow - bitCount;
+            var fieldMask = valueMask << windowShift;
+            // Read-modify-write of the whole window: every bit outside the field is written back unchanged, so
+            // storing eight bytes leaves the buffer exactly as the byte loop would have.
+            var word = BinaryPrimitives.ReadUInt64BigEndian(window);
+            BinaryPrimitives.WriteUInt64BigEndian(window, (word & ~fieldMask) | ((value & valueMask) << windowShift));
+            return;
+        }
+
         if (bitCount < MaxFieldBits) value &= (1UL << bitCount) - 1;
         var remaining = bitCount;
         while (remaining > 0)
@@ -166,6 +216,21 @@ public static class BitPacking
 
     internal static ulong ReadBitsCore(ReadOnlySpan<byte> source, long bitOffset, int bitCount)
     {
+        if (bitCount == 0) return 0;
+        // Same single-byte shortcut as the write side, and for the same measured reason.
+        var firstByte = (int)(bitOffset >> 3);
+        var usedBits = (int)(bitOffset & 7);
+        if (usedBits + bitCount <= 8)
+            return (uint)(source[firstByte] >> (8 - usedBits - bitCount)) & ((1u << bitCount) - 1);
+
+        var start = WindowStart(source.Length, bitOffset, bitCount, out var bitInWindow);
+        if (start >= 0)
+        {
+            var word = BinaryPrimitives.ReadUInt64BigEndian(source.Slice(start, 8));
+            var mask = bitCount == MaxFieldBits ? ulong.MaxValue : (1UL << bitCount) - 1;
+            return (word >> (64 - bitInWindow - bitCount)) & mask;
+        }
+
         ulong result = 0;
         var remaining = bitCount;
         while (remaining > 0)
