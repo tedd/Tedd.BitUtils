@@ -86,6 +86,11 @@ h1 em { color: transparent; font-style: normal; -webkit-text-stroke: 1.5px #6981
 .check-list { display: grid; gap: 1rem; margin: 2rem 0 0; padding: 0; list-style: none; }
 .check-list li { position: relative; padding-left: 1.6rem; color: #acc1c2; font-size: .88rem; }
 .check-list li::before { position: absolute; left: 0; color: #65d2c6; content: "✓"; font-weight: 700; }
+.measure-note { margin: 2.4rem 0 0; padding: 1.4rem 1.6rem; border: 1px solid rgba(101,210,198,.28); border-radius: 10px; background: rgba(101,210,198,.06); }
+.measure-note .eyebrow { margin: 0 0 .7rem; }
+.measure-note p:not(.eyebrow) { margin: 0; color: #cfe4e3; font-size: .9rem; line-height: 1.65; }
+.measure-note strong { color: #7ee3d6; }
+.measure-note p.measure-fine { margin: .85rem 0 0; color: #8fa6a8; font-size: .78rem; line-height: 1.6; }
 .check-list strong { color: #f1f8f7; }
 .format-panel { background: #f8fbfa; border: 1px solid #46626a; box-shadow: 0 34px 80px rgba(0,0,0,.25); color: var(--ink); }
 .format-row { display: grid; grid-template-columns: 110px 1fr; gap: .25rem 1rem; padding: 1.25rem 1.4rem; border-bottom: 1px solid var(--line); }

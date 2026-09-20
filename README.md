@@ -96,6 +96,8 @@ var i3 = i1.Unpack(5, 2);
 ## Bit packing
 Everything above operates on a single integer. These types operate on a `Span<byte>`, for building and parsing binary formats. They validate their arguments and throw, and every operation also has a `Try...` form that reports failure instead. All of them are allocation free.
 
+A field is read and written through a single 64 bit window rather than a byte at a time, so the cost of a field is flat in its width instead of growing with the number of bytes it touches - see [Bit packing throughput](#bit-packing-throughput).
+
 ### Arbitrary width bit fields
 `BitPacking` reads and writes fields of 0 to 64 bits at any bit offset, ignoring byte boundaries. Bits are laid out **most significant bit first** (offset 0 is the `0x80` bit of byte 0), which is the order used by EBML, MPEG, JPEG and most network protocols. Writes are read-modify-write, so the buffer needs no zeroing and neighbouring fields survive:
 ```cs
@@ -161,6 +163,25 @@ var size = SizePrefix.Read(buffer, out var bytesRead); // 16384
 
 Note that for `sbyte`, `byte`, `short` and `ushort` the CPU operates at 32-bit word size regardless, so there's no speed to be gained from the smaller datatypes themselves - the JIT-generated assembly for these operations ends up identical across the narrower integer types.
 
+### Bit packing throughput
+`BitPacking`, `BitWriter` and `BitReader` read and write a field through one big-endian 64 bit window - a single load, shift and mask - rather than walking it one byte per loop iteration. The window is anchored at the field's own byte, or pulled back to the last eight bytes of the buffer when the field sits near the end, so the tail of a buffer is not a slow path. Two cases still take the byte-at-a-time walk: a buffer shorter than eight bytes, and a field of more than 56 bits starting at a non-zero bit offset (which spans nine bytes, so no 64 bit window covers it). A field lying inside a single byte takes a third, narrower path that touches just that byte.
+
+Measured on an AMD Ryzen 9 5950X, .NET 8, against the previous byte-at-a-time implementation:
+
+| Field width | Read | Write |
+| --- | --- | --- |
+| 1 to 8 bits | ~1.0x (at the harness's resolution) | 1.2x |
+| 12 bits | 1.3x | 1.6x |
+| 24 bits | 1.9x - 2.3x | 2.1x - 2.8x |
+| 32 bits | 2.3x - 2.8x | 2.7x - 3.4x |
+| 57 bits | 4.5x - 4.6x | 5.3x - 5.4x |
+| 64 bits, byte aligned | 5.7x | 6.5x |
+| 64 bits, not byte aligned | unchanged (byte-at-a-time fallback) | unchanged |
+
+End to end, packing and then parsing a sixteen field packet of mixed widths (1, 1, 2, 4, 3, 5, 12, 7, 16, 9, 24, 11, 32, 13, 48, 6 bits) through `BitWriter`/`BitReader` is **1.15x faster to write and 1.18x faster to read**. That figure is the one to go by: it includes the narrow fields, where the windowed read is no faster than what it replaced and can be a fraction of a nanosecond slower.
+
+Run it yourself with `dotnet run -c Release --filter *BitPacking*` or `--filter *BitStream*` in `src/Tedd.BitUtils.Benchmarks`.
+
 ### Hardware intrinsics
 | Operation                              | Backing intrinsic (when supported)     |
 | --------------------------------------- | --------------------------------------- |
@@ -197,6 +218,12 @@ dotnet run -c Release
 or target one comparison directly, e.g. `dotnet run -c Release --filter *ReverseBits*`.
 
 ## Changelog
+
+### 2.2.0
+* **Fixed:** `ZeroHighBits` gave a different answer on different target frameworks when `index` was outside 0 to the bit width of the type. On .NET 6 and later the `int`/`uint`/`long`/`ulong` overloads handed the index straight to BZHI, which reads only its low eight bits - so `ZeroHighBits(-1)` kept the whole value instead of giving 0, and `ZeroHighBits(256)` gave 0 instead of keeping the value. The .NET Standard 2.1 build, and the `sbyte`/`byte`/`short`/`ushort` overloads on every target, implemented the documented behaviour, so the same call could return different results on two assets of the same package - or on two overloads in the same build. The index is now clamped before it reaches the instruction. In-range indices are unaffected, and the clamp lowers to conditional moves rather than a branch.
+* **Faster bit packing.** `BitPacking`, `BitWriter` and `BitReader` now read and write a field through one 64 bit window instead of walking it a byte at a time. A mixed-width packet is 1.15x faster to write and 1.18x faster to read end to end; individual wide fields are up to 5.7x (read) and 6.5x (write) faster. See [Bit packing throughput](#bit-packing-throughput) for the full table and the cases that are unchanged.
+* **Faster `EbmlVInt.Read` for multi-byte encodings.** The encoding length now comes from `LeadingZeroCount` rather than a loop that shifts a marker bit right one position at a time, and the payload from one big-endian load rather than a byte-at-a-time loop. The decode step is 1.7x faster for a four byte VINT and 5.3x for an eight byte one; one byte encodings, which dominate real Matroska streams, keep their own early path and are unchanged. Note that decoding is a minority of `EbmlVInt.Read`'s total cost - constructing the returned value dominates - so the end-to-end gain is smaller than those figures.
+* Test suite grown from 430 to 487 tests, including differential tests that check `BitPacking` at every bit offset and every field width against an independent bit-by-bit reference, and a test that pins the EBML length derivation against all 255 legal first bytes.
 
 ### 2.1.0
 * New target: **.NET Standard 2.1** (.NET Core 3.x, Mono, Xamarin, Unity 2021+), alongside net6.0/net8.0/net10.0. Everything that needs `System.Numerics.BitOperations` or `System.Runtime.Intrinsics` is behind a `#if`, so modern targets keep the intrinsic-backed paths unchanged and .NET Standard 2.1 gets portable implementations. Still no package dependencies. (.NET Framework does not support .NET Standard 2.1 and stays on the 1.x line.)

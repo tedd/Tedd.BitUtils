@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7faf9">
-  <meta name="description" content="Tedd.BitUtils provides fast bit manipulation, bit packing, and variable-length integer encodings for .NET.">
+  <meta name="description" content="Tedd.BitUtils provides fast bit manipulation, bit packing, and variable-length integer encodings for .NET, with hardware intrinsics and a windowed bit-packing core.">
   <title>Tedd.BitUtils — Bit manipulation and binary encoding for .NET</title>
   <script>document.documentElement.classList.add('js')</script>
   <link rel="stylesheet" href="styles.css">
@@ -85,7 +85,13 @@ writer.<span class="code-call">AlignToByte</span>();
           <li><strong>MSB-first fields</strong> for common network and media layouts</li>
           <li><strong>Read-modify-write</strong> preserves neighboring fields</li>
           <li><strong>Try variants</strong> report malformed or undersized input without throwing</li>
+          <li><strong>Windowed core</strong> reads a field in one 64-bit load, not one byte per iteration</li>
         </ul>
+        <div class="measure-note">
+          <p class="eyebrow">Measured</p>
+          <p>Packing and parsing a sixteen-field mixed-width packet through <code>BitWriter</code> and <code>BitReader</code> is <strong>1.15&times; faster to write</strong> and <strong>1.18&times; faster to read</strong> than the previous byte-at-a-time core. Individual wide fields gain more: a 64-bit aligned field is 5.7&times; faster to read and 6.5&times; to write.</p>
+          <p class="measure-fine">AMD Ryzen 9 5950X, .NET 8, BenchmarkDotNet. Narrow fields of eight bits or fewer are unchanged within the harness&rsquo;s resolution. Benchmarks ship in the repository.</p>
+        </div>
       </div>
       <div class="format-panel reveal">
         <div class="format-row"><span>ULEB128</span><strong>Unsigned variable integers</strong><small>DWARF · WebAssembly · Protocol Buffers</small></div>
