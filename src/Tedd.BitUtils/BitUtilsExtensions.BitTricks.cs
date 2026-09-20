@@ -197,30 +197,40 @@ public static partial class BitUtilsExtensions
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static int ZeroHighBits(ref this int value, int index) =>
 #if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
-        Bmi2.IsSupported ? (int)Bmi2.ZeroHighBits((uint)value, (uint)index) :
+        Bmi2.IsSupported ? (int)Bmi2.ZeroHighBits((uint)value, BzhiIndex(index, 32)) :
 #endif
         (int)((uint)value & ZeroHighBitsMask32(index, 32));
     /// <inheritdoc cref="ZeroHighBits(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static uint ZeroHighBits(ref this uint value, int index) =>
 #if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
-        Bmi2.IsSupported ? Bmi2.ZeroHighBits(value, (uint)index) :
+        Bmi2.IsSupported ? Bmi2.ZeroHighBits(value, BzhiIndex(index, 32)) :
 #endif
         value & ZeroHighBitsMask32(index, 32);
     /// <inheritdoc cref="ZeroHighBits(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static long ZeroHighBits(ref this long value, int index) =>
 #if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
-        Bmi2.X64.IsSupported ? (long)Bmi2.X64.ZeroHighBits((ulong)value, (ulong)index) :
+        Bmi2.X64.IsSupported ? (long)Bmi2.X64.ZeroHighBits((ulong)value, BzhiIndex(index, 64)) :
 #endif
         (long)((ulong)value & ZeroHighBitsMask64(index, 64));
     /// <inheritdoc cref="ZeroHighBits(ref sbyte, int)"/>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static ulong ZeroHighBits(ref this ulong value, int index) =>
 #if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
-        Bmi2.X64.IsSupported ? Bmi2.X64.ZeroHighBits(value, (ulong)index) :
+        Bmi2.X64.IsSupported ? Bmi2.X64.ZeroHighBits(value, BzhiIndex(index, 64)) :
 #endif
         value & ZeroHighBitsMask64(index, 64);
+
+#if NET6_0_OR_GREATER && !BITUTILS_PORTABLE
+    // BZHI reads only the low 8 bits of its index operand, so an index outside 0..width means something quite
+    // different to the instruction than it does to this API: -1 would arrive as 255 and keep the whole value, and
+    // 256 would arrive as 0 and clear it. Clamping first is what keeps the intrinsic path answering the same as the
+    // portable mask below - and therefore the .NET 6+ assets answering the same as the .NET Standard 2.1 one.
+    // Both comparisons lower to conditional moves, so this stays branch free.
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    private static uint BzhiIndex(int index, int width) => (uint)(index < 0 ? 0 : index > width ? width : index);
+#endif
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static uint ZeroHighBitsMask32(int index, int width) => index <= 0 ? 0u : index >= width ? uint.MaxValue : (1u << index) - 1;
