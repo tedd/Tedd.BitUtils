@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <!-- Frozen snapshot of the pre-2.0 implementation, kept only as a benchmark baseline (see Tedd.BitUtils.Benchmarks).
-         Targets net8.0 only, matching the benchmark host; this is not a published package. -->
-    <TargetFramework>net8.0</TargetFramework>
+         Targets net8.0 and net9.0, matching the benchmark hosts; this is not a published package. -->
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <ImplicitUsings>disable</ImplicitUsings>
     <LangVersion>latest</LangVersion>

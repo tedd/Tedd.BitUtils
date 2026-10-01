@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <!-- Microsoft.NET.Test.Sdk does not support net6.0 as a test host; the library's net6.0 build has no
-         conditional code paths that differ from net8.0/net10.0, so running tests on those two hosts covers it. -->
-    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+         conditional code paths that differ from net8.0/net9.0/net10.0, so running tests on those hosts covers it. -->
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>

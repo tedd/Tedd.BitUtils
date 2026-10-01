@@ -9,9 +9,10 @@
       net6.0         : oldest .NET with System.Numerics.BitOperations + hardware intrinsics and automatic runtime
                        fallback on unsupported CPUs.
       net8.0         : current LTS.
-      net10.0        : latest LTS. net7.0/net9.0 (STS, both EOL) consumers resolve to the net6.0 or net8.0 asset.
+      net9.0         : current STS.
+      net10.0        : latest LTS. net7.0 (STS, EOL) consumers resolve to the net6.0 asset.
     -->
-    <TargetFrameworks>netstandard2.1;net6.0;net8.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net6.0;net8.0;net9.0;net10.0</TargetFrameworks>
     <RootNamespace>Tedd</RootNamespace>
     <AssemblyName>Tedd.BitUtils</AssemblyName>
     <Version>2.2.0</Version>
