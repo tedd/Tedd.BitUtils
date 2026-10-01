@@ -64,22 +64,96 @@ namespace Tedd.BitUtils.Tests
 
     public class RoundUpToPowerOf2CopyTest
     {
-        [Fact]
-        public void TestByte_DoesNotModifyOriginal()
+        [Theory]
+        [InlineData((sbyte)5, (sbyte)8)]
+        [InlineData((sbyte)16, (sbyte)16)]
+        [InlineData((sbyte)0, (sbyte)0)]
+        [InlineData((sbyte)-5, (sbyte)0)] // Negative treats as unsigned (fb for sbyte -> 0, or positive wrap? actually -5 is 0xFB, which is 251, so next is 256 which overflows -> 0)
+        public void TestSByte_MatchesExpected(sbyte v, sbyte expected)
         {
-            byte v = 5;
+            var original = v;
             var r = v.RoundUpToPowerOf2Copy();
-            Assert.Equal((byte)5, v);
-            Assert.Equal((byte)8, r);
+            Assert.Equal(original, v);
+            Assert.Equal(expected, r);
         }
 
-        [Fact]
-        public void TestUInt32_MatchesInPlace()
+        [Theory]
+        [InlineData((byte)5, (byte)8)]
+        [InlineData((byte)16, (byte)16)]
+        [InlineData((byte)0, (byte)0)]
+        [InlineData((byte)255, (byte)0)]
+        public void TestByte_MatchesExpected(byte v, byte expected)
         {
-            uint v = 100;
-            var copy = v.RoundUpToPowerOf2Copy();
-            v.RoundUpToPowerOf2();
-            Assert.Equal(v, copy);
+            var original = v;
+            var r = v.RoundUpToPowerOf2Copy();
+            Assert.Equal(original, v);
+            Assert.Equal(expected, r);
+        }
+
+        [Theory]
+        [InlineData((short)100, (short)128)]
+        [InlineData((short)0, (short)0)]
+        public void TestInt16_MatchesExpected(short v, short expected)
+        {
+            var original = v;
+            var r = v.RoundUpToPowerOf2Copy();
+            Assert.Equal(original, v);
+            Assert.Equal(expected, r);
+        }
+
+        [Theory]
+        [InlineData((ushort)100, (ushort)128)]
+        [InlineData((ushort)0, (ushort)0)]
+        public void TestUInt16_MatchesExpected(ushort v, ushort expected)
+        {
+            var original = v;
+            var r = v.RoundUpToPowerOf2Copy();
+            Assert.Equal(original, v);
+            Assert.Equal(expected, r);
+        }
+
+        [Theory]
+        [InlineData((int)100, (int)128)]
+        [InlineData((int)0, (int)0)]
+        public void TestInt32_MatchesExpected(int v, int expected)
+        {
+            var original = v;
+            var r = v.RoundUpToPowerOf2Copy();
+            Assert.Equal(original, v);
+            Assert.Equal(expected, r);
+        }
+
+        [Theory]
+        [InlineData((uint)100, (uint)128)]
+        [InlineData((uint)0, (uint)0)]
+        public void TestUInt32_MatchesExpected(uint v, uint expected)
+        {
+            var original = v;
+            var r = v.RoundUpToPowerOf2Copy();
+            Assert.Equal(original, v);
+            Assert.Equal(expected, r);
+        }
+
+        [Theory]
+        [InlineData((long)100, (long)128)]
+        [InlineData((long)0, (long)0)]
+        public void TestInt64_MatchesExpected(long v, long expected)
+        {
+            var original = v;
+            var r = v.RoundUpToPowerOf2Copy();
+            Assert.Equal(original, v);
+            Assert.Equal(expected, r);
+        }
+
+        [Theory]
+        [InlineData((ulong)100, (ulong)128)]
+        [InlineData((ulong)0, (ulong)0)]
+        public void TestUInt64_MatchesExpected(ulong v, ulong expected)
+        {
+            var original = v;
+            var r = v.RoundUpToPowerOf2Copy();
+            Assert.Equal(original, v);
+            Assert.Equal(expected, r);
         }
     }
 }

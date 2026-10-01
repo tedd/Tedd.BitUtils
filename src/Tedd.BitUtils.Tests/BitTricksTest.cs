@@ -9,14 +9,30 @@ namespace Tedd.BitUtils.Tests
         private readonly Random _rnd = new();
         private const int Iterations = 100_000;
 
-        [Fact]
-        public void TestByte_KnownValues()
-        {
-            byte v = 0b0110_1100;
-            Assert.Equal((byte)0b0000_0100, v.ExtractLowestSetBit());
-            byte zero = 0;
-            Assert.Equal((byte)0, zero.ExtractLowestSetBit());
-        }
+        [Theory]
+        [InlineData((sbyte)0b0110_1100, (sbyte)0b0000_0100)]
+        [InlineData((sbyte)0, (sbyte)0)]
+        public void TestSByte_MatchesExpected(sbyte v, sbyte expected) => Assert.Equal(expected, v.ExtractLowestSetBit());
+
+        [Theory]
+        [InlineData((byte)0b0110_1100, (byte)0b0000_0100)]
+        [InlineData((byte)0, (byte)0)]
+        public void TestByte_MatchesExpected(byte v, byte expected) => Assert.Equal(expected, v.ExtractLowestSetBit());
+
+        [Theory]
+        [InlineData((short)0b0110_1100, (short)0b0000_0100)]
+        [InlineData((short)0, (short)0)]
+        public void TestInt16_MatchesExpected(short v, short expected) => Assert.Equal(expected, v.ExtractLowestSetBit());
+
+        [Theory]
+        [InlineData((ushort)0b0110_1100, (ushort)0b0000_0100)]
+        [InlineData((ushort)0, (ushort)0)]
+        public void TestUInt16_MatchesExpected(ushort v, ushort expected) => Assert.Equal(expected, v.ExtractLowestSetBit());
+
+        [Theory]
+        [InlineData((int)0b0110_1100, (int)0b0000_0100)]
+        [InlineData((int)0, (int)0)]
+        public void TestInt32_MatchesExpected(int v, int expected) => Assert.Equal(expected, v.ExtractLowestSetBit());
 
         [Fact]
         public void TestUInt32_Random()
@@ -28,6 +44,11 @@ namespace Tedd.BitUtils.Tests
                 Assert.Equal(expected, v.ExtractLowestSetBit());
             }
         }
+
+        [Theory]
+        [InlineData((long)0b0110_1100, (long)0b0000_0100)]
+        [InlineData((long)0, (long)0)]
+        public void TestInt64_MatchesExpected(long v, long expected) => Assert.Equal(expected, v.ExtractLowestSetBit());
 
         [Fact]
         public void TestUInt64_Random()
@@ -46,12 +67,30 @@ namespace Tedd.BitUtils.Tests
         private readonly Random _rnd = new();
         private const int Iterations = 100_000;
 
-        [Fact]
-        public void TestByte_KnownValues()
-        {
-            byte v = 0b0110_1100;
-            Assert.Equal((byte)0b0110_1000, v.ResetLowestSetBit());
-        }
+        [Theory]
+        [InlineData((sbyte)0b0110_1100, (sbyte)0b0110_1000)]
+        [InlineData((sbyte)0, (sbyte)0)]
+        public void TestSByte_MatchesExpected(sbyte v, sbyte expected) => Assert.Equal(expected, v.ResetLowestSetBit());
+
+        [Theory]
+        [InlineData((byte)0b0110_1100, (byte)0b0110_1000)]
+        [InlineData((byte)0, (byte)0)]
+        public void TestByte_MatchesExpected(byte v, byte expected) => Assert.Equal(expected, v.ResetLowestSetBit());
+
+        [Theory]
+        [InlineData((short)0b0110_1100, (short)0b0110_1000)]
+        [InlineData((short)0, (short)0)]
+        public void TestInt16_MatchesExpected(short v, short expected) => Assert.Equal(expected, v.ResetLowestSetBit());
+
+        [Theory]
+        [InlineData((ushort)0b0110_1100, (ushort)0b0110_1000)]
+        [InlineData((ushort)0, (ushort)0)]
+        public void TestUInt16_MatchesExpected(ushort v, ushort expected) => Assert.Equal(expected, v.ResetLowestSetBit());
+
+        [Theory]
+        [InlineData((int)0b0110_1100, (int)0b0110_1000)]
+        [InlineData((int)0, (int)0)]
+        public void TestInt32_MatchesExpected(int v, int expected) => Assert.Equal(expected, v.ResetLowestSetBit());
 
         [Fact]
         public void TestUInt32_CombinedWithExtractGivesOriginal()
@@ -66,16 +105,44 @@ namespace Tedd.BitUtils.Tests
                 Assert.True(BitOperations.PopCount(reset) == BitOperations.PopCount(v) - 1);
             }
         }
+
+        [Theory]
+        [InlineData((long)0b0110_1100, (long)0b0110_1000)]
+        [InlineData((long)0, (long)0)]
+        public void TestInt64_MatchesExpected(long v, long expected) => Assert.Equal(expected, v.ResetLowestSetBit());
+
+        [Theory]
+        [InlineData((ulong)0b0110_1100, (ulong)0b0110_1000)]
+        [InlineData((ulong)0, (ulong)0)]
+        public void TestUInt64_MatchesExpected(ulong v, ulong expected) => Assert.Equal(expected, v.ResetLowestSetBit());
     }
 
     public class GetMaskUpToLowestSetBitTest
     {
-        [Fact]
-        public void TestByte_KnownValues()
-        {
-            byte v = 0b0110_1000;
-            Assert.Equal((byte)0b0000_1111, v.GetMaskUpToLowestSetBit());
-        }
+        [Theory]
+        [InlineData((sbyte)0b0110_1000, (sbyte)0b0000_1111)]
+        [InlineData((sbyte)0, (sbyte)-1)]
+        public void TestSByte_MatchesExpected(sbyte v, sbyte expected) => Assert.Equal(expected, v.GetMaskUpToLowestSetBit());
+
+        [Theory]
+        [InlineData((byte)0b0110_1000, (byte)0b0000_1111)]
+        [InlineData((byte)0, (byte)0xFF)]
+        public void TestByte_MatchesExpected(byte v, byte expected) => Assert.Equal(expected, v.GetMaskUpToLowestSetBit());
+
+        [Theory]
+        [InlineData((short)0b0110_1000, (short)0b0000_1111)]
+        [InlineData((short)0, (short)-1)]
+        public void TestInt16_MatchesExpected(short v, short expected) => Assert.Equal(expected, v.GetMaskUpToLowestSetBit());
+
+        [Theory]
+        [InlineData((ushort)0b0110_1000, (ushort)0b0000_1111)]
+        [InlineData((ushort)0, (ushort)0xFFFF)]
+        public void TestUInt16_MatchesExpected(ushort v, ushort expected) => Assert.Equal(expected, v.GetMaskUpToLowestSetBit());
+
+        [Theory]
+        [InlineData((int)0b0110_1000, (int)0b0000_1111)]
+        [InlineData((int)0, (int)-1)]
+        public void TestInt32_MatchesExpected(int v, int expected) => Assert.Equal(expected, v.GetMaskUpToLowestSetBit());
 
         [Fact]
         public void TestUInt32_Zero_GivesAllOnes()
@@ -90,6 +157,16 @@ namespace Tedd.BitUtils.Tests
             uint v = 0b1100u; // lowest set bit is at index 2
             Assert.Equal(0b0111u, v.GetMaskUpToLowestSetBit()); // bits [0,2] set
         }
+
+        [Theory]
+        [InlineData((long)0b0110_1000, (long)0b0000_1111)]
+        [InlineData((long)0, (long)-1)]
+        public void TestInt64_MatchesExpected(long v, long expected) => Assert.Equal(expected, v.GetMaskUpToLowestSetBit());
+
+        [Theory]
+        [InlineData((ulong)0b0110_1000, (ulong)0b0000_1111)]
+        [InlineData((ulong)0, ulong.MaxValue)]
+        public void TestUInt64_MatchesExpected(ulong v, ulong expected) => Assert.Equal(expected, v.GetMaskUpToLowestSetBit());
     }
 
     public class ExtractHighestSetBitTest
@@ -97,14 +174,33 @@ namespace Tedd.BitUtils.Tests
         private readonly Random _rnd = new();
         private const int Iterations = 100_000;
 
-        [Fact]
-        public void TestByte_KnownValues()
-        {
-            byte v = 0b0110_1100;
-            Assert.Equal((byte)0b0100_0000, v.ExtractHighestSetBit());
-            byte zero = 0;
-            Assert.Equal((byte)0, zero.ExtractHighestSetBit());
-        }
+        [Theory]
+        [InlineData((sbyte)0b0110_1100, (sbyte)0b0100_0000)]
+        [InlineData((sbyte)0, (sbyte)0)]
+        [InlineData((sbyte)-1, (sbyte)-128)]
+        public void TestSByte_MatchesExpected(sbyte v, sbyte expected) => Assert.Equal(expected, v.ExtractHighestSetBit());
+
+        [Theory]
+        [InlineData((byte)0b0110_1100, (byte)0b0100_0000)]
+        [InlineData((byte)0, (byte)0)]
+        public void TestByte_MatchesExpected(byte v, byte expected) => Assert.Equal(expected, v.ExtractHighestSetBit());
+
+        [Theory]
+        [InlineData((short)0b0110_1100, (short)0b0100_0000)]
+        [InlineData((short)0, (short)0)]
+        [InlineData((short)-1, (short)-32768)]
+        public void TestInt16_MatchesExpected(short v, short expected) => Assert.Equal(expected, v.ExtractHighestSetBit());
+
+        [Theory]
+        [InlineData((ushort)0b0110_1100, (ushort)0b0100_0000)]
+        [InlineData((ushort)0, (ushort)0)]
+        public void TestUInt16_MatchesExpected(ushort v, ushort expected) => Assert.Equal(expected, v.ExtractHighestSetBit());
+
+        [Theory]
+        [InlineData((int)0b0110_1100, (int)0b0100_0000)]
+        [InlineData((int)0, (int)0)]
+        [InlineData((int)-1, int.MinValue)]
+        public void TestInt32_MatchesExpected(int v, int expected) => Assert.Equal(expected, v.ExtractHighestSetBit());
 
         [Fact]
         public void TestUInt32_Random()
@@ -116,6 +212,12 @@ namespace Tedd.BitUtils.Tests
                 Assert.Equal(expected, v.ExtractHighestSetBit());
             }
         }
+
+        [Theory]
+        [InlineData((long)0b0110_1100, (long)0b0100_0000)]
+        [InlineData((long)0, (long)0)]
+        [InlineData((long)-1, long.MinValue)]
+        public void TestInt64_MatchesExpected(long v, long expected) => Assert.Equal(expected, v.ExtractHighestSetBit());
 
         [Fact]
         public void TestUInt64_Random()
@@ -131,42 +233,92 @@ namespace Tedd.BitUtils.Tests
 
     public class ZeroHighBitsTest
     {
-        [Fact]
-        public void TestUInt32_KeepsOnlyLowIndexBits()
-        {
-            var v = 0xFFFFFFFFu;
-            Assert.Equal(0u, v.ZeroHighBits(0));
-            Assert.Equal(0b1111u, v.ZeroHighBits(4));
-            Assert.Equal(0xFFFFFFFFu, v.ZeroHighBits(32));
-        }
+        [Theory]
+        [InlineData((sbyte)-1, 0, (sbyte)0)]
+        [InlineData((sbyte)-1, 4, (sbyte)0b1111)]
+        [InlineData((sbyte)-1, 8, (sbyte)-1)]
+        public void TestSByte_KeepsOnlyLowIndexBits(sbyte v, int bits, sbyte expected) => Assert.Equal(expected, v.ZeroHighBits(bits));
 
-        [Fact]
-        public void TestUInt64_KeepsOnlyLowIndexBits()
-        {
-            var v = 0xFFFFFFFF_FFFFFFFFul;
-            Assert.Equal(0ul, v.ZeroHighBits(0));
-            Assert.Equal(0xFFul, v.ZeroHighBits(8));
-            Assert.Equal(0xFFFFFFFF_FFFFFFFFul, v.ZeroHighBits(64));
-        }
+        [Theory]
+        [InlineData((byte)0xFF, 0, (byte)0)]
+        [InlineData((byte)0xFF, 2, (byte)0b0011)]
+        [InlineData((byte)0xFF, 8, (byte)0xFF)]
+        public void TestByte_KeepsOnlyLowIndexBits(byte v, int bits, byte expected) => Assert.Equal(expected, v.ZeroHighBits(bits));
 
-        [Fact]
-        public void TestByte()
-        {
-            byte v = 0xFF;
-            Assert.Equal((byte)0b0011, v.ZeroHighBits(2));
-        }
+        [Theory]
+        [InlineData((short)-1, 0, (short)0)]
+        [InlineData((short)-1, 4, (short)0b1111)]
+        [InlineData((short)-1, 16, (short)-1)]
+        public void TestInt16_KeepsOnlyLowIndexBits(short v, int bits, short expected) => Assert.Equal(expected, v.ZeroHighBits(bits));
+
+        [Theory]
+        [InlineData((ushort)0xFFFF, 0, (ushort)0)]
+        [InlineData((ushort)0xFFFF, 4, (ushort)0b1111)]
+        [InlineData((ushort)0xFFFF, 16, (ushort)0xFFFF)]
+        public void TestUInt16_KeepsOnlyLowIndexBits(ushort v, int bits, ushort expected) => Assert.Equal(expected, v.ZeroHighBits(bits));
+
+        [Theory]
+        [InlineData((int)-1, 0, (int)0)]
+        [InlineData((int)-1, 4, (int)0b1111)]
+        [InlineData((int)-1, 32, (int)-1)]
+        public void TestInt32_KeepsOnlyLowIndexBits(int v, int bits, int expected) => Assert.Equal(expected, v.ZeroHighBits(bits));
+
+        [Theory]
+        [InlineData(0xFFFFFFFFu, 0, 0u)]
+        [InlineData(0xFFFFFFFFu, 4, 0b1111u)]
+        [InlineData(0xFFFFFFFFu, 32, 0xFFFFFFFFu)]
+        public void TestUInt32_KeepsOnlyLowIndexBits(uint v, int bits, uint expected) => Assert.Equal(expected, v.ZeroHighBits(bits));
+
+        [Theory]
+        [InlineData((long)-1, 0, (long)0)]
+        [InlineData((long)-1, 8, (long)0xFF)]
+        [InlineData((long)-1, 64, (long)-1)]
+        public void TestInt64_KeepsOnlyLowIndexBits(long v, int bits, long expected) => Assert.Equal(expected, v.ZeroHighBits(bits));
+
+        [Theory]
+        [InlineData(0xFFFFFFFF_FFFFFFFFul, 0, 0ul)]
+        [InlineData(0xFFFFFFFF_FFFFFFFFul, 8, 0xFFul)]
+        [InlineData(0xFFFFFFFF_FFFFFFFFul, 64, 0xFFFFFFFF_FFFFFFFFul)]
+        public void TestUInt64_KeepsOnlyLowIndexBits(ulong v, int bits, ulong expected) => Assert.Equal(expected, v.ZeroHighBits(bits));
     }
 
     public class ZeroLowBitsTest
     {
-        [Fact]
-        public void TestUInt32_ClearsOnlyLowIndexBits()
-        {
-            var v = 0xFFFFFFFFu;
-            Assert.Equal(0xFFFFFFFFu, v.ZeroLowBits(0));
-            Assert.Equal(0xFFFFFFF0u, v.ZeroLowBits(4));
-            Assert.Equal(0u, v.ZeroLowBits(32));
-        }
+        [Theory]
+        [InlineData((sbyte)-1, 0, (sbyte)-1)]
+        [InlineData((sbyte)-1, 4, (sbyte)-16)]
+        [InlineData((sbyte)-1, 8, (sbyte)0)]
+        public void TestSByte_ClearsOnlyLowIndexBits(sbyte v, int bits, sbyte expected) => Assert.Equal(expected, v.ZeroLowBits(bits));
+
+        [Theory]
+        [InlineData((byte)0xFF, 0, (byte)0xFF)]
+        [InlineData((byte)0xFF, 4, (byte)0b1111_0000)]
+        [InlineData((byte)0xFF, 8, (byte)0)]
+        public void TestByte_ClearsOnlyLowIndexBits(byte v, int bits, byte expected) => Assert.Equal(expected, v.ZeroLowBits(bits));
+
+        [Theory]
+        [InlineData((short)-1, 0, (short)-1)]
+        [InlineData((short)-1, 4, (short)-16)] // 0xFFF0
+        [InlineData((short)-1, 16, (short)0)]
+        public void TestInt16_ClearsOnlyLowIndexBits(short v, int bits, short expected) => Assert.Equal(expected, v.ZeroLowBits(bits));
+
+        [Theory]
+        [InlineData((ushort)0xFFFF, 0, (ushort)0xFFFF)]
+        [InlineData((ushort)0xFFFF, 4, (ushort)0xFFF0)]
+        [InlineData((ushort)0xFFFF, 16, (ushort)0)]
+        public void TestUInt16_ClearsOnlyLowIndexBits(ushort v, int bits, ushort expected) => Assert.Equal(expected, v.ZeroLowBits(bits));
+
+        [Theory]
+        [InlineData((int)-1, 0, (int)-1)]
+        [InlineData((int)-1, 4, (int)-16)] // 0xFFFFFFF0
+        [InlineData((int)-1, 32, (int)0)]
+        public void TestInt32_ClearsOnlyLowIndexBits(int v, int bits, int expected) => Assert.Equal(expected, v.ZeroLowBits(bits));
+
+        [Theory]
+        [InlineData(0xFFFFFFFFu, 0, 0xFFFFFFFFu)]
+        [InlineData(0xFFFFFFFFu, 4, 0xFFFFFFF0u)]
+        [InlineData(0xFFFFFFFFu, 32, 0u)]
+        public void TestUInt32_ClearsOnlyLowIndexBits(uint v, int bits, uint expected) => Assert.Equal(expected, v.ZeroLowBits(bits));
 
         [Fact]
         public void TestUInt32_ComplementsZeroHighBits()
@@ -175,6 +327,18 @@ namespace Tedd.BitUtils.Tests
             for (var index = 0; index <= 32; index++)
                 Assert.Equal(v, v.ZeroHighBits(index) | v.ZeroLowBits(index));
         }
+
+        [Theory]
+        [InlineData((long)-1, 0, (long)-1)]
+        [InlineData((long)-1, 4, (long)-16)]
+        [InlineData((long)-1, 64, (long)0)]
+        public void TestInt64_ClearsOnlyLowIndexBits(long v, int bits, long expected) => Assert.Equal(expected, v.ZeroLowBits(bits));
+
+        [Theory]
+        [InlineData(0xFFFFFFFF_FFFFFFFFul, 0, 0xFFFFFFFF_FFFFFFFFul)]
+        [InlineData(0xFFFFFFFF_FFFFFFFFul, 4, 0xFFFFFFFF_FFFFFFF0ul)]
+        [InlineData(0xFFFFFFFF_FFFFFFFFul, 64, 0ul)]
+        public void TestUInt64_ClearsOnlyLowIndexBits(ulong v, int bits, ulong expected) => Assert.Equal(expected, v.ZeroLowBits(bits));
     }
 
     public class ParallelBitExtractTest
