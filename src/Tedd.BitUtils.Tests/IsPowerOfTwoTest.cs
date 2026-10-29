@@ -5,6 +5,19 @@ namespace Tedd.BitUtils.Tests
 {
     public class IsPowerOfTwoTest
     {
+        [Theory]
+        [InlineData(0, false)]
+        [InlineData(1, true)]
+        [InlineData(2, true)]
+        [InlineData(3, false)]
+        [InlineData(4, true)]
+        [InlineData(128, true)]
+        [InlineData(255, false)]
+        public void TestByte_SpecificValues(byte value, bool expected)
+        {
+            Assert.Equal(expected, value.IsPowerOfTwo());
+        }
+
         [Fact]
         public void TestByte_AllValues()
         {
@@ -15,11 +28,56 @@ namespace Tedd.BitUtils.Tests
             }
         }
 
+        [Theory]
+        [InlineData(0, false)]
+        [InlineData(1, true)]
+        [InlineData(2, true)]
+        [InlineData(3, false)]
+        [InlineData(4, true)]
+        [InlineData(64, true)]
+        [InlineData(127, false)]
+        [InlineData(-1, false)]
+        [InlineData(-2, false)]
+        [InlineData(-128, false)]
+        public void TestSByte_SpecificValues(sbyte value, bool expected)
+        {
+            Assert.Equal(expected, value.IsPowerOfTwo());
+        }
+
         [Fact]
         public void TestSByte_NegativeIsNeverPowerOfTwo()
         {
             for (sbyte v = sbyte.MinValue; v < 0; v++)
                 Assert.False(v.IsPowerOfTwo());
+        }
+
+        [Theory]
+        [InlineData(0, false)]
+        [InlineData(1, true)]
+        [InlineData(2, true)]
+        [InlineData(3, false)]
+        [InlineData(4, true)]
+        [InlineData(1024, true)]
+        [InlineData(32767, false)]
+        [InlineData(-1, false)]
+        [InlineData(-32768, false)]
+        public void TestInt16_SpecificValues(short value, bool expected)
+        {
+            Assert.Equal(expected, value.IsPowerOfTwo());
+        }
+
+        [Theory]
+        [InlineData(0, false)]
+        [InlineData(1, true)]
+        [InlineData(2, true)]
+        [InlineData(3, false)]
+        [InlineData(4, true)]
+        [InlineData(1024, true)]
+        [InlineData(32768, true)]
+        [InlineData(65535, false)]
+        public void TestUInt16_SpecificValues(ushort value, bool expected)
+        {
+            Assert.Equal(expected, value.IsPowerOfTwo());
         }
 
         [Fact]
@@ -43,11 +101,43 @@ namespace Tedd.BitUtils.Tests
             Assert.False(minValue.IsPowerOfTwo());
         }
 
+        [Theory]
+        [InlineData(0L, false)]
+        [InlineData(1L, true)]
+        [InlineData(2L, true)]
+        [InlineData(3L, false)]
+        [InlineData(4L, true)]
+        [InlineData(1024L, true)]
+        [InlineData(1073741824L, true)] // 2^30
+        [InlineData(4611686018427387904L, true)] // 2^62
+        [InlineData(-1L, false)]
+        [InlineData(-2L, false)]
+        [InlineData(-9223372036854775808L, false)] // long.MinValue
+        public void TestInt64_SpecificValues(long value, bool expected)
+        {
+            Assert.Equal(expected, value.IsPowerOfTwo());
+        }
+
         [Fact]
         public void TestUInt32_HighBitSet()
         {
             var v = 0x80000000u;
             Assert.True(v.IsPowerOfTwo());
+        }
+
+        [Theory]
+        [InlineData(0ul, false)]
+        [InlineData(1ul, true)]
+        [InlineData(2ul, true)]
+        [InlineData(3ul, false)]
+        [InlineData(4ul, true)]
+        [InlineData(1024ul, true)]
+        [InlineData(1073741824ul, true)] // 2^30
+        [InlineData(4611686018427387904ul, true)] // 2^62
+        [InlineData(9223372036854775808ul, true)] // 2^63
+        public void TestUInt64_SpecificValues(ulong value, bool expected)
+        {
+            Assert.Equal(expected, value.IsPowerOfTwo());
         }
 
         [Fact]
